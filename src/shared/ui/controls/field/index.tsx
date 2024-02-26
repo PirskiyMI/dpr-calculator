@@ -5,20 +5,25 @@ interface IProps {
    value: string;
    placeholder?: string;
    maxLength?: number;
-   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-
+   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
    controls?: {
       increment: () => void;
       decrement: () => void;
    };
 }
 
-export const Field: FC<IProps> = ({ value, placeholder, maxLength, onChange, controls }) => {
+export const Field: FC<IProps> = ({
+   value,
+   placeholder = 'Значение',
+   maxLength,
+   onChange,
+   controls,
+}) => {
    return (
       <div className={styles.field}>
          <input
             type="text"
-            placeholder={placeholder ? placeholder : 'Значение'}
+            placeholder={placeholder}
             value={String(value)}
             onChange={onChange}
             maxLength={maxLength}

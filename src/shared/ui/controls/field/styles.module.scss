@@ -1,5 +1,6 @@
 .field {
    position: relative;
+   overflow: hidden;
    &__input {
       width: 100%;
       padding: 10px;

@@ -1,0 +1,19 @@
+.select {
+   display: flex;
+   border-collapse: collapse;
+   &__item {
+      padding: 10px;
+      border: var(--border-default) rgba(var(--color-dark), 0.3);
+      transition: all ease 0.3s;
+      &:first-child {
+         border-radius: var(--border-radius-default) 0 0 var(--border-radius-default);
+      }
+      &:last-child {
+         border-radius: 0 var(--border-radius-default) var(--border-radius-default) 0;
+      }
+      &_active {
+         color: rgb(var(--color-primary));
+         border-color: rgb(var(--color-primary));
+      }
+   }
+}
