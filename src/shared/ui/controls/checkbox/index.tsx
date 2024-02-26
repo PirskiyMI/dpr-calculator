@@ -16,8 +16,6 @@ export const Checkbox: FC<IProps> = ({ checked, onChange }) => {
          <input
             type="checkbox"
             className={styles.input}
-            name="ch1"
-            id="ch1"
             checked={checked}
             onKeyDown={enterHandle}
          />
