@@ -1,12 +1,12 @@
 import { FC, KeyboardEvent } from 'react';
 import styles from './styles.module.scss';
 
-interface Props {
+interface IProps {
    checked: boolean;
    onChange: () => void;
 }
 
-export const Checkbox: FC<Props> = ({ checked, onChange }) => {
+export const Checkbox: FC<IProps> = ({ checked, onChange }) => {
    const enterHandle = (e: KeyboardEvent) => {
       if (e.key === 'Enter') onChange();
    };
