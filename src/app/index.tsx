@@ -1,5 +1,17 @@
+import { Button } from 'src/shared/ui/button';
+import 'src/shared/lib/styles/index.scss';
+import { withProviders } from './providers';
+
 function App() {
-   return <></>;
+   return (
+      <div className="container">
+         <Button type="primary" size="large" shape="round">
+            Button
+         </Button>
+      </div>
+   );
 }
 
-export default App;
+const AppWithProviders = withProviders(App);
+
+export default AppWithProviders;
