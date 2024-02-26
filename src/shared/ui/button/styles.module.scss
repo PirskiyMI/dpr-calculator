@@ -40,7 +40,8 @@
       color: rgb(var(--color-light));
       background-color: rgb(var(--color-primary));
       transition: border-color ease 0.2s, background-color ease 0.2s;
-      &:active {
+      &:active,
+      &:focus {
          border-color: rgb(var(--color-primary-active));
          background-color: rgb(var(--color-primary-active));
       }
@@ -70,9 +71,9 @@
             color: rgb(var(--color-primary));
             border-color: rgb(var(--color-primary));
          }
-         &:active {
-            border-color: rgb(var(--color-primary-active));
-         }
+      }
+      &:active {
+         border-color: rgb(var(--color-primary-active));
       }
    }
    &_text {
