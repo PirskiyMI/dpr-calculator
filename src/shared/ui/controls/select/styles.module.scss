@@ -5,6 +5,7 @@
       padding: 6px 8px;
       border: var(--border-default) rgba(var(--color-dark), 0.3);
       transition: all ease 0.3s;
+      cursor: pointer;
       &:first-child {
          border-radius: var(--border-radius-default) 0 0 var(--border-radius-default);
       }
