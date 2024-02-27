@@ -1,4 +1,4 @@
-import { FC, MouseEvent, ReactNode, useRef } from 'react';
+import { FC, MouseEvent, ReactNode, memo, useCallback, useRef } from 'react';
 import styles from './styles.module.scss';
 
 type ButtonType = 'primary' | 'default' | 'dashed' | 'text';
@@ -52,54 +52,59 @@ interface Props {
    onClick?: () => void;
 }
 
-export const Button: FC<Props> = ({
-   children,
-   icon,
-   type,
-   shape = 'default',
-   size = 'large',
-   block = false,
-   ghost = false,
-   disabled = false,
-   onClick,
-}) => {
-   let classes = getButtonType(type);
-   classes = `${classes} ${getButtonSize(size)}`;
-   if (shape !== 'default') classes = `${classes} ${getButtonShape(shape)}`;
-   if (block) classes = getButtonBlock(classes);
-   if (ghost) classes = getButtonGhost(classes);
+export const Button: FC<Props> = memo(
+   ({
+      children,
+      icon,
+      type,
+      shape = 'default',
+      size = 'large',
+      block = false,
+      ghost = false,
+      disabled = false,
+      onClick,
+   }) => {
+      let classes = getButtonType(type);
+      classes = `${classes} ${getButtonSize(size)}`;
+      if (shape !== 'default') classes = `${classes} ${getButtonShape(shape)}`;
+      if (block) classes = getButtonBlock(classes);
+      if (ghost) classes = getButtonGhost(classes);
 
-   const buttonRef = useRef<HTMLButtonElement>(null);
+      const buttonRef = useRef<HTMLButtonElement>(null);
 
-   const handleClick = (event: MouseEvent) => {
-      if (onClick) onClick();
-      const buttonElement = buttonRef.current;
-      if (buttonElement) {
-         const buttonRect = buttonElement.getBoundingClientRect();
-         const offsetX = event.clientX - buttonRect.left;
-         const offsetY = event.clientY - buttonRect.top;
+      const handleClick = useCallback(
+         (event: MouseEvent) => {
+            if (onClick) onClick();
+            const buttonElement = buttonRef.current;
+            if (buttonElement) {
+               const buttonRect = buttonElement.getBoundingClientRect();
+               const offsetX = event.clientX - buttonRect.left;
+               const offsetY = event.clientY - buttonRect.top;
 
-         const bubbleElement = document.createElement('div');
-         bubbleElement.classList.add(styles.bubble);
-         bubbleElement.style.left = `${offsetX}px`;
-         bubbleElement.style.top = `${offsetY}px`;
+               const bubbleElement = document.createElement('div');
+               bubbleElement.classList.add(styles.bubble);
+               bubbleElement.style.left = `${offsetX}px`;
+               bubbleElement.style.top = `${offsetY}px`;
 
-         buttonElement.appendChild(bubbleElement);
+               buttonElement.appendChild(bubbleElement);
 
-         setTimeout(() => {
-            buttonElement.removeChild(bubbleElement);
-         }, 600);
-      }
-   };
+               setTimeout(() => {
+                  buttonElement.removeChild(bubbleElement);
+               }, 600);
+            }
+         },
+         [onClick],
+      );
 
-   return (
-      <button
-         onClick={handleClick}
-         disabled={disabled}
-         className={`${styles.button} ${classes}`}
-         ref={buttonRef}>
-         {icon}
-         {children}
-      </button>
-   );
-};
+      return (
+         <button
+            onClick={handleClick}
+            disabled={disabled}
+            className={`${styles.button} ${classes}`}
+            ref={buttonRef}>
+            {icon}
+            {children}
+         </button>
+      );
+   },
+);

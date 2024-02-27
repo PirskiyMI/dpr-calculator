@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import styles from './styles.module.scss';
 
 interface IProps {
@@ -13,7 +13,7 @@ interface ISelectItemProps {
    onChange: (arg: string) => void;
 }
 
-export const Select: FC<IProps> = ({ items, currentValue, onChange }) => {
+export const Select: FC<IProps> = memo(({ items, currentValue, onChange }) => {
    return (
       <ul className={styles.select}>
          {items.map((el) => (
@@ -21,7 +21,7 @@ export const Select: FC<IProps> = ({ items, currentValue, onChange }) => {
          ))}
       </ul>
    );
-};
+});
 
 const SelectItem: FC<ISelectItemProps> = ({ label, onChange, selected }) => {
    const classes = selected

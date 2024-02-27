@@ -1,4 +1,4 @@
-import { FC, KeyboardEvent } from 'react';
+import { FC, KeyboardEvent, memo } from 'react';
 import styles from './styles.module.scss';
 
 interface IProps {
@@ -6,7 +6,7 @@ interface IProps {
    onChange: () => void;
 }
 
-export const Checkbox: FC<IProps> = ({ checked, onChange }) => {
+export const Checkbox: FC<IProps> = memo(({ checked, onChange }) => {
    const enterHandle = (e: KeyboardEvent) => {
       if (e.key === 'Enter') onChange();
    };
@@ -24,4 +24,4 @@ export const Checkbox: FC<IProps> = ({ checked, onChange }) => {
          </div>
       </>
    );
-};
+});

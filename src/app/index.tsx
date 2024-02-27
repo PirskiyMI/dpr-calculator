@@ -7,11 +7,14 @@ import { Field } from 'src/shared/ui/controls/field';
 import { useInputNumber } from 'src/shared/lib/hooks/use-input-number';
 import { Select } from 'src/shared/ui/controls/select';
 import { useSelect } from 'src/shared/lib/hooks/use-select';
+import { useMemo } from 'react';
 
 function App() {
    const { checked, onChange } = useCheckbox();
    const { value, onChange: onFieldChange, increment, decrement } = useInputNumber();
    const { selectedValue, onChange: onSelectChange } = useSelect('Обычный');
+
+   const selectList = useMemo(() => ['Преимущество', 'Обычный', 'Помеха'], []);
 
    return (
       <div className="container">
@@ -22,14 +25,16 @@ function App() {
          <br />
          <Checkbox checked={checked} onChange={onChange} />
          <br />
-         <Field value={value} controls={{ increment, decrement }} onChange={onFieldChange} />
+         <Field
+            value={value}
+            controls={{ increment, decrement }}
+            onChange={onFieldChange}
+            maxLength={2}
+            placeholder="d6"
+         />
          <br />
          <div style={{ display: 'flex' }}>
-            <Select
-               items={['Преимущество', 'Обычный', 'Помеха']}
-               currentValue={selectedValue}
-               onChange={onSelectChange}
-            />
+            <Select items={selectList} currentValue={selectedValue} onChange={onSelectChange} />
          </div>
       </div>
    );
