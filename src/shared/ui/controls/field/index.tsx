@@ -3,9 +3,10 @@ import styles from './styles.module.scss';
 
 interface IProps {
    value: string;
+   name?: string;
    placeholder?: string;
    maxLength?: number;
-   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+   onChange?: (e: ChangeEvent<HTMLInputElement>, ...args: unknown[]) => void;
    controls?: {
       increment: () => void;
       decrement: () => void;
@@ -13,12 +14,13 @@ interface IProps {
 }
 
 export const Field: FC<IProps> = memo(
-   ({ value, placeholder = 'Значение', maxLength, onChange, controls }) => {
+   ({ value, name, placeholder = 'Значение', maxLength, onChange, controls }) => {
       return (
          <div className={styles.field}>
             <input
                type="text"
                value={String(value)}
+               name={name}
                onChange={onChange}
                maxLength={maxLength}
                className={styles.field__input}
