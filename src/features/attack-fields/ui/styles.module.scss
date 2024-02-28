@@ -1,4 +1,9 @@
 .fields {
-   display: flex;
-   gap: 10px;
+   &__list {
+      display: flex;
+      gap: 10px;
+   }
+   &__item {
+      max-width: 100px;
+   }
 }

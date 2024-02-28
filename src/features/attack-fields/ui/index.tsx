@@ -30,8 +30,24 @@ export const AttackFields: FC = () => {
 
    return (
       <div className={styles.fields}>
-         <Field value={String(attack)} maxLength={2} onChange={setAttack} />
-         <Field value={String(protection)} maxLength={2} onChange={setProtection} />
+         <ul className={styles.fields__list}>
+            <li className={styles.fields__item}>
+               <Field
+                  value={String(attack)}
+                  placeholder="Бонус атаки"
+                  maxLength={2}
+                  onChange={setAttack}
+               />
+            </li>
+            <li className={styles.fields__item}>
+               <Field
+                  value={String(protection)}
+                  placeholder="Бонус защиты"
+                  maxLength={2}
+                  onChange={setProtection}
+               />
+            </li>
+         </ul>
       </div>
    );
 };

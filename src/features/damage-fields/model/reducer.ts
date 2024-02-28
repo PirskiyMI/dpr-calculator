@@ -33,12 +33,12 @@ const initialState: IDamage = {
       {
          name: DiceName.D4,
          value: DiceValue.D4,
-         count: 1,
+         count: 0,
       },
       {
          name: DiceName.D6,
          value: DiceValue.D6,
-         count: 1,
+         count: 0,
       },
       {
          name: DiceName.D8,

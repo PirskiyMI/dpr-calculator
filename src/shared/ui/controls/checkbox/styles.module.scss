@@ -21,16 +21,27 @@
    }
 }
 
+.wrapper {
+   display: flex;
+   gap: 4px;
+   align-items: center;
+   justify-content: center;
+}
+
 .input {
    position: absolute;
    opacity: 0;
-   &:focus + .checkbox {
+   &:focus + .wrapper > .checkbox {
       border-color: rgb(var(--color-primary));
    }
-   &:checked + .checkbox {
+   &:checked + .wrapper > .checkbox {
       border-color: rgb(var(--color-primary));
       & > .checkbox__flag {
          background-color: rgb(var(--color-primary));
       }
    }
+}
+
+.label {
+   font-size: var(--fs-default);
 }
