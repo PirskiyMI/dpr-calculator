@@ -5,13 +5,11 @@ interface ISpecialProperties {
    hasShield: boolean;
    hasWeaponFeats: boolean;
 }
-
 const initialState: ISpecialProperties = {
    hasElvenAccuracy: false,
    hasShield: false,
    hasWeaponFeats: false,
 };
-
 const specialPropertiesSlice = createSlice({
    name: 'special-properties',
    initialState,

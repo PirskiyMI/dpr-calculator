@@ -8,9 +8,9 @@ export const hasWeaponFeatsSelector = (state: RootState) =>
 
 export const specialPropertiesSelector = createSelector(
    [hasElvenAccuracySelector, hasShieldSelector, hasWeaponFeatsSelector],
-   (elvenAccuracy, shield, weaponFeats) => ({
-      elvenAccuracy,
-      shield,
-      weaponFeats,
+   (hasElvenAccuracy, hasShield, hasWeaponFeats) => ({
+      hasElvenAccuracy,
+      hasShield,
+      hasWeaponFeats,
    }),
 );
