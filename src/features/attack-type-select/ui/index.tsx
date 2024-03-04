@@ -1,10 +1,10 @@
-import { FC, useMemo } from 'react';
+import { FC, memo, useMemo } from 'react';
 import { Select } from 'src/shared/ui/controls/select';
 import { attackTypeActions, throwType } from '../model';
 import { useAppDispatch, useAppSelector } from 'src/shared/lib';
 import { attackTypeSelector } from '../model/selectors';
 
-export const AttackTypeSelect: FC = () => {
+export const AttackTypeSelect: FC = memo(() => {
    const attackType = useAppSelector(attackTypeSelector);
    const { setThrowType } = attackTypeActions;
    const dispatch = useAppDispatch();
@@ -22,4 +22,4 @@ export const AttackTypeSelect: FC = () => {
    };
 
    return <Select items={selectList} currentValue={attackType} onChange={setAttackType} />;
-};
+});

@@ -2,6 +2,7 @@ import { ChangeEvent, FC, memo } from 'react';
 import styles from './styles.module.scss';
 
 interface IProps {
+   id?: string;
    value: string;
    name?: string;
    placeholder?: string;
@@ -14,10 +15,11 @@ interface IProps {
 }
 
 export const Field: FC<IProps> = memo(
-   ({ value, name, placeholder = 'Значение', maxLength, onChange, controls }) => {
+   ({ id, value, name, placeholder = 'Значение', maxLength, onChange, controls }) => {
       return (
          <div className={styles.field}>
             <input
+               id={id}
                type="text"
                value={String(value)}
                name={name}

@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useCallback } from 'react';
+import { ChangeEvent, FC, memo, useCallback } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'src/shared/lib';
 import { Field } from 'src/shared/ui/controls/field';
@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
 import { attackSelector } from '../model/selectors';
 import { attackActions } from '..';
 
-export const AttackFields: FC = () => {
+export const AttackFields: FC = memo(() => {
    const { attack, protection } = useAppSelector(attackSelector);
    const { setAttackBonus, setTargetProtection } = attackActions;
    const dispatch = useAppDispatch();
@@ -50,4 +50,4 @@ export const AttackFields: FC = () => {
          </ul>
       </div>
    );
-};
+});

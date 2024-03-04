@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 export type TDiceName = 'd4' | 'd6' | 'd8' | 'd10' | 'd12';
 export type TDiceValue = '2.5' | '3.5' | '4.5' | '5.5' | '6.5';
 
-enum DiceName {
+export enum DiceName {
    D4 = 'd4',
    D6 = 'd6',
    D8 = 'd8',
@@ -11,48 +11,27 @@ enum DiceName {
    D12 = 'd12',
 }
 enum DiceValue {
-   D4 = '2.5',
-   D6 = '3.5',
-   D8 = '4.5',
-   D10 = '5.5',
-   D12 = '6.5',
+   d4 = '2.5',
+   d6 = '3.5',
+   d8 = '4.5',
+   d10 = '5.5',
+   d12 = '6.5',
 }
-
-interface IDace {
+export interface IDice {
+   id: string;
    name: TDiceName;
    value: TDiceValue;
    count: number;
 }
-
 interface IDamage {
-   dices: IDace[];
+   dices: IDice[];
 }
-
 const initialState: IDamage = {
    dices: [
       {
+         id: DiceName.D4,
          name: DiceName.D4,
-         value: DiceValue.D4,
-         count: 0,
-      },
-      {
-         name: DiceName.D6,
-         value: DiceValue.D6,
-         count: 0,
-      },
-      {
-         name: DiceName.D8,
-         value: DiceValue.D8,
-         count: 0,
-      },
-      {
-         name: DiceName.D10,
-         value: DiceValue.D10,
-         count: 0,
-      },
-      {
-         name: DiceName.D12,
-         value: DiceValue.D12,
+         value: DiceValue.d4,
          count: 0,
       },
    ],
@@ -62,10 +41,20 @@ const damageSlice = createSlice({
    name: 'damage',
    initialState,
    reducers: {
-      setDices: (state, { payload }: PayloadAction<{ name: TDiceName; count: number }>) => {
-         state.dices.forEach((el) =>
-            el.name === payload.name ? (el.count = payload.count) : null,
-         );
+      setDices: (state, { payload }: PayloadAction<{ id: string; count: number }>) => {
+         state.dices.forEach((el) => (el.id === payload.id ? (el.count = payload.count) : null));
+      },
+      addDice: (state) => {
+         const id = String(Date.now());
+         state.dices.push({ id, name: DiceName.D6, value: DiceValue.d6, count: 0 });
+      },
+      setDiceType: (state, { payload }: PayloadAction<{ id: string; name: TDiceName }>) => {
+         state.dices.forEach((el) => {
+            if (el.id === payload.id) {
+               el.name = payload.name;
+               el.value = DiceValue[`${payload.name}`];
+            }
+         });
       },
    },
 });

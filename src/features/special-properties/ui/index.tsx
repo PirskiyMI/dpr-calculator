@@ -1,11 +1,11 @@
-import { FC, useCallback } from 'react';
+import { FC, memo, useCallback } from 'react';
 import styles from './styles.module.scss';
 import { useAppDispatch, useAppSelector } from 'src/shared/lib';
 import { specialPropertiesActions } from '..';
 import { specialPropertiesSelector } from '../model/selectors';
 import { Checkbox } from 'src/shared/ui/controls/checkbox';
 
-export const SpecialProperties: FC = () => {
+export const SpecialProperties: FC = memo(() => {
    const { setHasElvenAccuracy, setHasShield, setHasWeaponFeats } = specialPropertiesActions;
    const { hasElvenAccuracy, hasShield, hasWeaponFeats } =
       useAppSelector(specialPropertiesSelector);
@@ -44,4 +44,4 @@ export const SpecialProperties: FC = () => {
          </ul>
       </div>
    );
-};
+});
