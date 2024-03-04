@@ -1,23 +1,22 @@
-import { ChangeEvent, FC, useMemo } from 'react';
+import { ChangeEvent, FC } from 'react';
 import { Dropdown } from 'src/shared/ui/controls/dropdown';
 import { Field } from 'src/shared/ui/controls/field';
-import { IDice, TDiceName, damageActions } from '..';
-import { useAppDispatch } from 'src/shared/lib';
+import { IDice } from '..';
 
-export const DamageField: FC<IDice> = ({ name, count, id, value }) => {
-   const dispatch = useAppDispatch();
-   const { setDices, setDiceType } = damageActions;
-   const options = useMemo(() => ['d4', 'd6', 'd8', 'd10', 'd12'], []);
-   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-      const count = +e.target.value;
-      dispatch(setDices({ count, id: e.target.id }));
-   };
+interface IProps extends IDice {
+   options: string[];
+   onFieldChange: (e: ChangeEvent<HTMLInputElement>) => void;
+   onTypeChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+}
 
-   const onTypeChange = (e: ChangeEvent<HTMLSelectElement>) => {
-      const name = e.target.value as TDiceName;
-      dispatch(setDiceType({ id, name, value }));
-   };
-
+export const DamageField: FC<IProps> = ({
+   name,
+   count,
+   id,
+   options,
+   onFieldChange,
+   onTypeChange,
+}) => {
    return (
       <>
          <Field
@@ -26,9 +25,9 @@ export const DamageField: FC<IDice> = ({ name, count, id, value }) => {
             placeholder={name}
             value={count ? String(count) : ''}
             maxLength={2}
-            onChange={onChange}
+            onChange={onFieldChange}
          />
-         <Dropdown defaultValue={name} options={options} onChange={onTypeChange} />
+         <Dropdown defaultValue={name} name={id} options={options} onChange={onTypeChange} />
       </>
    );
 };

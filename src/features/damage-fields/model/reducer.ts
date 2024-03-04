@@ -29,7 +29,7 @@ interface IDamage {
 const initialState: IDamage = {
    dices: [
       {
-         id: DiceName.D4,
+         id: '1',
          name: DiceName.D4,
          value: DiceValue.d4,
          count: 0,
