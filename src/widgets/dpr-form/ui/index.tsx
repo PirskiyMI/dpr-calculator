@@ -3,7 +3,6 @@ import { FC, useState } from 'react';
 import styles from './styles.module.scss';
 import { AttackFields } from 'src/features/attack-fields';
 import { AttackTypeSelect } from 'src/features/attack-type-select/ui';
-import { DamageFields } from 'src/features/damage-fields';
 import { SpecialProperties } from 'src/features/special-properties';
 import { Button } from 'src/shared/ui/button';
 import { useAppSelector } from 'src/shared/lib';
@@ -12,6 +11,7 @@ import { damageSelector } from 'src/features/damage-fields/model/selectors';
 import { IAttackIndicators, getAttackDetails } from '../getAttackDetails';
 import { attackTypeSelector } from 'src/features/attack-type-select/model/selectors';
 import { specialPropertiesSelector } from 'src/features/special-properties/model/selectors';
+import { DamageFields } from 'src/features/damage-fields';
 
 export const DrpForm: FC = () => {
    const damage = useAppSelector(damageSelector);
@@ -35,7 +35,7 @@ export const DrpForm: FC = () => {
          attackBonus: attack,
          defendBonus: protection,
          averageDamage: damage,
-         criticalHitValues: '19-20',
+         criticalHitValues: '20',
          modifiers,
       });
       setAttackIndicators(indicators);

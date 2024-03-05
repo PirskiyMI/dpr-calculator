@@ -1,18 +1,48 @@
 import { ChangeEvent, useCallback, useMemo } from 'react';
-import { useAppDispatch, useAppSelector } from 'src/shared/lib';
-
-import styles from './styles.module.scss';
+import { IOption, useAppDispatch, useAppSelector } from 'src/shared/lib';
 import { dicesSelector } from '../model/selectors';
-import { DamageField } from './item';
-import { TDiceName, damageActions } from '..';
-import { Button } from 'src/shared/ui/button';
+import { TDiceType } from '../types';
+import { damageActions } from '..';
+import {
+   DamageEfficiency,
+   DamageEfficiencyOnRu,
+   DamageType,
+   DamageTypeOnRu,
+   DiceName,
+} from '../constants';
+import { DamageFieldsUI } from './ui';
 
 export const DamageFields = () => {
-   const dices = useAppSelector(dicesSelector);
    const dispatch = useAppDispatch();
-   const { setDices, setDiceType, addDice } = damageActions;
+   const fieldList = useAppSelector(dicesSelector);
+   const { setDices, setDiceType, addDice, removeDice, setDamageType, setDamageEfficiency } =
+      damageActions;
 
-   const options = useMemo(() => ['d4', 'd6', 'd8', 'd10', 'd12'], []);
+   const typeOptions = useMemo(() => {
+      const list: IOption[] = [];
+      for (const key in DiceName) {
+         const title = DiceName[key as keyof typeof DiceName];
+         list.push({ title, value: key });
+      }
+      return list;
+   }, []);
+   const damageTypeOptions = useMemo(() => {
+      const list: IOption[] = [];
+      for (const key in DamageType) {
+         const title = DamageTypeOnRu[key as keyof typeof DamageTypeOnRu];
+         list.push({ title, value: key });
+      }
+      return list;
+   }, []);
+   const damageEfficiencyOptions = useMemo(() => {
+      const list: IOption[] = [];
+      for (const key in DamageEfficiency) {
+         const title = DamageEfficiencyOnRu[key as keyof typeof DamageEfficiencyOnRu];
+         list.push({ title, value: key });
+      }
+      return list;
+   }, []);
+
    const onFieldChange = useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
          const count = +e.target.value;
@@ -23,31 +53,43 @@ export const DamageFields = () => {
    const onTypeChange = useCallback(
       (e: ChangeEvent<HTMLSelectElement>) => {
          const id = e.target.name;
-         const name = e.target.value as TDiceName;
+         const name = e.target.value as TDiceType;
          dispatch(setDiceType({ id, name }));
       },
       [dispatch, setDiceType],
    );
-   const handleCreateField = useCallback(() => dispatch(addDice()), [dispatch, addDice]);
+   const onDamageTypeChange = useCallback(
+      (e: ChangeEvent<HTMLSelectElement>) => {
+         const id = e.target.name;
+         const damageType = e.target.value as keyof typeof DamageType;
+         dispatch(setDamageType({ id, damageType }));
+      },
+      [dispatch, setDamageType],
+   );
+   const onDamageEfficiencyChange = useCallback(
+      (e: ChangeEvent<HTMLSelectElement>) => {
+         const id = e.target.name;
+         const damageEfficiency = e.target.value as keyof typeof DamageEfficiency;
+         console.log(damageEfficiency);
+
+         dispatch(setDamageEfficiency({ id, damageEfficiency }));
+      },
+      [dispatch, setDamageEfficiency],
+   );
+
+   const createField = useCallback(() => dispatch(addDice()), [dispatch, addDice]);
+   const removeField = useCallback(
+      (id: string) => dispatch(removeDice(id)),
+      [dispatch, removeDice],
+   );
 
    return (
-      <div className={styles.fields}>
-         <Button type="default" shape="round" onClick={handleCreateField}>
-            Add Dice
-         </Button>
-         <ul className={styles.list}>
-            {dices.map((el) => (
-               <li className={styles.list__item}>
-                  <DamageField
-                     {...el}
-                     key={el.id}
-                     options={options}
-                     onFieldChange={onFieldChange}
-                     onTypeChange={onTypeChange}
-                  />
-               </li>
-            ))}
-         </ul>
-      </div>
+      <DamageFieldsUI
+         fieldList={fieldList}
+         options={{ typeOptions, damageTypeOptions, damageEfficiencyOptions }}
+         change={{ onFieldChange, onTypeChange, onDamageTypeChange, onDamageEfficiencyChange }}
+         createField={createField}
+         removeField={removeField}
+      />
    );
 };
