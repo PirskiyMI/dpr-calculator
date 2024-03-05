@@ -70,7 +70,6 @@ export const DamageFields = () => {
       (e: ChangeEvent<HTMLSelectElement>) => {
          const id = e.target.name;
          const damageEfficiency = e.target.value as keyof typeof DamageEfficiency;
-         console.log(damageEfficiency);
 
          dispatch(setDamageEfficiency({ id, damageEfficiency }));
       },

@@ -42,8 +42,6 @@ const getAttackProbabilityWithAdvantage = ({
    minCriticalHitValue,
    hasElvenAccuracy,
 }: IAttackParams): IAttackProbability => {
-   console.log(1141 / 8000);
-
    if (hasElvenAccuracy) {
       const probabilityOfCriticalHit = minCriticalHitValue === 20 ? 1141 / 8000 : (1141 / 8000) * 2;
       const probabilityOfMiss =
@@ -72,12 +70,16 @@ const getAttackProbabilityWithDisadvantage = ({
    minCriticalHitValue,
 }: IAttackParams): IAttackProbability => {
    const probabilityOfCriticalHit = minCriticalHitValue === 20 ? 1 / 400 : (1 / 400) * 2;
+
+   console.log(1 - Math.pow(21 - minValueToHit, 2) / 400);
+
    const probabilityOfMiss =
       minValueToHit === 2
          ? 39 / 400
          : minValueToHit === minCriticalHitValue
          ? 1 - probabilityOfCriticalHit
-         : 1 - Math.pow(21 - minValueToHit, 2) / 400 - probabilityOfCriticalHit;
+         : 1 - Math.pow(21 - minValueToHit, 2) / 400;
+
    const probabilityOfHit =
       minValueToHit === probabilityOfCriticalHit
          ? 0
