@@ -1,4 +1,13 @@
 .fields {
    display: flex;
+   flex-direction: column;
    gap: 10px;
+}
+.list {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 10px;
+   &__item {
+      flex: 0 1 20%;
+   }
 }

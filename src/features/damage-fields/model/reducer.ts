@@ -4,11 +4,11 @@ export type TDiceName = 'd4' | 'd6' | 'd8' | 'd10' | 'd12';
 export type TDiceValue = '2.5' | '3.5' | '4.5' | '5.5' | '6.5';
 
 export enum DiceName {
-   D4 = 'd4',
-   D6 = 'd6',
-   D8 = 'd8',
-   D10 = 'd10',
-   D12 = 'd12',
+   d4 = 'd4',
+   d6 = 'd6',
+   d8 = 'd8',
+   d10 = 'd10',
+   d12 = 'd12',
 }
 enum DiceValue {
    d4 = '2.5',
@@ -17,6 +17,7 @@ enum DiceValue {
    d10 = '5.5',
    d12 = '6.5',
 }
+
 export interface IDice {
    id: string;
    name: TDiceName;
@@ -30,7 +31,7 @@ const initialState: IDamage = {
    dices: [
       {
          id: '1',
-         name: DiceName.D4,
+         name: DiceName.d4,
          value: DiceValue.d4,
          count: 0,
       },
@@ -46,7 +47,7 @@ const damageSlice = createSlice({
       },
       addDice: (state) => {
          const id = String(Date.now());
-         state.dices.push({ id, name: DiceName.D6, value: DiceValue.d6, count: 0 });
+         state.dices.push({ id, name: DiceName.d6, value: DiceValue.d6, count: 0 });
       },
       setDiceType: (state, { payload }: PayloadAction<{ id: string; name: TDiceName }>) => {
          state.dices.forEach((el) => {
