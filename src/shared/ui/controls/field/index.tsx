@@ -8,6 +8,7 @@ interface IProps {
    placeholder?: string;
    maxLength?: number;
    onChange?: (e: ChangeEvent<HTMLInputElement>, ...args: unknown[]) => void;
+   onBlur?: () => void;
    controls?: {
       increment: () => void;
       decrement: () => void;
@@ -15,7 +16,7 @@ interface IProps {
 }
 
 export const Field: FC<IProps> = memo(
-   ({ id, value, name, placeholder = 'Значение', maxLength, onChange, controls }) => {
+   ({ id, value, name, placeholder = 'Значение', maxLength, onChange, onBlur, controls }) => {
       return (
          <div className={styles.field}>
             <div
@@ -32,6 +33,7 @@ export const Field: FC<IProps> = memo(
                value={value}
                name={name}
                onChange={onChange}
+               onBlur={onBlur}
                maxLength={maxLength}
                className={styles.field__input}
             />

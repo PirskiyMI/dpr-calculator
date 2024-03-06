@@ -7,43 +7,26 @@ import styles from './styles.module.scss';
 import { attackSelector } from '../model/selectors';
 import { attackActions } from '..';
 import { useInputNumber } from 'src/shared/lib/hooks/use-input-number';
-
-const getAttackSum = (value: string) => {
-   const bonusList = value.split('+');
-   let res = 0;
-
-   for (const el of bonusList) {
-      const bonusSubList = el.split('-');
-
-      bonusSubList.length === 1
-         ? (res += +bonusSubList[0])
-         : (res += bonusSubList.reduce((acc, el) => (acc -= +el), +bonusSubList[0] * 2));
-   }
-
-   return res;
-};
+import { useAttackModifierInput } from '../lib/hooks';
+import { getAttackBonusSum, getAttackModifierSum } from '../lib/helpers';
 
 export const AttackFields: FC = memo(() => {
    const { attack, protection } = useAppSelector(attackSelector);
    const { setAttackBonus, setTargetProtection } = attackActions;
-   const { value, onChange } = useInputNumber(String(attack));
+   const attackInput = useInputNumber(attack === 0 ? '' : String(attack));
+   const attackModifierInput = useAttackModifierInput();
    const dispatch = useAppDispatch();
 
    useEffect(() => {
       const timerId = setTimeout(() => {
-         const result = getAttackSum(value);
+         const modifierSum = isNaN(getAttackBonusSum(attackModifierInput.value))
+            ? 0
+            : getAttackBonusSum(attackModifierInput.value);
+         const result = getAttackModifierSum(attackInput.value) + modifierSum;
          dispatch(setAttackBonus(result));
       }, 700);
       return () => clearTimeout(timerId);
-   }, [dispatch, setAttackBonus, value]);
-
-   /*    const setAttack = useCallback(
-      (e: ChangeEvent<HTMLInputElement>) => {
-         const value = Number(e.target.value);
-         dispatch(setAttackBonus(value));
-      },
-      [dispatch, setAttackBonus],
-   ); */
+   }, [dispatch, setAttackBonus, attackInput.value, attackModifierInput.value]);
 
    const setProtection = useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +40,7 @@ export const AttackFields: FC = memo(() => {
       <div className={styles.fields}>
          <ul className={styles.fields__list}>
             <li className={styles.fields__item}>
-               <Field value={value} onChange={onChange} placeholder="Бонус атаки" />
+               <Field {...attackInput} placeholder="Бонус атаки" />
             </li>
             <li className={styles.fields__item}>
                <Field
@@ -66,6 +49,9 @@ export const AttackFields: FC = memo(() => {
                   maxLength={2}
                   onChange={setProtection}
                />
+            </li>
+            <li className={styles.fields__item}>
+               <Field {...attackModifierInput} placeholder="Ситуативные бонусы" />
             </li>
          </ul>
       </div>
