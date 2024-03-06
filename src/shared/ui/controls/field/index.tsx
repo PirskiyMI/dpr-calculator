@@ -29,7 +29,7 @@ export const Field: FC<IProps> = memo(
             <input
                id={id}
                type="text"
-               value={String(value)}
+               value={value}
                name={name}
                onChange={onChange}
                maxLength={maxLength}

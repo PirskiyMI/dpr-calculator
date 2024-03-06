@@ -115,9 +115,8 @@ export const getAttackDetails = ({
          ? getAttackProbabilityWithDisadvantage(attackParams)
          : getDefaultAttackProbability(attackParams);
 
-   let damagePerRound =
+   const damagePerRound =
       averageDamage * probabilityOfHit + averageDamage * probabilityOfCriticalHit * 2;
-   damagePerRound = modifiers.hasWeaponFeats ? damagePerRound + 10 : damagePerRound;
 
    return { probabilityOfMiss, probabilityOfHit, probabilityOfCriticalHit, damagePerRound };
 };

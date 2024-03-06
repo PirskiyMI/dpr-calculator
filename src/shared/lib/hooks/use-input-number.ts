@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, useCallback } from 'react';
 
-export const useInputNumber = () => {
-   const [value, setValue] = useState<string>('');
+export const useInputNumber = (defaultValue?: string) => {
+   const [value, setValue] = useState<string>(defaultValue || '');
 
    const increment = useCallback(
       () =>
@@ -26,7 +26,7 @@ export const useInputNumber = () => {
    );
 
    const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-      const numbersOnly = e.target.value.replace(/[^1-9]/g, '');
+      const numbersOnly = e.target.value.replace(/[^0-9\\+-]+/g, '');
       setValue(numbersOnly);
    }, []);
 
