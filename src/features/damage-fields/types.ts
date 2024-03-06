@@ -22,6 +22,7 @@ export interface IDice {
    name: TDiceName;
    value: TDiceValue;
    count: number;
+   damageModifier: number;
    damageType: TDamageType;
    damageEfficiency: TDamageEfficiency;
 }

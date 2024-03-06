@@ -11,6 +11,7 @@ const initialState: IDamage = {
       {
          id: '1',
          count: 0,
+         damageModifier: 0,
          name: DiceName.D4,
          value: DiceValue.D4,
          damageType: DamageType.PIERCING,
@@ -34,6 +35,7 @@ const damageSlice = createSlice({
          state.dices.push({
             id,
             count: 0,
+            damageModifier: 0,
             name: DiceName.D6,
             value: DiceValue.D6,
             damageType: DamageType.PIERCING,
@@ -42,6 +44,12 @@ const damageSlice = createSlice({
       },
       removeDice: (state, { payload }: PayloadAction<string>) => {
          state.dices = state.dices.filter((el) => el.id !== payload);
+      },
+      setDamageModifier: (
+         state,
+         { payload: { id, damageModifier } }: PayloadAction<{ id: string; damageModifier: number }>,
+      ) => {
+         state.dices.forEach((el) => (el.id === id ? (el.damageModifier = damageModifier) : null));
       },
       setDiceType: (
          state,

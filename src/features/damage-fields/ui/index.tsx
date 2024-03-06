@@ -15,8 +15,15 @@ import { DamageFieldsUI } from './ui';
 export const DamageFields = () => {
    const dispatch = useAppDispatch();
    const fieldList = useAppSelector(dicesSelector);
-   const { setDices, setDiceType, addDice, removeDice, setDamageType, setDamageEfficiency } =
-      damageActions;
+   const {
+      setDices,
+      setDiceType,
+      addDice,
+      removeDice,
+      setDamageModifier,
+      setDamageType,
+      setDamageEfficiency,
+   } = damageActions;
 
    const typeOptions = useMemo(() => {
       const list: IOption[] = [];
@@ -50,6 +57,15 @@ export const DamageFields = () => {
       },
       [dispatch, setDices],
    );
+   const onDamageModifierChange = useCallback(
+      (e: ChangeEvent<HTMLInputElement>) => {
+         const id = e.target.id;
+         const damageModifier = +e.target.value;
+         dispatch(setDamageModifier({ id, damageModifier }));
+      },
+      [dispatch, setDamageModifier],
+   );
+
    const onTypeChange = useCallback(
       (e: ChangeEvent<HTMLSelectElement>) => {
          const id = e.target.name;
@@ -86,7 +102,13 @@ export const DamageFields = () => {
       <DamageFieldsUI
          fieldList={fieldList}
          options={{ typeOptions, damageTypeOptions, damageEfficiencyOptions }}
-         change={{ onFieldChange, onTypeChange, onDamageTypeChange, onDamageEfficiencyChange }}
+         change={{
+            onFieldChange,
+            onDamageModifierChange,
+            onTypeChange,
+            onDamageTypeChange,
+            onDamageEfficiencyChange,
+         }}
          createField={createField}
          removeField={removeField}
       />
