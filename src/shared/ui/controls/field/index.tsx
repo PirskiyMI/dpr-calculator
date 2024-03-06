@@ -18,6 +18,14 @@ export const Field: FC<IProps> = memo(
    ({ id, value, name, placeholder = 'Значение', maxLength, onChange, controls }) => {
       return (
          <div className={styles.field}>
+            <div
+               className={`${
+                  value
+                     ? `${styles.field__placeholder} ${styles.field__placeholder_active}`
+                     : styles.field__placeholder
+               }`}>
+               {placeholder}
+            </div>
             <input
                id={id}
                type="text"
@@ -27,14 +35,6 @@ export const Field: FC<IProps> = memo(
                maxLength={maxLength}
                className={styles.field__input}
             />
-            <div
-               className={`${
-                  value
-                     ? `${styles.field__placeholder} ${styles.field__placeholder_active}`
-                     : styles.field__placeholder
-               }`}>
-               {placeholder}
-            </div>
             {controls && (
                <div className={styles.field__controls}>
                   <button onClick={controls.increment} className={styles.field__button}>

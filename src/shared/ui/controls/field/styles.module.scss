@@ -1,11 +1,13 @@
 .field {
    position: relative;
    &__input {
+      position: relative;
       width: 100%;
       padding: 6px 8px;
       border: var(--border-default) rgba(var(--color-dark), 0.3);
       border-radius: var(--border-radius-default);
       transition: border-color ease 0.3s;
+      z-index: 1;
    }
    &__input:focus {
       border-color: rgb(var(--color-primary));
@@ -27,6 +29,7 @@
          top: -8px;
          left: 3px;
          font-size: var(--fs-small);
+         z-index: 32;
       }
    }
    &__controls {
