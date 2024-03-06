@@ -23,6 +23,7 @@ export const DamageFields = () => {
       setDamageModifier,
       setDamageType,
       setDamageEfficiency,
+      setDamageFit,
    } = damageActions;
 
    const typeOptions = useMemo(() => {
@@ -91,6 +92,12 @@ export const DamageFields = () => {
       },
       [dispatch, setDamageEfficiency],
    );
+   const onHasFitChange = useCallback(
+      (id: string) => {
+         dispatch(setDamageFit(id));
+      },
+      [dispatch, setDamageFit],
+   );
 
    const createField = useCallback(() => dispatch(addDice()), [dispatch, addDice]);
    const removeField = useCallback(
@@ -108,6 +115,7 @@ export const DamageFields = () => {
             onTypeChange,
             onDamageTypeChange,
             onDamageEfficiencyChange,
+            onHasFitChange
          }}
          createField={createField}
          removeField={removeField}

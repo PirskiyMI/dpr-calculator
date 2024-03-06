@@ -15,6 +15,7 @@ interface IProps extends IDice {
    onTypeChange: (e: ChangeEvent<HTMLSelectElement>) => void;
    onDamageTypeChange: (e: ChangeEvent<HTMLSelectElement>) => void;
    onDamageEfficiencyChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+   onHasFitChange: (id: string) => void;
    removeField: (id: string) => void;
 }
 
@@ -23,6 +24,7 @@ export const DamageField: FC<IProps> = memo(
       name,
       count,
       id,
+      hasDamageFit,
       damageModifier,
       damageType,
       damageEfficiency,
@@ -34,6 +36,7 @@ export const DamageField: FC<IProps> = memo(
       onTypeChange,
       onDamageTypeChange,
       onDamageEfficiencyChange,
+      onHasFitChange,
       removeField,
    }) => {
       const handleRemoveField = useCallback(() => removeField(id), [id, removeField]);
@@ -75,7 +78,13 @@ export const DamageField: FC<IProps> = memo(
                options={damageEfficiencyOptions}
                onChange={onDamageEfficiencyChange}
             />
-
+            <div
+               className={
+                  hasDamageFit ? `${styles.checkbox} ${styles.checkbox_active}` : styles.checkbox
+               }
+               onClick={() => onHasFitChange(id)}>
+               Мастер большого оружия / Меткий стрелок
+            </div>
             <Button type="dashed" onClick={handleRemoveField}>
                Удалить
             </Button>

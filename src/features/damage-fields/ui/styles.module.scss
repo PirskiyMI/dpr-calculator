@@ -21,4 +21,12 @@
    display: flex;
    column-gap: 4px;
 }
-
+.checkbox {
+   padding: 4px;
+   font-size: 10px;
+   transition: all ease 0.3s;
+   &_active {
+      color: rgb(var(--color-light));
+      background-color: rgb(var(--color-primary));
+   }
+}

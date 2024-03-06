@@ -25,4 +25,5 @@ export interface IDice {
    damageModifier: number;
    damageType: TDamageType;
    damageEfficiency: TDamageEfficiency;
+   hasDamageFit: boolean;
 }

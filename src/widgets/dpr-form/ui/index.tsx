@@ -1,13 +1,13 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import styles from './styles.module.scss';
 import { AttackFields } from 'src/features/attack-fields';
 import { AttackTypeSelect } from 'src/features/attack-type-select/ui';
-import { SpecialProperties } from 'src/features/special-properties';
+import { SpecialProperties, specialPropertiesActions } from 'src/features/special-properties';
 import { Button } from 'src/shared/ui/button';
-import { useAppSelector } from 'src/shared/lib';
+import { useAppDispatch, useAppSelector } from 'src/shared/lib';
 import { attackSelector } from 'src/features/attack-fields/model/selectors';
-import { damageSelector } from 'src/features/damage-fields/model/selectors';
+import { damageSelector, isDamageFitActive } from 'src/features/damage-fields/model/selectors';
 import { IAttackIndicators, getAttackDetails } from '../getAttackDetails';
 import { attackTypeSelector } from 'src/features/attack-type-select/model/selectors';
 import { specialPropertiesSelector } from 'src/features/special-properties/model/selectors';
@@ -17,7 +17,14 @@ export const DrpForm: FC = () => {
    const damage = useAppSelector(damageSelector);
    const modifiers = useAppSelector(specialPropertiesSelector);
    const { attack, protection } = useAppSelector(attackSelector);
+   const { setHasWeaponFeats } = specialPropertiesActions;
    const attackType = useAppSelector(attackTypeSelector);
+   const isDamageFit = useAppSelector(isDamageFitActive);
+   const dispatch = useAppDispatch();
+
+   useEffect(() => {
+      dispatch(setHasWeaponFeats(isDamageFit));
+   }, [dispatch, isDamageFit, setHasWeaponFeats]);
 
    const [attackIndicators, setAttackIndicators] = useState<IAttackIndicators>({
       probabilityOfMiss: 0,

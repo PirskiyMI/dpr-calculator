@@ -2,6 +2,10 @@ label {
    cursor: pointer;
 }
 
+.disabled {
+   opacity: 0.6;
+}
+
 .checkbox {
    width: 20px;
    height: 20px;

@@ -53,6 +53,7 @@ export const SpecialProperties: FC = memo(() => {
                <Checkbox
                   checked={hasWeaponFeats}
                   onChange={setWeaponFeats}
+                  disabled
                   label={'Мастер большого оружия / Меткий стрелок'}
                />
             </li>

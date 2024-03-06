@@ -19,6 +19,7 @@ interface IProps {
       onTypeChange: (e: ChangeEvent<HTMLSelectElement>) => void;
       onDamageTypeChange: (e: ChangeEvent<HTMLSelectElement>) => void;
       onDamageEfficiencyChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+      onHasFitChange: (id: string) => void;
    };
    createField: () => void;
    removeField: (id: string) => void;
