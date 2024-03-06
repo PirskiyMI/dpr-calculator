@@ -6,6 +6,7 @@
    justify-content: center;
    border: var(--border-default) rgba(var(--color-dark), 0.3);
    transition: border-color ease 0.3s;
+   background: transparent;
    cursor: pointer;
    &:hover {
       border-color: rgb(var(--color-primary));
@@ -14,6 +15,8 @@
       width: 14px;
       height: 14px;
       transition: background-color ease 0.3s;
+      position: relative;
+      z-index: 0;
    }
    &,
    &__flag {

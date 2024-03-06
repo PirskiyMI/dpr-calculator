@@ -44,9 +44,9 @@ export const DrpForm: FC = () => {
    return (
       <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
          <AttackFields />
+         <SpecialProperties />
          <AttackTypeSelect />
          <DamageFields />
-         <SpecialProperties />
 
          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <div>Промах: {(probabilityOfMiss * 100).toFixed(2)}%</div>

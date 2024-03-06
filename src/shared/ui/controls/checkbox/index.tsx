@@ -22,7 +22,7 @@ export const Checkbox: FC<IProps> = memo(({ checked, label, onChange }) => {
             onChange={onChange}
          />
          <div className={styles.wrapper}>
-            <div className={styles.checkbox} onClick={onChange}>
+            <div className={styles.checkbox}>
                <div className={styles.checkbox__flag} />
             </div>
             {label && <span className={styles.label}>{label}</span>}
