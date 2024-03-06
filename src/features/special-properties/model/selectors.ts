@@ -5,12 +5,14 @@ export const hasElvenAccuracySelector = (state: RootState) =>
 export const hasShieldSelector = (state: RootState) => state.specialPropertiesReducer.hasShield;
 export const hasWeaponFeatsSelector = (state: RootState) =>
    state.specialPropertiesReducer.hasWeaponFeats;
+export const coverSelector = (state: RootState) => state.specialPropertiesReducer.cover;
 
 export const specialPropertiesSelector = createSelector(
-   [hasElvenAccuracySelector, hasShieldSelector, hasWeaponFeatsSelector],
-   (hasElvenAccuracy, hasShield, hasWeaponFeats) => ({
+   [hasElvenAccuracySelector, hasShieldSelector, hasWeaponFeatsSelector, coverSelector],
+   (hasElvenAccuracy, hasShield, hasWeaponFeats, cover) => ({
       hasElvenAccuracy,
       hasShield,
       hasWeaponFeats,
+      cover,
    }),
 );
