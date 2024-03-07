@@ -99,9 +99,11 @@ export const getAttackDetails = ({
    modifiers,
 }: IAttackDetails) => {
    const minCriticalHitValue = criticalHitValues === '19-20' ? 19 : 20;
-   let minValueToHit = modifiers.hasWeaponFeats
-      ? defendBonus - attackBonus + 5
-      : defendBonus - attackBonus;
+   let minValueToHit = defendBonus - attackBonus;
+   
+   if (modifiers.hasWeaponFeats) minValueToHit += 5;
+   if (modifiers.hasShield) minValueToHit += 5;
+
    minValueToHit =
       modifiers.cover === 'absent'
          ? minValueToHit
