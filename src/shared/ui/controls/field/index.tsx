@@ -7,7 +7,7 @@ interface IProps {
    name?: string;
    placeholder?: string;
    maxLength?: number;
-   onChange?: (e: ChangeEvent<HTMLInputElement>, ...args: unknown[]) => void;
+   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
    onBlur?: () => void;
    controls?: {
       increment: () => void;
