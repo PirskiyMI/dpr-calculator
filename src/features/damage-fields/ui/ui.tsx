@@ -34,7 +34,7 @@ export const DamageFieldsUI: FC<IProps> = ({
 }) => {
    return (
       <div className={styles.fields}>
-         <Button type="default" shape="round" onClick={createField}>
+         <Button type="default" shape="round" onClick={createField} className={styles.button}>
             Добавить кость урона
          </Button>
          <ul className={styles.list}>

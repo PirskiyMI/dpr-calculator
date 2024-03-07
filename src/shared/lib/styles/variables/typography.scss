@@ -7,7 +7,16 @@
    --fw-default: 400;
    --fw-small: 300;
 
-   --fs-large: 18px;
-   --fs-default: 14px;
-   --fs-small: 12px;
+   --fs-large: calc(1vh + 1vw);
+   --fs-default: calc((1vh + 1vw) / 2);
+   --fs-small: calc((1vh + 1vw) / 2.25);
+
+   @media (max-width: 1024px) {
+      --fs-default: calc((1vh + 1vw) / 1.5);
+      --fs-small: calc((1vh + 1vw) / 1.75);
+   }
+   @media (max-width: 728px) {
+      --fs-default: calc((1vh + 1vw) / 1.25);
+      --fs-small: calc((1vh + 1vw) / 1.5);
+   }
 }

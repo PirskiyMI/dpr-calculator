@@ -40,8 +40,7 @@
       color: rgb(var(--color-light));
       background-color: rgb(var(--color-primary));
       transition: border-color ease 0.2s, background-color ease 0.2s;
-      &:active,
-      &:focus {
+      &:active {
          border-color: rgb(var(--color-primary-active));
          background-color: rgb(var(--color-primary-active));
       }

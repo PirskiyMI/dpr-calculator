@@ -41,11 +41,12 @@ const getButtonGhost = (className: string) => `${className} ${styles.button_ghos
 const getButtonBlock = (className: string) => `${className} ${styles.button_block}`;
 
 interface Props {
+   type: ButtonType;
    children?: ReactNode;
    icon?: ReactNode;
-   type: ButtonType;
    size?: ButtonSize;
    shape?: ButtonShape;
+   className?: string;
    block?: boolean;
    ghost?: boolean;
    disabled?: boolean;
@@ -59,6 +60,7 @@ export const Button: FC<Props> = memo(
       type,
       shape = 'default',
       size = 'large',
+      className,
       block = false,
       ghost = false,
       disabled = false,
@@ -69,6 +71,7 @@ export const Button: FC<Props> = memo(
       if (shape !== 'default') classes = `${classes} ${getButtonShape(shape)}`;
       if (block) classes = getButtonBlock(classes);
       if (ghost) classes = getButtonGhost(classes);
+      if (className) classes = `${classes} ${className}`;
 
       const buttonRef = useRef<HTMLButtonElement>(null);
 

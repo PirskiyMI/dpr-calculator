@@ -85,7 +85,7 @@ export const DamageField: FC<IProps> = memo(
                onClick={() => onHasFitChange(id)}>
                Мастер большого оружия / Меткий стрелок
             </div>
-            <Button type="dashed" onClick={handleRemoveField}>
+            <Button type="dashed" shape="round" onClick={handleRemoveField}>
                Удалить
             </Button>
          </>

@@ -3,13 +3,7 @@ import { withProviders } from './providers';
 import { DrpForm } from 'src/widgets/dpr-form';
 
 function App() {
-   
-
-   return (
-      <div className="container">
-         <DrpForm />
-      </div>
-   );
+   return <DrpForm />;
 }
 
 const AppWithProviders = withProviders(App);

@@ -1,6 +1,7 @@
 .properties {
    &__list {
       display: flex;
+      flex-wrap: wrap;
       gap: 14px;
    }
    &__item {

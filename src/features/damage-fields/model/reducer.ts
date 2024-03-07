@@ -34,6 +34,7 @@ const damageSlice = createSlice({
          state.dices.forEach((el) => (el.id === id ? (el.count = count) : null));
       },
       addDice: (state) => {
+         if (state.dices.length === 15) return;
          const id = String(Date.now());
          state.dices.push({
             id,

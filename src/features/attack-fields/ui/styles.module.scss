@@ -1,7 +1,8 @@
 .fields {
    &__list {
       display: flex;
-      gap: 10px;
+      flex-wrap: wrap;
+      gap: 14px;
    }
    &__item {
       max-width: 170px;

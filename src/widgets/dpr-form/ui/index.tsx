@@ -50,21 +50,35 @@ export const DrpForm: FC = () => {
 
    return (
       <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
-         <AttackFields />
-         <SpecialProperties />
-         <AttackTypeSelect />
-         <DamageFields />
+         <div className={styles.form__controls}>
+            <div
+               style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '14px',
+                  flexWrap: 'wrap',
+               }}>
+               <AttackFields />
+               <SpecialProperties />
+            </div>
 
-         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <AttackTypeSelect />
+
+            <DamageFields />
+         </div>
+         <div className={styles.form__output}>
+            <Button
+               type="primary"
+               shape="round"
+               onClick={handleCalculation}
+               className={styles.form__button}>
+               Результат
+            </Button>
             <div>Промах: {(probabilityOfMiss * 100).toFixed(2)}%</div>
             <div>Попадание: {(probabilityOfHit * 100).toFixed(2)}%</div>
             <div>Критическое попадание: {(probabilityOfCriticalHit * 100).toFixed(2)}%</div>
             <div>Средний урон: {damagePerRound.toFixed(2)}</div>
          </div>
-
-         <Button type="primary" shape="round" onClick={handleCalculation}>
-            Посчитать
-         </Button>
       </form>
    );
 };
