@@ -1,9 +1,11 @@
 import { throwType } from 'src/features/attack-type-select';
+import { Cover } from 'src/features/special-properties';
 
 interface ISpecialProperties {
    hasElvenAccuracy: boolean;
    hasShield: boolean;
    hasWeaponFeats: boolean;
+   cover: Cover;
 }
 interface IAttackDetails {
    type: throwType;
@@ -101,7 +103,12 @@ export const getAttackDetails = ({
       ? defendBonus - attackBonus + 5
       : defendBonus - attackBonus;
    minValueToHit =
-      minValueToHit < minCriticalHitValue ? (minValueToHit > 2 ? minValueToHit : 2) : 20;
+      modifiers.cover === 'absent'
+         ? minValueToHit
+         : modifiers.cover === 'half'
+         ? minValueToHit + 2
+         : minValueToHit + 5;
+   minValueToHit < minCriticalHitValue ? (minValueToHit > 2 ? minValueToHit : 2) : 20;
 
    const attackParams: IAttackParams = { minValueToHit, minCriticalHitValue };
 
