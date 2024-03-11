@@ -7,27 +7,34 @@ interface ISpecialProperties {
    hasWeaponFeats: boolean;
    cover: Cover;
 }
-const initialState: ISpecialProperties = {
-   hasElvenAccuracy: false,
-   hasShield: false,
-   hasWeaponFeats: false,
-   cover: Cover.ABSENT,
+const initialState: Record<string, ISpecialProperties> = {
+   'throw-1': {
+      hasElvenAccuracy: false,
+      hasShield: false,
+      hasWeaponFeats: false,
+      cover: Cover.ABSENT,
+   },
 };
 const specialPropertiesSlice = createSlice({
    name: 'special-properties',
    initialState,
    reducers: {
-      setHasElvenAccuracy: (state, { payload }: PayloadAction<boolean>) => {
-         state.hasElvenAccuracy = payload;
+      setSpecialProperties: (
+         state,
+         {
+            payload: { id, params },
+         }: PayloadAction<{
+            id: string;
+            params: { hasElvenAccuracy?: boolean; hasShield?: boolean; hasWeaponFeats?: boolean };
+         }>,
+      ) => {
+         state[id] = { ...state[id], ...params };
       },
-      setHasShield: (state, { payload }: PayloadAction<boolean>) => {
-         state.hasShield = payload;
-      },
-      setHasWeaponFeats: (state, { payload }: PayloadAction<boolean>) => {
-         state.hasWeaponFeats = payload;
-      },
-      setCover: (state, { payload }: PayloadAction<keyof typeof Cover>) => {
-         state.cover = Cover[payload];
+      setCover: (
+         state,
+         { payload: { id, cover } }: PayloadAction<{ id: string; cover: keyof typeof Cover }>,
+      ) => {
+         state[id].cover = Cover[cover];
       },
    },
 });

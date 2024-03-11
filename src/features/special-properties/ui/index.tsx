@@ -2,16 +2,20 @@ import { ChangeEvent, FC, memo, useCallback, useMemo } from 'react';
 import styles from './styles.module.scss';
 import { IOption, useAppDispatch, useAppSelector } from 'src/shared/lib';
 import { specialPropertiesActions } from '..';
-import { specialPropertiesSelector } from '../model/selectors';
+import { getSpecialPropertiesSelector } from '../model/selectors';
 import { Checkbox } from 'src/shared/ui/controls/checkbox';
 import { Dropdown } from 'src/shared/ui/controls/dropdown';
 import { Cover, CoverOnRu } from '../types';
 
-export const SpecialProperties: FC = memo(() => {
-   const { setHasElvenAccuracy, setHasShield, setHasWeaponFeats, setCover } =
-      specialPropertiesActions;
-   const { hasElvenAccuracy, hasShield, hasWeaponFeats, cover } =
-      useAppSelector(specialPropertiesSelector);
+interface IProps {
+   id: string;
+}
+
+export const SpecialProperties: FC<IProps> = memo(({ id }) => {
+   const { setSpecialProperties, setCover } = specialPropertiesActions;
+   const { hasElvenAccuracy, hasShield, hasWeaponFeats, cover } = useAppSelector((state) =>
+      getSpecialPropertiesSelector(state, id),
+   );
    const dispatch = useAppDispatch();
 
    const coverOptions = useMemo(() => {
@@ -23,18 +27,22 @@ export const SpecialProperties: FC = memo(() => {
    }, []);
 
    const setShield = useCallback(() => {
-      dispatch(setHasShield(!hasShield));
-   }, [dispatch, setHasShield, hasShield]);
+      dispatch(setSpecialProperties({ id, params: { hasShield: !hasShield } }));
+   }, [dispatch, setSpecialProperties, id, hasShield]);
    const setElvenAccuracy = useCallback(() => {
-      dispatch(setHasElvenAccuracy(!hasElvenAccuracy));
-   }, [dispatch, hasElvenAccuracy, setHasElvenAccuracy]);
+      dispatch(setSpecialProperties({ id, params: { hasElvenAccuracy: !hasElvenAccuracy } }));
+   }, [dispatch, setSpecialProperties, id, hasElvenAccuracy]);
    const setWeaponFeats = useCallback(() => {
-      dispatch(setHasWeaponFeats(!hasWeaponFeats));
-   }, [dispatch, setHasWeaponFeats, hasWeaponFeats]);
+      dispatch(setSpecialProperties({ id, params: { hasWeaponFeats: !hasWeaponFeats } }));
+   }, [dispatch, setSpecialProperties, id, hasWeaponFeats]);
 
-   const onCoverChange = (e: ChangeEvent<HTMLSelectElement>) => {
-      dispatch(setCover(e.target.value as keyof typeof Cover));
-   };
+   const onCoverChange = useCallback(
+      (e: ChangeEvent<HTMLSelectElement>) => {
+         const cover = e.target.value as keyof typeof Cover;
+         dispatch(setCover({ id, cover }));
+      },
+      [dispatch, id, setCover],
+   );
 
    return (
       <div className={styles.properties}>

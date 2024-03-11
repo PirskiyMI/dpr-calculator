@@ -5,23 +5,27 @@ interface IAttack {
    targetProtection: number;
 }
 
-const initialState: IAttack = {
-   attackBonus: 0,
-   targetProtection: 10,
+const initialState: Record<string, IAttack> = {
+   'throw-1': { attackBonus: 0, targetProtection: 10 },
 };
 
-const attackSlice = createSlice({
-   name: 'attack',
+const attackParamsSlice = createSlice({
+   name: 'attackParams',
    initialState,
    reducers: {
-      setAttackBonus: (state, { payload }: PayloadAction<number>) => {
-         state.attackBonus = payload;
-      },
-      setTargetProtection: (state, { payload }: PayloadAction<number>) => {
-         state.targetProtection = payload;
+      setAttackParams: (
+         state,
+         {
+            payload: { id, params },
+         }: PayloadAction<{
+            id: string;
+            params: { attackBonus?: number; targetProtection?: number };
+         }>,
+      ) => {
+         state[id] = { ...state[id], ...params };
       },
    },
 });
 
-export const attackReducer = attackSlice.reducer;
-export const attackActions = attackSlice.actions;
+export const attackParamsReducer = attackParamsSlice.reducer;
+export const attackParamsActions = attackParamsSlice.actions;

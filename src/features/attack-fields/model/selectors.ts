@@ -1,12 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-const attackBonusSelector = (state: RootState) => state.attackReducer.attackBonus;
-const targetProtectionSelector = (state: RootState) => state.attackReducer.targetProtection;
+const attackParamsSelector = (state: RootState) => state.attackParamsReducer;
 
-export const attackSelector = createSelector(
-   [attackBonusSelector, targetProtectionSelector],
-   (attack, protection) => ({
-      attack,
-      protection,
-   }),
+export const getAttackParamsSelector = createSelector(
+   [attackParamsSelector, (_attackParamsSelector, id: string) => id],
+   (attackParams, id) => attackParams[id],
 );

@@ -2,10 +2,14 @@ import { FC, memo, useMemo } from 'react';
 import { Select } from 'src/shared/ui/controls/select';
 import { attackTypeActions, throwType } from '../model';
 import { useAppDispatch, useAppSelector } from 'src/shared/lib';
-import { attackTypeSelector } from '../model/selectors';
+import { getThrowTypeSelector } from '../model/selectors';
 
-export const AttackTypeSelect: FC = memo(() => {
-   const attackType = useAppSelector(attackTypeSelector);
+interface IProps {
+   id: string;
+}
+
+export const AttackTypeSelect: FC<IProps> = memo(({ id }) => {
+   const attackType = useAppSelector((state) => getThrowTypeSelector(state, id));
    const { setThrowType } = attackTypeActions;
    const dispatch = useAppDispatch();
 
@@ -17,8 +21,8 @@ export const AttackTypeSelect: FC = memo(() => {
       ];
    }, []);
 
-   const setAttackType = (value: string) => {
-      dispatch(setThrowType(value as throwType));
+   const setAttackType = (value: throwType) => {
+      dispatch(setThrowType({ id, throwType: value }));
    };
 
    return <Select items={selectList} currentValue={attackType} onChange={setAttackType} />;

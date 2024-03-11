@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useMemo } from 'react';
 import { IOption, useAppDispatch, useAppSelector } from 'src/shared/lib';
-import { dicesSelector } from '../model/selectors';
+import { getDicesSelector } from '../model/selectors';
 import { TDiceType } from '../types';
 import { damageActions } from '..';
 import {
@@ -12,9 +12,13 @@ import {
 } from '../constants';
 import { DamageFieldsUI } from './ui';
 
-export const DamageFields = () => {
+interface IProps {
+   id: string;
+}
+
+export const DamageFields = ({ id }: IProps) => {
    const dispatch = useAppDispatch();
-   const fieldList = useAppSelector(dicesSelector);
+   const fieldList = useAppSelector((state) => getDicesSelector(state, id));
    const {
       setDices,
       setDiceType,
@@ -54,55 +58,55 @@ export const DamageFields = () => {
    const onFieldChange = useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
          const count = +e.target.value;
-         dispatch(setDices({ count, id: e.target.id }));
+         dispatch(setDices({ id, dice: { id: e.target.id, count } }));
       },
-      [dispatch, setDices],
+      [dispatch, id, setDices],
    );
    const onDamageModifierChange = useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
-         const id = e.target.id;
+         const diceId = e.target.id;
          const damageModifier = +e.target.value;
-         dispatch(setDamageModifier({ id, damageModifier }));
+         dispatch(setDamageModifier({ id, dice: { id: diceId, damageModifier } }));
       },
-      [dispatch, setDamageModifier],
+      [dispatch, id, setDamageModifier],
    );
 
    const onTypeChange = useCallback(
       (e: ChangeEvent<HTMLSelectElement>) => {
-         const id = e.target.name;
+         const diceId = e.target.name;
          const name = e.target.value as TDiceType;
-         dispatch(setDiceType({ id, name }));
+         dispatch(setDiceType({ id, dice: { id: diceId, name } }));
       },
-      [dispatch, setDiceType],
+      [dispatch, id, setDiceType],
    );
    const onDamageTypeChange = useCallback(
       (e: ChangeEvent<HTMLSelectElement>) => {
-         const id = e.target.name;
+         const diceId = e.target.name;
          const damageType = e.target.value as keyof typeof DamageType;
-         dispatch(setDamageType({ id, damageType }));
+         dispatch(setDamageType({ id, dice: { id: diceId, damageType } }));
       },
-      [dispatch, setDamageType],
+      [dispatch, id, setDamageType],
    );
    const onDamageEfficiencyChange = useCallback(
       (e: ChangeEvent<HTMLSelectElement>) => {
-         const id = e.target.name;
+         const diceId = e.target.name;
          const damageEfficiency = e.target.value as keyof typeof DamageEfficiency;
 
-         dispatch(setDamageEfficiency({ id, damageEfficiency }));
+         dispatch(setDamageEfficiency({ id, dice: { id: diceId, damageEfficiency } }));
       },
-      [dispatch, setDamageEfficiency],
+      [dispatch, id, setDamageEfficiency],
    );
    const onHasFitChange = useCallback(
-      (id: string) => {
-         dispatch(setDamageFit(id));
+      (diceId: string) => {
+         dispatch(setDamageFit({ id, diceId }));
       },
-      [dispatch, setDamageFit],
+      [dispatch, id, setDamageFit],
    );
 
-   const createField = useCallback(() => dispatch(addDice()), [dispatch, addDice]);
+   const createField = useCallback(() => dispatch(addDice(id)), [dispatch, addDice, id]);
    const removeField = useCallback(
-      (id: string) => dispatch(removeDice(id)),
-      [dispatch, removeDice],
+      (diceId: string) => dispatch(removeDice({ id, diceId })),
+      [dispatch, id, removeDice],
    );
 
    return (
@@ -115,7 +119,7 @@ export const DamageFields = () => {
             onTypeChange,
             onDamageTypeChange,
             onDamageEfficiencyChange,
-            onHasFitChange
+            onHasFitChange,
          }}
          createField={createField}
          removeField={removeField}

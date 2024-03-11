@@ -2,20 +2,19 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export type throwType = 'disadvantage' | 'default' | 'advantage';
 
-interface IAttackType {
-   type: throwType;
-}
-
-const initialState: IAttackType = {
-   type: 'default',
+const initialState: Record<string, throwType> = {
+   'throw-1': 'default',
 };
 
 const attackTypeSlice = createSlice({
    name: 'attack-type',
    initialState,
    reducers: {
-      setThrowType: (state, { payload }: PayloadAction<throwType>) => {
-         state.type = payload;
+      setThrowType: (
+         state,
+         { payload: { id, throwType } }: PayloadAction<{ id: string; throwType: throwType }>,
+      ) => {
+         state[id] = throwType;
       },
    },
 });

@@ -4,16 +4,22 @@ import { useAppDispatch, useAppSelector } from 'src/shared/lib';
 import { Field } from 'src/shared/ui/controls/field';
 
 import styles from './styles.module.scss';
-import { attackSelector } from '../model/selectors';
-import { attackActions } from '..';
+import { getAttackParamsSelector } from '../model/selectors';
+import { attackParamsActions } from '..';
 import { useInputNumber } from 'src/shared/lib/hooks/use-input-number';
 import { useAttackModifierInput } from '../lib/hooks';
 import { getAttackBonusSum, getAttackModifierSum } from '../lib/helpers';
 
-export const AttackFields: FC = memo(() => {
-   const { attack, protection } = useAppSelector(attackSelector);
-   const { setAttackBonus, setTargetProtection } = attackActions;
-   const attackInput = useInputNumber(attack === 0 ? '' : String(attack));
+interface IProps {
+   id: string;
+}
+
+export const AttackFields: FC<IProps> = memo(({ id }) => {
+   const { attackBonus, targetProtection } = useAppSelector((state) =>
+      getAttackParamsSelector(state, id),
+   );
+   const { setAttackParams } = attackParamsActions;
+   const attackInput = useInputNumber(attackBonus === 0 ? '' : String(attackBonus));
    const attackModifierInput = useAttackModifierInput();
    const dispatch = useAppDispatch();
 
@@ -23,17 +29,17 @@ export const AttackFields: FC = memo(() => {
             ? 0
             : getAttackBonusSum(attackModifierInput.value);
          const result = getAttackModifierSum(attackInput.value) + modifierSum;
-         dispatch(setAttackBonus(result));
+         dispatch(setAttackParams({ id, params: { attackBonus: result } }));
       }, 700);
       return () => clearTimeout(timerId);
-   }, [dispatch, setAttackBonus, attackInput.value, attackModifierInput.value]);
+   }, [attackInput.value, attackModifierInput.value, dispatch, id, setAttackParams]);
 
    const setProtection = useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
          const value = Number(e.target.value);
-         dispatch(setTargetProtection(value));
+         dispatch(setAttackParams({ id, params: { targetProtection: value } }));
       },
-      [dispatch, setTargetProtection],
+      [dispatch, id, setAttackParams],
    );
 
    return (
@@ -44,7 +50,7 @@ export const AttackFields: FC = memo(() => {
             </li>
             <li className={styles.fields__item}>
                <Field
-                  value={String(protection)}
+                  value={String(targetProtection)}
                   placeholder="Бонус защиты"
                   maxLength={2}
                   onChange={setProtection}
