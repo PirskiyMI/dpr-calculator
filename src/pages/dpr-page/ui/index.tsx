@@ -1,11 +1,9 @@
 import { useAppSelector } from 'src/shared/lib';
-import { AddThrow } from 'src/widgets/add-throw';
-import { getThrowsId } from 'src/widgets/add-throw/model/selectors';
-import { DrpForm } from 'src/widgets/dpr-form';
+import { AddThrow, ThrowForm, getThrowList } from 'src/features/throw-form';
 import styles from './styles.module.scss';
 
 export const DprPage = () => {
-   const throwList = useAppSelector(getThrowsId);
+   const throwList = useAppSelector(getThrowList);
 
    return (
       <div>
@@ -13,7 +11,7 @@ export const DprPage = () => {
          <ul className={styles.list}>
             {throwList.map((el) => (
                <li key={el}>
-                  <DrpForm id={el} />
+                  <ThrowForm id={el} />
                </li>
             ))}
          </ul>

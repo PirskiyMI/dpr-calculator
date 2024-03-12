@@ -1,0 +1,38 @@
+.controls,
+.output {
+   padding: 30px 0px 30px 26px;
+   display: flex;
+   flex-direction: column;
+   @media (max-width: 1024px) {
+      padding: 20px 0px 20px 16px;
+   }
+   @media (max-width: 728px) {
+      padding: 14px 0px 14px 8px;
+   }
+}
+
+.controls {
+   row-gap: 14px;
+}
+
+.output {
+   padding-right: 16px;
+   row-gap: 14px;
+   font-size: var(--fs-large);
+   color: rgb(var(--color-dark));
+   border-left: 2px solid rgb(var(--color-primary));
+   @media (max-width: 728px) {
+      padding-right: 8px;
+      font-size: var(--fs-default);
+   }
+   &__wrapper {
+      position: sticky;
+      top: 30px;
+      left: 0;
+   }
+   &__list {
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+   }
+}
