@@ -40,20 +40,19 @@ export const DamageField: FC<IProps> = memo(
       removeField,
    }) => {
       const handleRemoveField = useCallback(() => removeField(id), [id, removeField]);
+      const handleHasFitChange = useCallback(() => onHasFitChange(id), [id, onHasFitChange]);
       return (
          <>
             <div className={styles.inputs}>
                <Field
-                  id={id}
-                  name={name}
+                  name={id}
                   placeholder={'Кол-во'}
                   value={count ? String(count) : ''}
                   maxLength={2}
                   onChange={onFieldChange}
                />
                <Field
-                  id={id}
-                  name={name}
+                  name={id}
                   placeholder={'Мод-ор'}
                   value={damageModifier ? String(damageModifier) : ''}
                   maxLength={2}
@@ -82,7 +81,7 @@ export const DamageField: FC<IProps> = memo(
                className={
                   hasDamageFit ? `${styles.checkbox} ${styles.checkbox_active}` : styles.checkbox
                }
-               onClick={() => onHasFitChange(id)}>
+               onClick={handleHasFitChange}>
                Мастер большого оружия / Меткий стрелок
             </div>
             <Button type="dashed" shape="round" onClick={handleRemoveField}>

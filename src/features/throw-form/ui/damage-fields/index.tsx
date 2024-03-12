@@ -58,7 +58,7 @@ export const DamageFields = memo(({ id }: IProps) => {
    const onFieldChange = useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
          const count = +e.target.value;
-         dispatch(setDices({ id, dice: { id: e.target.id, count } }));
+         dispatch(setDices({ id, dice: { id: e.target.name, count } }));
       },
       [dispatch, id, setDices],
    );
