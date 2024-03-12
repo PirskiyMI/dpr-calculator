@@ -29,6 +29,23 @@ const damageSlice = createSlice({
    name: 'damage',
    initialState,
    reducers: {
+      addThrow: (state, { payload }: PayloadAction<string>) => {
+         state[payload] = {
+            isDamageFitActive: false,
+            dices: [
+               {
+                  id: '1',
+                  count: 0,
+                  damageModifier: 0,
+                  name: DiceName.D4,
+                  value: DiceValue.D4,
+                  damageType: DamageType.PIERCING,
+                  damageEfficiency: DamageEfficiency.DEFAULT,
+                  hasDamageFit: false,
+               },
+            ],
+         };
+      },
       setDices: (
          state,
          {
@@ -38,7 +55,7 @@ const damageSlice = createSlice({
          state[id].dices.forEach((el) => (el.id === dice.id ? (el.count = dice.count) : null));
       },
       addDice: (state, { payload: id }: PayloadAction<string>) => {
-         if (state[id].dices.length === 15) return;
+         if (state[id].dices.length === 5) return;
          const diceId = String(Date.now());
          state[id].dices.push({
             id: diceId,

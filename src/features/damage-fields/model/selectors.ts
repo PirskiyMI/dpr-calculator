@@ -32,7 +32,5 @@ export const getDamageSelector = createSelector(
    },
 );
 
-export const getIsDamageFitActive = createSelector(
-   [dicesSelector, (_dicesSelector, id: string) => id],
-   (dices, id) => dices[id].isDamageFitActive,
-);
+export const getIsDamageFitActive = (state: RootState, id: string) =>
+   state.damageReducer[id].isDamageFitActive;

@@ -19,6 +19,14 @@ const specialPropertiesSlice = createSlice({
    name: 'special-properties',
    initialState,
    reducers: {
+      addSpecialProperties: (state, { payload }: PayloadAction<string>) => {
+         state[payload] = {
+            hasElvenAccuracy: false,
+            hasShield: false,
+            hasWeaponFeats: false,
+            cover: Cover.ABSENT,
+         };
+      },
       setSpecialProperties: (
          state,
          {

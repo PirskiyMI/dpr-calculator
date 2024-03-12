@@ -10,6 +10,9 @@ const attackTypeSlice = createSlice({
    name: 'attack-type',
    initialState,
    reducers: {
+      addThrowType: (state, { payload }: PayloadAction<string>) => {
+         state[payload] = 'default';
+      },
       setThrowType: (
          state,
          { payload: { id, throwType } }: PayloadAction<{ id: string; throwType: throwType }>,

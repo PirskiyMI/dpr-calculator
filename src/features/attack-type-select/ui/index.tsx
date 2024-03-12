@@ -21,8 +21,8 @@ export const AttackTypeSelect: FC<IProps> = memo(({ id }) => {
       ];
    }, []);
 
-   const setAttackType = (value: throwType) => {
-      dispatch(setThrowType({ id, throwType: value }));
+   const setAttackType = (value: string) => {
+      dispatch(setThrowType({ id, throwType: value as throwType }));
    };
 
    return <Select items={selectList} currentValue={attackType} onChange={setAttackType} />;

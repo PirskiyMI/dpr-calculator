@@ -6,25 +6,34 @@ import { AttackTypeSelect } from 'src/features/attack-type-select/ui';
 import { SpecialProperties, specialPropertiesActions } from 'src/features/special-properties';
 import { Button } from 'src/shared/ui/button';
 import { useAppDispatch, useAppSelector } from 'src/shared/lib';
-import { attackSelector } from 'src/features/attack-fields/model/selectors';
-import { damageSelector, isDamageFitActive } from 'src/features/damage-fields/model/selectors';
 import { IAttackIndicators, getAttackDetails } from '../getAttackDetails';
-import { attackTypeSelector } from 'src/features/attack-type-select/model/selectors';
-import { specialPropertiesSelector } from 'src/features/special-properties/model/selectors';
+import { getThrowTypeSelector } from 'src/features/attack-type-select/model/selectors';
 import { DamageFields } from 'src/features/damage-fields';
+import {
+   getDamageSelector,
+   getIsDamageFitActive,
+} from 'src/features/damage-fields/model/selectors';
+import { getSpecialPropertiesSelector } from 'src/features/special-properties/model/selectors';
+import { getAttackParamsSelector } from 'src/features/attack-fields/model/selectors';
 
-export const DrpForm: FC = () => {
-   const damage = useAppSelector(damageSelector);
-   const modifiers = useAppSelector(specialPropertiesSelector);
-   const { attack, protection } = useAppSelector(attackSelector);
-   const { setHasWeaponFeats } = specialPropertiesActions;
-   const attackType = useAppSelector(attackTypeSelector);
-   const isDamageFit = useAppSelector(isDamageFitActive);
+interface IProps {
+   id: string;
+}
+
+export const DrpForm: FC<IProps> = ({ id }) => {
+   const damage = useAppSelector((state) => getDamageSelector(state, id));
+   const modifiers = useAppSelector((state) => getSpecialPropertiesSelector(state, id));
+   const { attackBonus, targetProtection } = useAppSelector((state) =>
+      getAttackParamsSelector(state, id),
+   );
+   const { setSpecialProperties } = specialPropertiesActions;
+   const attackType = useAppSelector((state) => getThrowTypeSelector(state, id));
+   const isDamageFit = useAppSelector((state) => getIsDamageFitActive(state, id));
    const dispatch = useAppDispatch();
 
    useEffect(() => {
-      dispatch(setHasWeaponFeats(isDamageFit));
-   }, [dispatch, isDamageFit, setHasWeaponFeats]);
+      dispatch(setSpecialProperties({ id, params: { hasWeaponFeats: isDamageFit } }));
+   }, [dispatch, id, isDamageFit, setSpecialProperties]);
 
    const [attackIndicators, setAttackIndicators] = useState<IAttackIndicators>({
       probabilityOfMiss: 0,
@@ -39,8 +48,8 @@ export const DrpForm: FC = () => {
    const handleCalculation = () => {
       const indicators = getAttackDetails({
          type: attackType,
-         attackBonus: attack,
-         defendBonus: protection,
+         attackBonus: attackBonus,
+         defendBonus: targetProtection,
          averageDamage: damage,
          criticalHitValues: '20',
          modifiers,
@@ -58,26 +67,30 @@ export const DrpForm: FC = () => {
                   gap: '14px',
                   flexWrap: 'wrap',
                }}>
-               <AttackFields />
-               <SpecialProperties />
+               <AttackFields id={id} />
+               <SpecialProperties id={id} />
             </div>
 
-            <AttackTypeSelect />
+            <AttackTypeSelect id={id} />
 
-            <DamageFields />
+            <DamageFields id={id} />
          </div>
          <div className={styles.form__output}>
-            <Button
-               type="primary"
-               shape="round"
-               onClick={handleCalculation}
-               className={styles.form__button}>
-               Результат
-            </Button>
-            <div>Промах: {(probabilityOfMiss * 100).toFixed(2)}%</div>
-            <div>Попадание: {(probabilityOfHit * 100).toFixed(2)}%</div>
-            <div>Критическое попадание: {(probabilityOfCriticalHit * 100).toFixed(2)}%</div>
-            <div>Средний урон: {damagePerRound.toFixed(2)}</div>
+            <div className={styles.form__wrapper}>
+               <Button
+                  type="primary"
+                  shape="round"
+                  onClick={handleCalculation}
+                  className={styles.form__button}>
+                  Результат
+               </Button>
+               <ul className={styles.form__list}>
+                  <li>Промах: {(probabilityOfMiss * 100).toFixed(2)}%</li>
+                  <li>Попадание: {(probabilityOfHit * 100).toFixed(2)}%</li>
+                  <li>Критическое попадание: {(probabilityOfCriticalHit * 100).toFixed(2)}%</li>
+                  <li>Средний урон: {damagePerRound.toFixed(2)}</li>
+               </ul>
+            </div>
          </div>
       </form>
    );

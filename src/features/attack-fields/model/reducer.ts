@@ -6,13 +6,16 @@ interface IAttack {
 }
 
 const initialState: Record<string, IAttack> = {
-   'throw-1': { attackBonus: 0, targetProtection: 10 },
+   'throw-1': { attackBonus: 0, targetProtection: 8 },
 };
 
 const attackParamsSlice = createSlice({
    name: 'attackParams',
    initialState,
    reducers: {
+      addAttackParams: (state, { payload }: PayloadAction<string>) => {
+         state[payload] = { attackBonus: 0, targetProtection: 8 };
+      },
       setAttackParams: (
          state,
          {

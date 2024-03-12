@@ -1,5 +1,5 @@
 .form {
-   min-height: 100vh;
+   min-height: 33vh;
    display: grid;
    grid-template-columns: 3fr 1fr;
    column-gap: 26px;
@@ -22,13 +22,22 @@
       padding-right: 16px;
       row-gap: 14px;
       font-size: var(--fs-large);
-      font-weight: var(--fw-large);
-      color: rgb(var(--color-light));
-      background-color: rgb(var(--color-primary));
+      color: rgb(var(--color-dark));
+      border-left: 2px solid rgb(var(--color-primary));
       @media (max-width: 728px) {
          padding-right: 8px;
          font-size: var(--fs-default);
       }
+   }
+   &__wrapper {
+      position: sticky;
+      top: 30px;
+      left: 0;
+   }
+   &__list {
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
    }
    &__button {
       font-size: calc((1vh + 1vw));
