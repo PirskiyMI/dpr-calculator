@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, memo, useEffect, useState } from 'react';
 
 import { Button } from 'src/shared/ui/button';
 import { useAppDispatch, useAppSelector } from 'src/shared/lib';
@@ -16,12 +16,13 @@ import { AttackFields } from './attack-fields';
 import { AttackTypeSelect } from './attack-type-select';
 import { SpecialProperties } from './special-properties';
 import { DamageFields } from './damage-fields';
+import { Throw } from 'src/entities/throw/ui';
 
 interface IProps {
    id: string;
 }
 
-export const ThrowForm: FC<IProps> = ({ id }) => {
+export const ThrowForm: FC<IProps> = memo(({ id }) => {
    const damage = useAppSelector((state) => getDamageSelector(state, id));
    const modifiers = useAppSelector((state) => getSpecialPropertiesSelector(state, id));
    const { attackBonus, targetProtection } = useAppSelector((state) =>
@@ -43,8 +44,7 @@ export const ThrowForm: FC<IProps> = ({ id }) => {
       damagePerRound: 0,
    });
 
-   const { probabilityOfMiss, probabilityOfHit, probabilityOfCriticalHit, damagePerRound } =
-      attackIndicators;
+   const params = attackIndicators;
 
    const handleCalculation = () => {
       const indicators = getAttackDetails({
@@ -60,25 +60,8 @@ export const ThrowForm: FC<IProps> = ({ id }) => {
 
    return (
       <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
-         <div className={styles.form__controls}>
-            <div
-               style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '14px',
-                  flexWrap: 'wrap',
-               }}>
-               <AttackFields id={id} />
-               <SpecialProperties id={id} />
-            </div>
-
-            <AttackTypeSelect id={id} />
-
-            <DamageFields id={id} />
-         </div>
-         
-         <div className={styles.form__output}>
-            <div className={styles.form__wrapper}>
+         <Throw
+            button={
                <Button
                   type="primary"
                   shape="round"
@@ -86,14 +69,19 @@ export const ThrowForm: FC<IProps> = ({ id }) => {
                   className={styles.form__button}>
                   Результат
                </Button>
-               <ul className={styles.form__list}>
-                  <li>Промах: {(probabilityOfMiss * 100).toFixed(2)}%</li>
-                  <li>Попадание: {(probabilityOfHit * 100).toFixed(2)}%</li>
-                  <li>Критическое попадание: {(probabilityOfCriticalHit * 100).toFixed(2)}%</li>
-                  <li>Средний урон: {damagePerRound.toFixed(2)}</li>
-               </ul>
-            </div>
-         </div>
+            }
+            controls={{
+               main: (
+                  <div className={styles.form__controls}>
+                     <AttackFields id={id} />
+                     <SpecialProperties id={id} />
+                  </div>
+               ),
+               select: <AttackTypeSelect id={id} />,
+               fields: <DamageFields id={id} />,
+            }}
+            params={params}
+         />
       </form>
    );
-};
+});

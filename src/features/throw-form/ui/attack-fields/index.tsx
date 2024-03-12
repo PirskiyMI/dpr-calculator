@@ -19,6 +19,7 @@ export const AttackFields: FC<IProps> = memo(({ id }) => {
    const { attackBonus, targetProtection } = useAppSelector((state) =>
       getAttackParamsSelector(state, id),
    );
+
    const { setAttackParams } = attackParamsActions;
    const attackInput = useInputNumber(attackBonus === 0 ? '' : String(attackBonus));
    const attackModifierInput = useAttackModifierInput();

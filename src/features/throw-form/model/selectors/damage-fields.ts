@@ -2,8 +2,10 @@ import { createSelector } from '@reduxjs/toolkit';
 
 const dicesSelector = (state: RootState) => state.damageReducer;
 
-export const getDicesSelector = (state: RootState, id: string) => state.damageReducer[id].dices;
-
+export const getDicesSelector = createSelector(
+   [dicesSelector, (_dicesSelector, id: string) => id],
+   (diceList, id) => diceList[id].dices,
+);
 export const getDamageSelector = createSelector(
    [dicesSelector, (_dicesSelector, id: string) => id],
    (dices, id) => {

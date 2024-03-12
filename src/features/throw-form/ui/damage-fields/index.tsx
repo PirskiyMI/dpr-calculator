@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useMemo } from 'react';
+import { ChangeEvent, memo, useCallback, useMemo } from 'react';
 import { IOption, useAppDispatch, useAppSelector } from 'src/shared/lib';
 import { getDicesSelector } from '../../model/selectors/damage-fields';
 import { TDiceType } from '../../lib/types/dice-types';
@@ -16,7 +16,7 @@ interface IProps {
    id: string;
 }
 
-export const DamageFields = ({ id }: IProps) => {
+export const DamageFields = memo(({ id }: IProps) => {
    const dispatch = useAppDispatch();
    const fieldList = useAppSelector((state) => getDicesSelector(state, id));
    const {
@@ -125,4 +125,4 @@ export const DamageFields = ({ id }: IProps) => {
          removeField={removeField}
       />
    );
-};
+});

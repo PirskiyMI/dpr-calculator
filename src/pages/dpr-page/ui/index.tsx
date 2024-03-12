@@ -1,20 +1,15 @@
-import { useAppSelector } from 'src/shared/lib';
-import { AddThrow, ThrowForm, getThrowList } from 'src/features/throw-form';
+import { AddThrow } from 'src/features/throw-form';
+import { ThrowList } from 'src/widgets/throw-list';
+
 import styles from './styles.module.scss';
 
-export const DprPage = () => {
-   const throwList = useAppSelector(getThrowList);
-
+export const CalculatorPage = () => {
    return (
-      <div>
-         <AddThrow />
-         <ul className={styles.list}>
-            {throwList.map((el) => (
-               <li key={el}>
-                  <ThrowForm id={el} />
-               </li>
-            ))}
-         </ul>
+      <div className={styles.calculator}>
+         <div className={styles.calculator__button}>
+            <AddThrow />
+         </div>
+         <ThrowList />
       </div>
    );
 };

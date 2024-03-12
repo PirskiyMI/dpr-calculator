@@ -1,3 +1,8 @@
-export const attackTypeSelector = (state: RootState) => state.attackTypeReducer;
+import { createSelector } from '@reduxjs/toolkit';
 
-export const getThrowTypeSelector = (state: RootState, id: string) => state.attackTypeReducer[id];
+const throwTypeSelector = (state: RootState) => state.attackTypeReducer;
+
+export const getThrowTypeSelector = createSelector(
+   [throwTypeSelector, (_throwTypeSelector, id: string) => id],
+   (throwTypeList, id) => throwTypeList[id],
+);

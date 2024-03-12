@@ -1,6 +1,5 @@
 .controls,
 .output {
-   padding: 30px 0px 30px 26px;
    display: flex;
    flex-direction: column;
    @media (max-width: 1024px) {
@@ -10,13 +9,11 @@
       padding: 14px 0px 14px 8px;
    }
 }
-
 .controls {
    row-gap: 14px;
 }
-
 .output {
-   padding-right: 16px;
+   padding-left: 16px;
    row-gap: 14px;
    font-size: var(--fs-large);
    color: rgb(var(--color-dark));
