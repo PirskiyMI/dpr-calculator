@@ -1,5 +1,5 @@
-import { throwType } from 'src/features/attack-type-select';
-import { Cover } from 'src/features/special-properties';
+import { throwType } from '../../model/reducers/attack-type-select';
+import { Cover } from '../../constants/cover-consts';
 
 interface ISpecialProperties {
    hasElvenAccuracy: boolean;
@@ -100,7 +100,7 @@ export const getAttackDetails = ({
 }: IAttackDetails) => {
    const minCriticalHitValue = criticalHitValues === '19-20' ? 19 : 20;
    let minValueToHit = defendBonus - attackBonus;
-   
+
    if (modifiers.hasWeaponFeats) minValueToHit += 5;
    if (modifiers.hasShield) minValueToHit += 5;
 

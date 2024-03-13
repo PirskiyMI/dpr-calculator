@@ -1,8 +1,5 @@
 .form {
    min-height: 30vh;
-   display: grid;
-   grid-template-columns: 3fr 1fr;
-   column-gap: 26px;
    &__controls {
       display: flex;
       align-items: center;

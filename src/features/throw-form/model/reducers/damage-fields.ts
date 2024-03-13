@@ -47,6 +47,9 @@ const damageSlice = createSlice({
             ],
          };
       },
+      removeThrow: (state, { payload }: PayloadAction<string>) => {
+         delete state[payload];
+      },
       setDices: (
          state,
          {

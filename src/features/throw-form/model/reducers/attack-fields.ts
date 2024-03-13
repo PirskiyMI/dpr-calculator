@@ -27,6 +27,9 @@ const attackParamsSlice = createSlice({
       ) => {
          state[id] = { ...state[id], ...params };
       },
+      removeAttackParams: (state, { payload }: PayloadAction<string>) => {
+         delete state[payload];
+      },
    },
 });
 

@@ -3,12 +3,13 @@ import styles from './styles.module.scss';
 
 interface IProps {
    checked: boolean;
+   name?: string;
    label?: string;
    disabled?: boolean;
    onChange: () => void;
 }
 
-export const Checkbox: FC<IProps> = memo(({ checked, label, disabled = false, onChange }) => {
+export const Checkbox: FC<IProps> = memo(({ checked, name, label, disabled = false, onChange }) => {
    const enterHandle = (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.key === 'Enter') onChange();
    };
@@ -16,6 +17,7 @@ export const Checkbox: FC<IProps> = memo(({ checked, label, disabled = false, on
    return (
       <label className={disabled ? styles.disabled : undefined}>
          <input
+            name={name}
             type="checkbox"
             className={styles.input}
             checked={checked}

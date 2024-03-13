@@ -10,7 +10,7 @@ const throwListSlice = createSlice({
          state.push(payload);
       },
       removeThrow: (state, { payload }: PayloadAction<string>) => {
-         state.filter((el) => el !== payload);
+         return (state = state.filter((el) => el !== payload));
       },
    },
 });

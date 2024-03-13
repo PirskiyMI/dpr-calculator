@@ -27,6 +27,9 @@ const specialPropertiesSlice = createSlice({
             cover: Cover.ABSENT,
          };
       },
+      removeSpecialProperties: (state, { payload }: PayloadAction<string>) => {
+         delete state[payload];
+      },
       setSpecialProperties: (
          state,
          {

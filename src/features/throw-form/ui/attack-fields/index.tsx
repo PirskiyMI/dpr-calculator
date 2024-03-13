@@ -48,10 +48,11 @@ export const AttackFields: FC<IProps> = memo(({ id }) => {
       <div className={styles.fields}>
          <ul className={styles.fields__list}>
             <li className={styles.fields__item}>
-               <Field {...attackInput} placeholder="Бонус атаки" />
+               <Field name={id} {...attackInput} placeholder="Бонус атаки" />
             </li>
             <li className={styles.fields__item}>
                <Field
+                  name={id}
                   value={String(targetProtection)}
                   placeholder="Бонус защиты"
                   maxLength={2}
@@ -59,7 +60,7 @@ export const AttackFields: FC<IProps> = memo(({ id }) => {
                />
             </li>
             <li className={styles.fields__item}>
-               <Field {...attackModifierInput} placeholder="Ситуативные бонусы" />
+               <Field name={id} {...attackModifierInput} placeholder="Ситуативные бонусы" />
             </li>
          </ul>
       </div>

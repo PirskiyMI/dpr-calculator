@@ -17,6 +17,7 @@ import { AttackTypeSelect } from './attack-type-select';
 import { SpecialProperties } from './special-properties';
 import { DamageFields } from './damage-fields';
 import { Throw } from 'src/entities/throw/ui';
+import { RemoveThrow } from './remove-throw';
 
 interface IProps {
    id: string;
@@ -59,7 +60,7 @@ export const ThrowForm: FC<IProps> = memo(({ id }) => {
    };
 
    return (
-      <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+      <div className={styles.form}>
          <Throw
             button={
                <Button
@@ -70,6 +71,7 @@ export const ThrowForm: FC<IProps> = memo(({ id }) => {
                   Результат
                </Button>
             }
+            deleteButton={<RemoveThrow id={id} />}
             controls={{
                main: (
                   <div className={styles.form__controls}>
@@ -82,6 +84,6 @@ export const ThrowForm: FC<IProps> = memo(({ id }) => {
             }}
             params={params}
          />
-      </form>
+      </div>
    );
 });

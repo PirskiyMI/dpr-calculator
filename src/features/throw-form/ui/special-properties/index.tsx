@@ -50,10 +50,11 @@ export const SpecialProperties: FC<IProps> = memo(({ id }) => {
       <div className={styles.properties}>
          <ul className={styles.properties__list}>
             <li className={styles.properties__item}>
-               <Checkbox checked={hasShield} onChange={setShield} label={'Щит у цели'} />
+               <Checkbox name={id} checked={hasShield} onChange={setShield} label={'Щит у цели'} />
             </li>
             <li className={styles.properties__item}>
                <Checkbox
+                  name={id}
                   checked={hasElvenAccuracy}
                   onChange={setElvenAccuracy}
                   label={'Эльфийская точность'}
@@ -61,6 +62,7 @@ export const SpecialProperties: FC<IProps> = memo(({ id }) => {
             </li>
             <li className={styles.properties__item}>
                <Checkbox
+                  name={id}
                   checked={hasWeaponFeats}
                   onChange={setWeaponFeats}
                   disabled
@@ -70,6 +72,7 @@ export const SpecialProperties: FC<IProps> = memo(({ id }) => {
             <li className={styles.properties__item}>
                Укрытие:
                <Dropdown
+                  name={id}
                   defaultValue={cover.toUpperCase()}
                   options={coverOptions}
                   onChange={onCoverChange}

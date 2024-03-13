@@ -55,9 +55,9 @@ interface Props {
 
 export const Button: FC<Props> = memo(
    ({
+      type,
       children,
       icon,
-      type,
       shape = 'default',
       size = 'large',
       className,

@@ -19,6 +19,9 @@ const attackTypeSlice = createSlice({
       ) => {
          state[id] = throwType;
       },
+      removeThrowType: (state, { payload }: PayloadAction<string>) => {
+         delete state[payload];
+      },
    },
 });
 
