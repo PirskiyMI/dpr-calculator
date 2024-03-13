@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { Button } from 'src/shared/ui/button';
 import { useAppDispatch } from 'src/shared/lib';
 import { attackParamsActions } from '../../model/reducers/attack-fields';
@@ -13,7 +13,7 @@ interface IProps {
    id: string;
 }
 
-export const RemoveThrow: FC<IProps> = ({ id }) => {
+export const RemoveThrow: FC<IProps> = memo(({ id }) => {
    const dispatch = useAppDispatch();
    const { removeAttackParams } = attackParamsActions;
    const { removeThrowType } = attackTypeActions;
@@ -39,4 +39,4 @@ export const RemoveThrow: FC<IProps> = ({ id }) => {
          +
       </Button>
    );
-};
+});
