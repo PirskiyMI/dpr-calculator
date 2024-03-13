@@ -64,7 +64,7 @@ export const DamageFields = memo(({ id }: IProps) => {
    );
    const onDamageModifierChange = useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
-         const diceId = e.target.id;
+         const diceId = e.target.name;
          const damageModifier = +e.target.value;
          dispatch(setDamageModifier({ id, dice: { id: diceId, damageModifier } }));
       },

@@ -110,7 +110,8 @@ export const getAttackDetails = ({
          : modifiers.cover === 'half'
          ? minValueToHit + 2
          : minValueToHit + 5;
-   minValueToHit < minCriticalHitValue ? (minValueToHit > 2 ? minValueToHit : 2) : 20;
+   minValueToHit =
+      minValueToHit < minCriticalHitValue ? (minValueToHit > 2 ? minValueToHit : 2) : 20;
 
    const attackParams: IAttackParams = { minValueToHit, minCriticalHitValue };
 
