@@ -1,30 +1,24 @@
-# React + TypeScript + Vite
+## Описание
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Данный проект представляет собой калькулятор, который позволяет рассчитать средний урон в раунд для персонажей в настольной ролевой игре Dungeons & Dragons (D&D). Этот инструмент поможет игрокам быстро определить ожидаемый урон, который может нанести персонаж за один раунд сражения от атаки, вероятность промаха, вероятность попадания и вероятность критического попадания.
 
-Currently, two official plugins are available:
+## Документация
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Как использовать калькулятор:
 
-## Expanding the ESLint configuration
+1. Укажите бонус к атаке: введите бонус к атаке вашего персонажа целым числом (например, 10) или в виде матиматического выражения (например, 10+2-3).
+2. Укажите бонус защиты: введите бонус защиты цели, по которой совершается атака.
+3. Укажите ситуативный бонус к атаке: введите ситуативный бонус к атаке вашего персонажа единым значением (например, 1d4) или в виде матиматического выражения (например, 1d4+2d6-1d8).
+4. Укажите дополнительные опции броска атаки.
+5. Укажите вариант броска атаки: бросок с помехой, обычный бросок или бросок с преимуществом.
+6. Укажите количество кубиков урона: введите количество и тип кубиков урона, используемых вашим персонажем (например, 2).
+7. Добавьте бонус урона: при необходимости укажите дополнительный бонус урона (например, от модификатора характеристики или магического оружия).
+8. Выберите тип кубика урона: определите, какой кубика урона (d4, d6, d8 и т. д.) будет использоваться персонажем.
+8. Выберите тип урона: определите, какой вид урона (колющий, рубящий, дробящий и т. д.) будет использоваться персонажем.
+9. Выберите эффективность урона: определите, насколько эффективен выбранный тип урона против цели атаки (иммунитет, уязвимость и прочее).
+10. Получите результат: калькулятор автоматически рассчитает средний урон в раунд от атаки, вероятность промаха, вероятность попадания, вероятность критического попадания.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Developers
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- [PirskiyMI](https://github.com/PirskiyMI)
+  
