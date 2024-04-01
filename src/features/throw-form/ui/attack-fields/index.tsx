@@ -2,10 +2,9 @@ import { ChangeEvent, FC, memo, useCallback, useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'src/shared/lib';
 import { Field } from 'src/shared/ui/controls/field';
+import { getAttackParamsSelector, attackParamsActions } from 'src/entities/throw';
 
 import styles from './styles.module.scss';
-import { getAttackParamsSelector } from '../../model/selectors/attack-fields';
-import { attackParamsActions } from '../../model/reducers/attack-fields';
 import { useInputNumber } from 'src/shared/lib/hooks/use-input-number';
 import { useAttackModifierInput } from '../../lib/hooks';
 import { getAttackBonusSum } from '../../lib/helpers/get-attack-bonus-sum';
@@ -41,7 +40,7 @@ export const AttackFields: FC<IProps> = memo(({ id }) => {
          const value = Number(e.target.value);
          dispatch(setAttackParams({ id, params: { targetProtection: value } }));
       },
-      [dispatch, id, setAttackParams],
+      [id],
    );
 
    return (

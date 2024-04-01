@@ -47,6 +47,12 @@ const specialPropertiesSlice = createSlice({
       ) => {
          state[id].cover = Cover[cover];
       },
+      copySpecialProperties: (
+         state,
+         { payload: { id, paramId } }: PayloadAction<{ id: string; paramId: string }>,
+      ) => {
+         state[id] = { ...state[paramId] };
+      },
    },
 });
 

@@ -4,12 +4,14 @@ import { useAppDispatch, useAppSelector } from 'src/shared/lib';
 import { Button } from 'src/shared/ui/button';
 
 import styles from './styles.module.scss';
-import { throwListActions } from '../../model/reducers/throw-list';
-import { attackParamsActions } from '../../model/reducers/attack-fields';
-import { attackTypeActions } from '../../model/reducers/attack-type-select';
-import { damageActions } from '../../model/reducers/damage-fields';
-import { specialPropertiesActions } from '../../model/reducers/special-properties';
-import { getThrowListLength } from '../../model/selectors/throw-list';
+import {
+   throwListActions,
+   attackParamsActions,
+   attackTypeActions,
+   damageActions,
+   specialPropertiesActions,
+   getThrowListLength,
+} from 'src/entities/throw';
 
 export const AddThrow: FC = () => {
    const throwListLength = useAppSelector(getThrowListLength);

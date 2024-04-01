@@ -1,15 +1,16 @@
 import { ChangeEvent, memo, useCallback, useMemo } from 'react';
 import { IOption, useAppDispatch, useAppSelector } from 'src/shared/lib';
-import { getDicesSelector } from '../../model/selectors/damage-fields';
-import { TDiceType } from '../../lib/types/dice-types';
-import { damageActions } from '../../model/reducers/damage-fields';
 import {
+   getDicesSelector,
+   damageActions,
    DamageEfficiency,
    DamageEfficiencyOnRu,
    DamageType,
    DamageTypeOnRu,
-} from '../../constants/damage-consts';
-import { DiceName } from '../../constants/dice-consts';
+   DiceName,
+} from 'src/entities/throw';
+
+import { TDiceType } from '../../lib/types/dice-types';
 import { DamageFieldsUI } from './ui';
 
 interface IProps {
@@ -77,7 +78,7 @@ export const DamageFields = memo(({ id }: IProps) => {
          const name = e.target.value as TDiceType;
          dispatch(setDiceType({ id, dice: { id: diceId, name } }));
       },
-      [dispatch, id, setDiceType],
+      [id],
    );
    const onDamageTypeChange = useCallback(
       (e: ChangeEvent<HTMLSelectElement>) => {
@@ -85,7 +86,7 @@ export const DamageFields = memo(({ id }: IProps) => {
          const damageType = e.target.value as keyof typeof DamageType;
          dispatch(setDamageType({ id, dice: { id: diceId, damageType } }));
       },
-      [dispatch, id, setDamageType],
+      [id],
    );
    const onDamageEfficiencyChange = useCallback(
       (e: ChangeEvent<HTMLSelectElement>) => {
@@ -94,13 +95,13 @@ export const DamageFields = memo(({ id }: IProps) => {
 
          dispatch(setDamageEfficiency({ id, dice: { id: diceId, damageEfficiency } }));
       },
-      [dispatch, id, setDamageEfficiency],
+      [id],
    );
    const onHasFitChange = useCallback(
       (diceId: string) => {
          dispatch(setDamageFit({ id, diceId }));
       },
-      [dispatch, id, setDamageFit],
+      [id],
    );
 
    const createField = useCallback(() => dispatch(addDice(id)), [dispatch, addDice, id]);

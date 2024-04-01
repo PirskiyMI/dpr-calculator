@@ -39,8 +39,8 @@ export const DamageField: FC<IProps> = memo(
       onHasFitChange,
       removeField,
    }) => {
-      const handleRemoveField = useCallback(() => removeField(id), [id, removeField]);
-      const handleHasFitChange = useCallback(() => onHasFitChange(id), [id, onHasFitChange]);
+      const handleRemoveField = useCallback(() => removeField(id), []);
+      const handleHasFitChange = useCallback(() => onHasFitChange(id), []);
       return (
          <>
             <div className={styles.inputs}>

@@ -22,6 +22,12 @@ const attackTypeSlice = createSlice({
       removeThrowType: (state, { payload }: PayloadAction<string>) => {
          delete state[payload];
       },
+      copyThrowType: (
+         state,
+         { payload: { id, paramId } }: PayloadAction<{ id: string; paramId: string }>,
+      ) => {
+         state[id] = state[paramId];
+      },
    },
 });
 

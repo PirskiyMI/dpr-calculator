@@ -1,5 +1,4 @@
-import { throwType } from '../../model/reducers/attack-type-select';
-import { Cover } from '../../constants/cover-consts';
+import { throwType, Cover } from 'src/entities/throw';
 
 interface ISpecialProperties {
    hasElvenAccuracy: boolean;
@@ -28,6 +27,7 @@ interface IAttackProbability {
 export interface IAttackIndicators extends IAttackProbability {
    damagePerRound: number;
 }
+
 const getDefaultAttackProbability = ({
    minValueToHit,
    minCriticalHitValue,

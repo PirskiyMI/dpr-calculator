@@ -4,11 +4,14 @@ import { Button } from 'src/shared/ui/button';
 import { useAppDispatch, useAppSelector } from 'src/shared/lib';
 
 import { IAttackIndicators, getAttackDetails } from '../lib/helpers/get-attack-details';
-import { getThrowTypeSelector } from '../model/selectors/attack-type-select';
-import { getDamageSelector, getIsDamageFitActive } from '../model/selectors/damage-fields';
-import { getSpecialPropertiesSelector } from '../model/selectors/special-properties';
-import { getAttackParamsSelector } from '../model/selectors/attack-fields';
-import { specialPropertiesActions } from '../model/reducers/special-properties';
+import {
+   getThrowTypeSelector,
+   getDamageSelector,
+   getIsDamageFitActive,
+   getSpecialPropertiesSelector,
+   getAttackParamsSelector,
+   specialPropertiesActions,
+} from 'src/entities/throw';
 
 import styles from './styles.module.scss';
 
@@ -17,7 +20,6 @@ import { AttackTypeSelect } from './attack-type-select';
 import { SpecialProperties } from './special-properties';
 import { DamageFields } from './damage-fields';
 import { Throw } from 'src/entities/throw/ui';
-import { RemoveThrow } from './remove-throw';
 
 interface IProps {
    id: string;
@@ -71,7 +73,7 @@ export const ThrowForm: FC<IProps> = memo(({ id }) => {
                   Результат
                </Button>
             }
-            deleteButton={<RemoveThrow id={id} />}
+            deleteButton={<></>}
             controls={{
                main: (
                   <div className={styles.form__controls}>

@@ -1,5 +1,6 @@
-import { FC, ReactNode, memo } from 'react';
+import { FC, ReactNode, memo, useState } from 'react';
 import styles from './styles.module.scss';
+import { Button } from 'src/shared/ui/button';
 
 interface IProps {
    button: ReactNode;
@@ -20,13 +21,12 @@ interface IProps {
 export const Throw: FC<IProps> = memo(
    ({
       button,
-      deleteButton,
       controls: { main, select, fields },
       params: { probabilityOfMiss, probabilityOfHit, probabilityOfCriticalHit, damagePerRound },
    }) => {
       return (
          <div className={styles.throw}>
-            {deleteButton}
+            <ThrowActionsMenu />
             <div className={styles.throw__wrapper}>
                <div className={styles.controls}>
                   {main}
@@ -51,3 +51,23 @@ export const Throw: FC<IProps> = memo(
       );
    },
 );
+
+const ThrowActionsMenu = () => {
+   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+   const toggleOpen = () => setIsOpen(!isOpen);
+
+   return (
+      <div className={styles.menu}>
+         <Button type="primary" shape="circle" onClick={toggleOpen} className={styles.menu__button}>
+            <span className={styles.menu__dot}>.</span>
+         </Button>
+         {isOpen && (
+            <div className={styles.menu__dropdown}>
+               <div>Копировать</div>
+               <div>Удалить</div>
+            </div>
+         )}
+      </div>
+   );
+};

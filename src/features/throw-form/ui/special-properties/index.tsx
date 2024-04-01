@@ -5,9 +5,12 @@ import { Checkbox } from 'src/shared/ui/controls/checkbox';
 import { Dropdown } from 'src/shared/ui/controls/dropdown';
 
 import styles from './styles.module.scss';
-import { specialPropertiesActions } from '../../model/reducers/special-properties';
-import { getSpecialPropertiesSelector } from '../../model/selectors/special-properties';
-import { Cover, CoverOnRu } from '../../constants/cover-consts';
+import {
+   specialPropertiesActions,
+   getSpecialPropertiesSelector,
+   Cover,
+   CoverOnRu,
+} from 'src/entities/throw';
 
 interface IProps {
    id: string;
@@ -30,13 +33,13 @@ export const SpecialProperties: FC<IProps> = memo(({ id }) => {
 
    const setShield = useCallback(() => {
       dispatch(setSpecialProperties({ id, params: { hasShield: !hasShield } }));
-   }, [dispatch, setSpecialProperties, id, hasShield]);
+   }, [id, hasShield]);
    const setElvenAccuracy = useCallback(() => {
       dispatch(setSpecialProperties({ id, params: { hasElvenAccuracy: !hasElvenAccuracy } }));
-   }, [dispatch, setSpecialProperties, id, hasElvenAccuracy]);
+   }, [id, hasElvenAccuracy]);
    const setWeaponFeats = useCallback(() => {
       dispatch(setSpecialProperties({ id, params: { hasWeaponFeats: !hasWeaponFeats } }));
-   }, [dispatch, setSpecialProperties, id, hasWeaponFeats]);
+   }, [id, hasWeaponFeats]);
 
    const onCoverChange = useCallback(
       (e: ChangeEvent<HTMLSelectElement>) => {
