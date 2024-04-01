@@ -8,6 +8,9 @@ body {
    font-size: var(--fs-default);
    font-weight: var(--fw-default);
    color: rgb(var(--color-dark));
+   &::-webkit-scrollbar {
+      display: none;
+   }
 }
 
 .container {
