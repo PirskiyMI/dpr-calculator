@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 type ButtonType = 'primary' | 'secondary';
 
 interface Props
-   extends Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'disabled' | 'type'> {
+   extends Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'disabled' | 'type' |'onMouseDown'> {
    uiType?: ButtonType;
    children?: ReactNode;
    icon?: ReactNode;

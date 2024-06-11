@@ -25,11 +25,25 @@
       top: 5px;
    }
    &__dropdown {
-      width: 100px;
-      border-radius: var(--border-radius-default);
-      background-color: rgb(var(--color-light));
       position: absolute;
-      bottom: -100%;
-      right: 0;
+      top: calc(100% + 8px);
+      left: 50%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 10px;
+      background-color: rgb(var(--color-light));
+      border: 1px solid rgb(var(--color-gray));
+      translate: -50%;
+      button {
+         padding: 4px;
+         text-align: left;
+         @media (any-hover: hover) {
+            &:hover {
+               color: rgb(var(--color-light));
+               background-color: rgb(var(--color-primary));
+            }
+         }
+      }
    }
 }

@@ -10,6 +10,11 @@
       background-color: rgb(var(--color-light));
       border: 1px solid rgb(var(--color-gray));
    }
+   &__header {
+      display: flex;
+      align-self: flex-end;
+      gap: 8px;
+   }
    &__outputs {
       display: flex;
       flex-wrap: wrap;

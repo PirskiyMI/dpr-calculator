@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 
 import { MyButton } from 'src/shared/ui/controls/my-button';
 import { useAppDispatch } from 'src/shared/lib';
@@ -18,12 +18,41 @@ interface IProps {
 
 export const ThrowActionsMenu: FC<IProps> = ({ id }) => {
    const [isOpen, setIsOpen] = useState<boolean>(false);
+
+   const toggleIsOpen = (isOpen: boolean) => () => {
+      return setIsOpen(isOpen);
+   };
+
+   return (
+      <div className={styles.menu}>
+         <MyButton
+            uiType="secondary"
+            onClick={toggleIsOpen(!isOpen)}
+            onMouseDown={(e) => e.stopPropagation()}
+            className={styles.menu__button}>
+            <span className={styles.menu__dot}>.</span>
+         </MyButton>
+         {isOpen && <ActionBody id={id} closeDropdown={toggleIsOpen(false)} />}
+      </div>
+   );
+};
+
+interface IActionBodyProps extends IProps {
+   closeDropdown: () => void;
+}
+
+const ActionBody: FC<IActionBodyProps> = ({ id, closeDropdown }) => {
    const { removeAttackParams, copyAttackParams } = attackParamsActions;
    const { removeThrowType, copyThrowType } = attackTypeActions;
    const { removeThrow, copyThrow } = damageActions;
    const { removeSpecialProperties, copySpecialProperties } = specialPropertiesActions;
    const { removeThrow: deleteThrow, addThrow } = throwListActions;
    const dispatch = useAppDispatch();
+
+   useEffect(() => {
+      document.addEventListener('mousedown', closeDropdown);
+      return () => document.removeEventListener('mousedown', closeDropdown);
+   }, [closeDropdown]);
 
    const handleDelete = () => {
       dispatch(deleteThrow(id));
@@ -45,19 +74,10 @@ export const ThrowActionsMenu: FC<IProps> = ({ id }) => {
       dispatch(addThrow(newId));
    }, [id]);
 
-   const toggleOpen = () => setIsOpen(!isOpen);
-
    return (
-      <div className={styles.menu}>
-         <MyButton uiType="secondary" onClick={toggleOpen} className={styles.menu__button}>
-            <span className={styles.menu__dot}>.</span>
-         </MyButton>
-         {isOpen && (
-            <div className={styles.menu__dropdown}>
-               <div onClick={handleCopy}>Копировать</div>
-               <div onClick={handleDelete}>Удалить</div>
-            </div>
-         )}
+      <div onMouseDown={(e) => e.stopPropagation()} className={styles.menu__dropdown}>
+         <button onClick={handleCopy}>Копировать</button>
+         <button onClick={handleDelete}>Удалить</button>
       </div>
    );
 };

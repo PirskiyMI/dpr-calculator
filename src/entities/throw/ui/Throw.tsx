@@ -1,6 +1,7 @@
 import { FC, ReactNode, memo } from 'react';
 
 import { useModal } from 'src/shared/lib';
+import { MyButton } from 'src/shared/ui/controls/my-button';
 import { Modal } from 'src/shared/ui/modal';
 
 import { getPercentage } from '../lib/helpers/get-percentage';
@@ -57,8 +58,10 @@ export const Throw: FC<IProps> = memo(
          <>
             <div className={styles.throw}>
                <div className={styles.throw__wrapper}>
-                  <div>
-                     <button onClick={toggleIsModalOpen(true)}>Открыть Модальное Окно</button>
+                  <div className={styles.throw__header}>
+                     <MyButton uiType="secondary" onClick={toggleIsModalOpen(true)}>
+                        Text
+                     </MyButton>
                      {actionMenu}
                   </div>
                   <div className={styles.throw__select}>{throwSelect}</div>

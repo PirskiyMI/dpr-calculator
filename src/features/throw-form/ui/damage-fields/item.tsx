@@ -6,6 +6,7 @@ import { MyButton } from 'src/shared/ui/controls/my-button';
 import { IOption } from 'src/shared/lib';
 
 import { IDice } from '../../lib/types/dice-types';
+
 import styles from './styles.module.scss';
 
 interface IProps extends IDice {
