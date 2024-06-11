@@ -3,7 +3,7 @@ import { IOption } from 'src/shared/lib';
 
 import styles from './styles.module.scss';
 import { DamageField } from './item';
-import { Button } from 'src/shared/ui/button';
+import { MyButton } from 'src/shared/ui/controls/my-button';
 import { IDice } from '../../lib/types/dice-types';
 
 interface IProps {
@@ -34,14 +34,12 @@ export const DamageFieldsUI: FC<IProps> = ({
 }) => {
    return (
       <div className={styles.fields}>
-         <Button
-            type="default"
-            shape="round"
+         <MyButton
             onClick={createField}
             disabled={fieldList.length >= 5}
             className={styles.button}>
             Добавить кость урона
-         </Button>
+         </MyButton>
          <ul className={styles.list}>
             {fieldList.map((el) => (
                <li key={el.id} className={styles.list__item}>

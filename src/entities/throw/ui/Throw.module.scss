@@ -1,0 +1,34 @@
+.throw {
+   display: flex;
+   flex-direction: column;
+   &__wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      padding: 14px;
+      background-color: rgb(var(--color-light));
+      border: 1px solid rgb(var(--color-gray));
+   }
+   &__header {
+      display: flex;
+      align-self: flex-end;
+      gap: 8px;
+   }
+   &__outputs {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+   }
+   &__select,
+   &__main,
+   &__checkboxes {
+      margin: 0 auto;
+   }
+   &__main {
+      display: flex;
+      gap: 14px;
+   }
+}

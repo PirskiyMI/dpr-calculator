@@ -1,9 +1,12 @@
 import { ChangeEvent, FC, memo, useCallback } from 'react';
+
 import { Dropdown } from 'src/shared/ui/controls/dropdown';
 import { Field } from 'src/shared/ui/controls/field';
-import { Button } from 'src/shared/ui/button';
+import { MyButton } from 'src/shared/ui/controls/my-button';
 import { IOption } from 'src/shared/lib';
+
 import { IDice } from '../../lib/types/dice-types';
+
 import styles from './styles.module.scss';
 
 interface IProps extends IDice {
@@ -39,8 +42,8 @@ export const DamageField: FC<IProps> = memo(
       onHasFitChange,
       removeField,
    }) => {
-      const handleRemoveField = useCallback(() => removeField(id), [id, removeField]);
-      const handleHasFitChange = useCallback(() => onHasFitChange(id), [id, onHasFitChange]);
+      const handleRemoveField = useCallback(() => removeField(id), []);
+      const handleHasFitChange = useCallback(() => onHasFitChange(id), []);
       return (
          <>
             <div className={styles.inputs}>
@@ -84,9 +87,9 @@ export const DamageField: FC<IProps> = memo(
                onClick={handleHasFitChange}>
                Мастер большого оружия / Меткий стрелок
             </div>
-            <Button type="dashed" shape="round" onClick={handleRemoveField}>
+            <MyButton uiType="secondary" onClick={handleRemoveField}>
                Удалить
-            </Button>
+            </MyButton>
          </>
       );
    },
