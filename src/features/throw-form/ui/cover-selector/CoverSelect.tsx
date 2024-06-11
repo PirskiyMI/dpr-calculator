@@ -1,13 +1,13 @@
 import { ChangeEvent, FC, useCallback, useMemo } from 'react';
 
-import { IOption, useAppDispatch, useAppSelector } from 'src/shared/lib';
-import { Dropdown } from 'src/shared/ui/controls/dropdown';
+import { IOption, useAppDispatch, useAppSelector } from 'shared/lib';
+import { Dropdown } from 'shared/ui/controls/dropdown';
 import {
    Cover,
    CoverOnRu,
    getSpecialPropertiesSelector,
    specialPropertiesActions,
-} from 'src/entities/throw';
+} from 'entities/throw';
 
 import styles from './CoverSelect.module.scss';
 

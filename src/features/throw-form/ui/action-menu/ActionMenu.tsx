@@ -1,14 +1,14 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 
-import { MyButton } from 'src/shared/ui/controls/my-button';
-import { useAppDispatch } from 'src/shared/lib';
+import { MyButton } from 'shared/ui/controls/my-button';
+import { useAppDispatch } from 'shared/lib';
 import {
    attackParamsActions,
    attackTypeActions,
    damageActions,
    specialPropertiesActions,
    throwListActions,
-} from 'src/entities/throw';
+} from 'entities/throw';
 
 import styles from './ActionMenu.module.scss';
 

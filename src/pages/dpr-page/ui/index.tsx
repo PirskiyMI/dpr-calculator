@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import { AddThrow } from 'src/features/add-throw';
-import { ThrowList } from 'src/widgets/throw-list';
+import { AddThrow } from 'features/add-throw';
+import { ThrowList } from 'widgets/throw-list';
 
 import styles from './styles.module.scss';
 

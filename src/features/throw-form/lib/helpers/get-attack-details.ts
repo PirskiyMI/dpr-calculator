@@ -1,4 +1,4 @@
-import { throwType, Cover } from 'src/entities/throw';
+import { throwType, Cover } from 'entities/throw';
 
 interface ISpecialProperties {
    hasElvenAccuracy: boolean;

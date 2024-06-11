@@ -1,10 +1,12 @@
 import { ChangeEvent, FC } from 'react';
-import { IOption } from 'src/shared/lib';
+
+import { IOption } from 'shared/lib';
+import { MyButton } from 'shared/ui/controls/my-button';
+
+import { IDice } from '../../lib/types/dice-types';
+import { DamageField } from './item';
 
 import styles from './styles.module.scss';
-import { DamageField } from './item';
-import { MyButton } from 'src/shared/ui/controls/my-button';
-import { IDice } from '../../lib/types/dice-types';
 
 interface IProps {
    fieldList: IDice[];
@@ -34,10 +36,7 @@ export const DamageFieldsUI: FC<IProps> = ({
 }) => {
    return (
       <div className={styles.fields}>
-         <MyButton
-            onClick={createField}
-            disabled={fieldList.length >= 5}
-            className={styles.button}>
+         <MyButton onClick={createField} disabled={fieldList.length >= 5} className={styles.button}>
             Добавить кость урона
          </MyButton>
          <ul className={styles.list}>

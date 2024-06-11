@@ -1,5 +1,6 @@
 import { ChangeEvent, memo, useCallback, useMemo } from 'react';
-import { IOption, useAppDispatch, useAppSelector } from 'src/shared/lib';
+
+import { IOption, useAppDispatch, useAppSelector } from 'shared/lib';
 import {
    getDicesSelector,
    damageActions,
@@ -8,7 +9,7 @@ import {
    DamageType,
    DamageTypeOnRu,
    DiceName,
-} from 'src/entities/throw';
+} from 'entities/throw';
 
 import { TDiceType } from '../../lib/types/dice-types';
 import { DamageFieldsUI } from './ui';

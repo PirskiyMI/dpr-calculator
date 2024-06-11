@@ -1,7 +1,7 @@
 import { FC, memo, useEffect, useState } from 'react';
 
-import { MyButton } from 'src/shared/ui/controls/my-button';
-import { useAppDispatch, useAppSelector } from 'src/shared/lib';
+import { MyButton } from 'shared/ui/controls/my-button';
+import { useAppDispatch, useAppSelector } from 'shared/lib';
 import {
    getThrowTypeSelector,
    getDamageSelector,
@@ -9,8 +9,8 @@ import {
    getSpecialPropertiesSelector,
    getAttackParamsSelector,
    specialPropertiesActions,
-} from 'src/entities/throw';
-import { Throw } from 'src/entities/throw/ui/Throw';
+} from 'entities/throw';
+import { Throw } from 'entities/throw';
 
 import { IAttackIndicators, getAttackDetails } from '../lib/helpers/get-attack-details';
 import { ThrowActionsMenu } from './action-menu/ActionMenu';

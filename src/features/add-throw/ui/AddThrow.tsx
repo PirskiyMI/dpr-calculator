@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import { useAppDispatch, useAppSelector } from 'src/shared/lib';
-import { MyButton } from 'src/shared/ui/controls/my-button';
+import { useAppDispatch, useAppSelector } from 'shared/lib';
+import { MyButton } from 'shared/ui/controls/my-button';
 import {
    throwListActions,
    attackParamsActions,
@@ -9,7 +9,7 @@ import {
    damageActions,
    specialPropertiesActions,
    getThrowListLength,
-} from 'src/entities/throw';
+} from 'entities/throw';
 
 import styles from './AddThrow.module.scss';
 

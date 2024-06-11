@@ -1,8 +1,8 @@
 import { FC, memo, useCallback } from 'react';
 
-import { useAppDispatch, useAppSelector } from 'src/shared/lib';
-import { MyCheckbox } from 'src/shared/ui/controls/my-checkbox';
-import { specialPropertiesActions, getSpecialPropertiesSelector } from 'src/entities/throw';
+import { useAppDispatch, useAppSelector } from 'shared/lib';
+import { MyCheckbox } from 'shared/ui/controls/my-checkbox';
+import { specialPropertiesActions, getSpecialPropertiesSelector } from 'entities/throw';
 
 import styles from './SpecialPropertiesCheckboxes.module.scss';
 

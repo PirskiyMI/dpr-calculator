@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
 import { Cover } from '../../constants/cover-consts';
 
 interface ISpecialProperties {

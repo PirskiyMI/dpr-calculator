@@ -1,8 +1,8 @@
 import { FC, ReactNode, memo } from 'react';
 
-import { useModal } from 'src/shared/lib';
-import { MyButton } from 'src/shared/ui/controls/my-button';
-import { Modal } from 'src/shared/ui/modal';
+import { useModal } from 'shared/lib';
+import { MyButton } from 'shared/ui/controls/my-button';
+import { Modal } from 'shared/ui/modal';
 
 import { getPercentage } from '../lib/helpers/get-percentage';
 import { Output } from './output/Output';

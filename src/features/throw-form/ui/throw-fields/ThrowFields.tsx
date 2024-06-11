@@ -1,13 +1,14 @@
 import { ChangeEvent, FC, memo, useCallback, useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector } from 'src/shared/lib';
-import { Field } from 'src/shared/ui/controls/field';
-import { useInputNumber } from 'src/shared/lib/hooks/use-input-number';
-import { getAttackParamsSelector, attackParamsActions } from 'src/entities/throw';
+import { useAppDispatch, useAppSelector } from 'shared/lib';
+import { Field } from 'shared/ui/controls/field';
+import { useInputNumber } from 'shared/lib/hooks/use-input-number';
+import { getAttackParamsSelector, attackParamsActions } from 'entities/throw';
 
 import { useAttackModifierInput } from '../../lib/hooks';
 import { getAttackBonusSum } from '../../lib/helpers/get-attack-bonus-sum';
 import { getAttackModifierSum } from '../../lib/helpers/get-attack-modifier-sum';
+
 import styles from './ThrowFields.module.scss';
 
 interface IProps {

@@ -6,7 +6,7 @@ import {
    damageReducer,
    specialPropertiesReducer,
    throwListReducer,
-} from 'src/entities/throw';
+} from 'entities/throw';
 
 export const rootReducer = combineReducers({
    attackParamsReducer,

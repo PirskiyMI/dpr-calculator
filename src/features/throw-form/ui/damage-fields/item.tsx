@@ -1,9 +1,9 @@
 import { ChangeEvent, FC, memo, useCallback } from 'react';
 
-import { Dropdown } from 'src/shared/ui/controls/dropdown';
-import { Field } from 'src/shared/ui/controls/field';
-import { MyButton } from 'src/shared/ui/controls/my-button';
-import { IOption } from 'src/shared/lib';
+import { Dropdown } from 'shared/ui/controls/dropdown';
+import { Field } from 'shared/ui/controls/field';
+import { MyButton } from 'shared/ui/controls/my-button';
+import { IOption } from 'shared/lib';
 
 import { IDice } from '../../lib/types/dice-types';
 

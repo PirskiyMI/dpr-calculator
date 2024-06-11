@@ -1,8 +1,8 @@
 import { FC } from 'react';
 
-import { useAppSelector } from 'src/shared/lib';
-import { getThrowList } from 'src/entities/throw';
-import { ThrowForm } from 'src/features/throw-form';
+import { useAppSelector } from 'shared/lib';
+import { getThrowList } from 'entities/throw';
+import { ThrowForm } from 'features/throw-form';
 
 import styles from './ThrowList.module.scss';
 

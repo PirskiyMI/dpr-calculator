@@ -21,9 +21,14 @@
       "noFallthroughCasesInSwitch": true,
 
       /* Aliases */
-      "baseUrl": ".",
+      "baseUrl": "./src",
       "paths": {
-         "src/*": ["src/*"]
+         "app/*": ["app/*"],
+         "pages/*": ["pages/*"],
+         "widgets/*": ["widgets/*"],
+         "features/*": ["features/*"],
+         "entities/*": ["entities/*"],
+         "shared/*": ["shared/*"]
       }
    },
    "include": ["src", "types/vite-env.d.ts", "types/global.d.ts"],
