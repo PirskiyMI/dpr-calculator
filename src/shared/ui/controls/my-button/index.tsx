@@ -11,7 +11,7 @@ interface Props
    className?: string;
 }
 
-export const Button: FC<Props> = memo(
+export const MyButton: FC<Props> = memo(
    ({ uiType = 'primary', children, icon, className, ...props }) => {
       let classes =
          uiType === 'primary'

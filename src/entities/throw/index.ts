@@ -1,3 +1,3 @@
 export * from './constants';
 export * from './model';
-export * from './ui';
+export * from './ui/Throw';

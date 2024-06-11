@@ -19,7 +19,7 @@ interface ISelectItemProps {
    onChange: (arg: string) => void;
 }
 
-export const Select: FC<IProps> = memo(({ items, currentValue, onChange }) => {
+export const MySelect: FC<IProps> = memo(({ items, currentValue, onChange }) => {
    return (
       <ul className={styles.select}>
          {items.map(({ title, value }) => (

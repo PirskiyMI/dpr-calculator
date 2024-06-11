@@ -9,7 +9,7 @@ interface IProps {
    onChange: () => void;
 }
 
-export const Checkbox: FC<IProps> = memo(({ checked, name, label, disabled = false, onChange }) => {
+export const MyCheckbox: FC<IProps> = memo(({ checked, name, label, disabled = false, onChange }) => {
    const enterHandle = (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.key === 'Enter') onChange();
    };

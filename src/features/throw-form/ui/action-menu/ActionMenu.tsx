@@ -1,8 +1,6 @@
 import { FC, useCallback, useState } from 'react';
 
-import { Button } from 'src/shared/ui/controls/button';
-
-import styles from './styles.module.scss';
+import { MyButton } from 'src/shared/ui/controls/my-button';
 import { useAppDispatch } from 'src/shared/lib';
 import {
    attackParamsActions,
@@ -11,6 +9,8 @@ import {
    specialPropertiesActions,
    throwListActions,
 } from 'src/entities/throw';
+
+import styles from './ActionMenu.module.scss';
 
 interface IProps {
    id: string;
@@ -49,9 +49,9 @@ export const ThrowActionsMenu: FC<IProps> = ({ id }) => {
 
    return (
       <div className={styles.menu}>
-         <Button onClick={toggleOpen} className={styles.menu__button}>
+         <MyButton uiType="secondary" onClick={toggleOpen} className={styles.menu__button}>
             <span className={styles.menu__dot}>.</span>
-         </Button>
+         </MyButton>
          {isOpen && (
             <div className={styles.menu__dropdown}>
                <div onClick={handleCopy}>Копировать</div>

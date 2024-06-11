@@ -1,9 +1,7 @@
 import { FC } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'src/shared/lib';
-import { Button } from 'src/shared/ui/controls/button';
-
-import styles from './styles.module.scss';
+import { MyButton } from 'src/shared/ui/controls/my-button';
 import {
    throwListActions,
    attackParamsActions,
@@ -12,6 +10,8 @@ import {
    specialPropertiesActions,
    getThrowListLength,
 } from 'src/entities/throw';
+
+import styles from './AddThrow.module.scss';
 
 export const AddThrow: FC = () => {
    const throwListLength = useAppSelector(getThrowListLength);
@@ -23,8 +23,8 @@ export const AddThrow: FC = () => {
    const { addThrow: createThrow } = throwListActions;
 
    const onClick = () => {
-      if (throwListLength >= 5) {
-         alert('Максимальное количество бросков равно 5');
+      if (throwListLength >= 6) {
+         alert('Максимальное количество бросков равно 6');
          return;
       }
       const id = String(Date.now());
@@ -36,8 +36,8 @@ export const AddThrow: FC = () => {
    };
 
    return (
-      <Button onClick={onClick} className={styles.button}>
+      <MyButton onClick={onClick} className={styles.button}>
          Добавить бросок
-      </Button>
+      </MyButton>
    );
 };

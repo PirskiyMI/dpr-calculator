@@ -2,19 +2,19 @@ import { ChangeEvent, FC, memo, useCallback, useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'src/shared/lib';
 import { Field } from 'src/shared/ui/controls/field';
+import { useInputNumber } from 'src/shared/lib/hooks/use-input-number';
 import { getAttackParamsSelector, attackParamsActions } from 'src/entities/throw';
 
-import styles from './styles.module.scss';
-import { useInputNumber } from 'src/shared/lib/hooks/use-input-number';
 import { useAttackModifierInput } from '../../lib/hooks';
 import { getAttackBonusSum } from '../../lib/helpers/get-attack-bonus-sum';
 import { getAttackModifierSum } from '../../lib/helpers/get-attack-modifier-sum';
+import styles from './ThrowFields.module.scss';
 
 interface IProps {
    id: string;
 }
 
-export const AttackFields: FC<IProps> = memo(({ id }) => {
+export const ThrowFields: FC<IProps> = memo(({ id }) => {
    const { attackBonus, targetProtection } = useAppSelector((state) =>
       getAttackParamsSelector(state, id),
    );

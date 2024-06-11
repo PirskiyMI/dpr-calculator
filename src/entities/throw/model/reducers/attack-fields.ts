@@ -10,7 +10,7 @@ const initialState: Record<string, IAttack> = {
 };
 
 const attackParamsSlice = createSlice({
-   name: 'attackParams',
+   name: 'attack-params',
    initialState,
    reducers: {
       addAttackParams: (state, { payload }: PayloadAction<string>) => {

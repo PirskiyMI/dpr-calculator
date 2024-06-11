@@ -6,7 +6,7 @@
    color: rgba(var(--color-dark), 0.6);
    border: var(--border-default) rgb(var(--color-primary));
    overflow: hidden;
-   transition: all ease-in-out 0.2s;
+   transition: all ease-in-out 0.04s;
    &_primary {
       color: rgb(var(--color-light));
       background-color: rgb(var(--color-primary));

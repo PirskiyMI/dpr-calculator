@@ -1,9 +1,7 @@
 import { FC, memo, useEffect, useState } from 'react';
 
-import { Button } from 'src/shared/ui/controls/button';
+import { MyButton } from 'src/shared/ui/controls/my-button';
 import { useAppDispatch, useAppSelector } from 'src/shared/lib';
-
-import { IAttackIndicators, getAttackDetails } from '../lib/helpers/get-attack-details';
 import {
    getThrowTypeSelector,
    getDamageSelector,
@@ -12,14 +10,17 @@ import {
    getAttackParamsSelector,
    specialPropertiesActions,
 } from 'src/entities/throw';
+import { Throw } from 'src/entities/throw/ui/Throw';
 
-import styles from './styles.module.scss';
-
-import { AttackFields } from './attack-fields';
-import { AttackTypeSelect } from './attack-type-select';
-import { SpecialProperties } from './special-properties';
+import { IAttackIndicators, getAttackDetails } from '../lib/helpers/get-attack-details';
+import { ThrowActionsMenu } from './action-menu/ActionMenu';
+import { CoverSelector } from './cover-selector/CoverSelect';
 import { DamageFields } from './damage-fields';
-import { Throw } from 'src/entities/throw/ui';
+import { SpecialPropertiesCheckboxes } from './special-properties/SpecialPropertiesCheckboxes';
+import { ThrowFields } from './throw-fields/ThrowFields';
+import { ThrowSelector } from './ThrowSelector';
+
+import styles from './ThrowForm.module.scss';
 
 interface IProps {
    id: string;
@@ -47,8 +48,6 @@ export const ThrowForm: FC<IProps> = memo(({ id }) => {
       damagePerRound: 0,
    });
 
-   const params = attackIndicators;
-
    const handleCalculation = () => {
       const indicators = getAttackDetails({
          type: attackType,
@@ -61,27 +60,26 @@ export const ThrowForm: FC<IProps> = memo(({ id }) => {
       setAttackIndicators(indicators);
    };
 
+   const calculationButton = (
+      <MyButton type="submit" onClick={handleCalculation} className={styles.form__button}>
+         Посчитать
+      </MyButton>
+   );
+
    return (
-      <div className={styles.form}>
+      <form onSubmit={(e) => e.preventDefault()} className={styles.form}>
          <Throw
-            button={
-               <Button onClick={handleCalculation} className={styles.form__button}>
-                  Результат
-               </Button>
-            }
-            deleteButton={<></>}
+            actionMenu={<ThrowActionsMenu id={id} />}
             controls={{
-               main: (
-                  <div className={styles.form__controls}>
-                     <AttackFields id={id} />
-                     <SpecialProperties id={id} />
-                  </div>
-               ),
-               select: <AttackTypeSelect id={id} />,
-               fields: <DamageFields id={id} />,
+               calculationButton,
+               checkboxes: <SpecialPropertiesCheckboxes id={id} />,
+               damageFields: <DamageFields id={id} />,
+               throwFields: <ThrowFields id={id} />,
+               throwSelect: <ThrowSelector id={id} />,
+               coverSelect: <CoverSelector id={id} />,
             }}
-            params={params}
+            params={attackIndicators}
          />
-      </div>
+      </form>
    );
 });
