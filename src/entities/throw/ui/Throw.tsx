@@ -3,9 +3,11 @@ import { FC, ReactNode, memo } from 'react';
 import { useModal } from 'shared/lib';
 import { MyButton } from 'shared/ui/controls/my-button';
 import { Modal } from 'shared/ui/modal';
+import GearIcon from 'shared/assets/icons/gear-icon.svg?react';
 
 import { getPercentage } from '../lib/helpers/get-percentage';
 import { Output } from './output/Output';
+
 import styles from './Throw.module.scss';
 
 interface IProps {
@@ -59,8 +61,11 @@ export const Throw: FC<IProps> = memo(
             <div className={styles.throw}>
                <div className={styles.throw__wrapper}>
                   <div className={styles.throw__header}>
-                     <MyButton uiType="secondary" onClick={toggleIsModalOpen(true)}>
-                        Text
+                     <MyButton
+                        uiType="secondary"
+                        onClick={toggleIsModalOpen(true)}
+                        className={styles.throw__button}>
+                        <GearIcon className={styles.throw__gear} />
                      </MyButton>
                      {actionMenu}
                   </div>

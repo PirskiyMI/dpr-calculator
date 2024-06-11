@@ -1,5 +1,4 @@
 .form {
-   min-height: 30vh;
    &__controls {
       display: flex;
       align-items: center;
@@ -11,7 +10,6 @@
       gap: 14px;
    }
    &__button {
-      font-size: calc((1vh + 1vw));
       color: rgb(var(--color-light));
       border-color: rgb(var(--color-light));
       @media (min-width: 728px) {

@@ -31,4 +31,16 @@
       display: flex;
       gap: 14px;
    }
+   &__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      padding: 0;
+   }
+   &__gear {
+      width: 14px;
+      height: 14px;
+   }
 }

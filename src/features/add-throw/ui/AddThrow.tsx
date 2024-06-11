@@ -23,10 +23,6 @@ export const AddThrow: FC = () => {
    const { addThrow: createThrow } = throwListActions;
 
    const onClick = () => {
-      if (throwListLength >= 6) {
-         alert('Максимальное количество бросков равно 6');
-         return;
-      }
       const id = String(Date.now());
       dispatch(addAttackParams(id));
       dispatch(addThrowType(id));
@@ -36,7 +32,7 @@ export const AddThrow: FC = () => {
    };
 
    return (
-      <MyButton onClick={onClick} className={styles.button}>
+      <MyButton onClick={onClick} disabled={throwListLength >= 6} className={styles.button}>
          Добавить бросок
       </MyButton>
    );

@@ -1,11 +1,12 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 
 import { MyButton } from 'shared/ui/controls/my-button';
-import { useAppDispatch } from 'shared/lib';
+import { useAppDispatch, useAppSelector } from 'shared/lib';
 import {
    attackParamsActions,
    attackTypeActions,
    damageActions,
+   getThrowListLength,
    specialPropertiesActions,
    throwListActions,
 } from 'entities/throw';
@@ -42,6 +43,7 @@ interface IActionBodyProps extends IProps {
 }
 
 const ActionBody: FC<IActionBodyProps> = ({ id, closeDropdown }) => {
+   const throwListLength = useAppSelector(getThrowListLength);
    const { removeAttackParams, copyAttackParams } = attackParamsActions;
    const { removeThrowType, copyThrowType } = attackTypeActions;
    const { removeThrow, copyThrow } = damageActions;
@@ -72,12 +74,18 @@ const ActionBody: FC<IActionBodyProps> = ({ id, closeDropdown }) => {
       dispatch(copyThrow(params));
       dispatch(copySpecialProperties(params));
       dispatch(addThrow(newId));
+
+      closeDropdown();
    }, [id]);
 
    return (
       <div onMouseDown={(e) => e.stopPropagation()} className={styles.menu__dropdown}>
-         <button onClick={handleCopy}>Копировать</button>
-         <button onClick={handleDelete}>Удалить</button>
+         <button onClick={handleCopy} disabled={throwListLength >= 6}>
+            Копировать
+         </button>
+         <button onClick={handleDelete} disabled={throwListLength <= 1}>
+            Удалить
+         </button>
       </div>
    );
 };
