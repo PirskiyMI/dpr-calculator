@@ -1,6 +1,6 @@
 import { FC, useCallback, useState } from 'react';
 
-import { Button } from 'src/shared/ui/button';
+import { Button } from 'src/shared/ui/controls/button';
 
 import styles from './styles.module.scss';
 import { useAppDispatch } from 'src/shared/lib';
@@ -49,7 +49,7 @@ export const ThrowActionsMenu: FC<IProps> = ({ id }) => {
 
    return (
       <div className={styles.menu}>
-         <Button type="primary" shape="circle" onClick={toggleOpen} className={styles.menu__button}>
+         <Button onClick={toggleOpen} className={styles.menu__button}>
             <span className={styles.menu__dot}>.</span>
          </Button>
          {isOpen && (

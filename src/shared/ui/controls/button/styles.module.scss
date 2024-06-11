@@ -1,0 +1,27 @@
+.button {
+   position: relative;
+   padding: 0 10px;
+   height: 48px;
+   font-weight: var(--fw-large);
+   color: rgba(var(--color-dark), 0.6);
+   border: var(--border-default) rgb(var(--color-primary));
+   overflow: hidden;
+   transition: all ease-in-out 0.2s;
+   &_primary {
+      color: rgb(var(--color-light));
+      background-color: rgb(var(--color-primary));
+      &:active {
+         background-color: rgb(var(--color-primary-active));
+      }
+   }
+   &_secondary {
+      background-color: rgb(var(--color-light));
+      border: 1px solid rgb(var(--color-gray));
+      &:active {
+         background-color: rgb(var(--color-gray));
+      }
+   }
+   &:active {
+      transform: scale(0.96);
+   }
+}

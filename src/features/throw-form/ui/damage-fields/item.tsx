@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, memo, useCallback } from 'react';
 import { Dropdown } from 'src/shared/ui/controls/dropdown';
 import { Field } from 'src/shared/ui/controls/field';
-import { Button } from 'src/shared/ui/button';
+import { Button } from 'src/shared/ui/controls/button';
 import { IOption } from 'src/shared/lib';
 import { IDice } from '../../lib/types/dice-types';
 import styles from './styles.module.scss';
@@ -84,7 +84,7 @@ export const DamageField: FC<IProps> = memo(
                onClick={handleHasFitChange}>
                Мастер большого оружия / Меткий стрелок
             </div>
-            <Button type="dashed" shape="round" onClick={handleRemoveField}>
+            <Button uiType="secondary" onClick={handleRemoveField}>
                Удалить
             </Button>
          </>

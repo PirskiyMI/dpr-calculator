@@ -8,6 +8,9 @@ body {
    font-size: var(--fs-default);
    font-weight: var(--fw-default);
    color: rgb(var(--color-dark));
+   background-size: 40px 40px;
+   background-image: linear-gradient(to right, #eee8 1px, transparent 1px),
+      linear-gradient(to bottom, #eee8 1px, transparent 1px);
    &::-webkit-scrollbar {
       display: none;
    }

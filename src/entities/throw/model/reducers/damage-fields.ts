@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IDice, TDiceType } from '../../types/dice-types';
+import { IDice, TDiceType } from '../../lib/types/dice-types';
 import { DamageEfficiency, DamageType } from '../../constants/damage-consts';
 import { DiceName, DiceValue } from '../../constants/dice-consts';
 

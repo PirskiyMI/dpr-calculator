@@ -1,6 +1,6 @@
 import { FC, memo, useEffect, useState } from 'react';
 
-import { Button } from 'src/shared/ui/button';
+import { Button } from 'src/shared/ui/controls/button';
 import { useAppDispatch, useAppSelector } from 'src/shared/lib';
 
 import { IAttackIndicators, getAttackDetails } from '../lib/helpers/get-attack-details';
@@ -65,11 +65,7 @@ export const ThrowForm: FC<IProps> = memo(({ id }) => {
       <div className={styles.form}>
          <Throw
             button={
-               <Button
-                  type="primary"
-                  shape="round"
-                  onClick={handleCalculation}
-                  className={styles.form__button}>
+               <Button onClick={handleCalculation} className={styles.form__button}>
                   Результат
                </Button>
             }

@@ -3,7 +3,7 @@ import { IOption } from 'src/shared/lib';
 
 import styles from './styles.module.scss';
 import { DamageField } from './item';
-import { Button } from 'src/shared/ui/button';
+import { Button } from 'src/shared/ui/controls/button';
 import { IDice } from '../../lib/types/dice-types';
 
 interface IProps {

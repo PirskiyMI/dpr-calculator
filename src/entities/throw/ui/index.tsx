@@ -1,6 +1,9 @@
 import { FC, ReactNode, memo, useState } from 'react';
+
+import { Button } from 'src/shared/ui/controls/button';
+
+import { getPercentage } from '../lib/helpers/get-percentage';
 import styles from './styles.module.scss';
-import { Button } from 'src/shared/ui/button';
 
 interface IProps {
    button: ReactNode;
@@ -24,6 +27,10 @@ export const Throw: FC<IProps> = memo(
       controls: { main, select, fields },
       params: { probabilityOfMiss, probabilityOfHit, probabilityOfCriticalHit, damagePerRound },
    }) => {
+      const missPercentage = getPercentage(probabilityOfMiss);
+      const hitPercentage = getPercentage(probabilityOfHit);
+      const criticalHitPercentage = getPercentage(probabilityOfCriticalHit);
+
       return (
          <div className={styles.throw}>
             <ThrowActionsMenu />
@@ -37,11 +44,9 @@ export const Throw: FC<IProps> = memo(
                   <div className={styles.output__wrapper}>
                      {button}
                      <ul className={styles.output__list}>
-                        <li>Промах: {(probabilityOfMiss * 100).toFixed(2)}%</li>
-                        <li>Попадание: {(probabilityOfHit * 100).toFixed(2)}%</li>
-                        <li>
-                           Критическое попадание: {(probabilityOfCriticalHit * 100).toFixed(2)}%
-                        </li>
+                        <li>Промах: {missPercentage}%</li>
+                        <li>Попадание: {hitPercentage}%</li>
+                        <li>Критическое попадание: {criticalHitPercentage}%</li>
                         <li>Средний урон: {damagePerRound.toFixed(2)}</li>
                      </ul>
                   </div>
@@ -59,7 +64,7 @@ const ThrowActionsMenu = () => {
 
    return (
       <div className={styles.menu}>
-         <Button type="primary" shape="circle" onClick={toggleOpen} className={styles.menu__button}>
+         <Button onClick={toggleOpen} className={styles.menu__button}>
             <span className={styles.menu__dot}>.</span>
          </Button>
          {isOpen && (

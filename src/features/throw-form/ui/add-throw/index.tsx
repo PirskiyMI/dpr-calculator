@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'src/shared/lib';
-import { Button } from 'src/shared/ui/button';
+import { Button } from 'src/shared/ui/controls/button';
 
 import styles from './styles.module.scss';
 import {
@@ -36,7 +36,7 @@ export const AddThrow: FC = () => {
    };
 
    return (
-      <Button type="primary" onClick={onClick} className={styles.button}>
+      <Button onClick={onClick} className={styles.button}>
          Добавить бросок
       </Button>
    );
