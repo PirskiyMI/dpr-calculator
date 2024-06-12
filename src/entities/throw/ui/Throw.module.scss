@@ -29,6 +29,8 @@
    }
    &__main {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 14px;
    }
    &__button {

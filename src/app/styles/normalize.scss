@@ -2,7 +2,6 @@
    padding: 0;
    margin: 0;
    border: 0;
-   user-select: none;
 }
 *,
 *:before,
@@ -10,6 +9,10 @@
    -moz-box-sizing: border-box;
    -webkit-box-sizing: border-box;
    box-sizing: border-box;
+}
+*::selection {
+   color: rgb(var(--color-light));
+   background-color: rgb(var(--color-dark));
 }
 :focus,
 :active {

@@ -1,0 +1,22 @@
+.calculator {
+   padding: 80px 20px;
+   display: flex;
+   flex-direction: column;
+   row-gap: 20px;
+   &__title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      font-size: calc(2vh + 2vw);
+      line-height: 1;
+      font-weight: var(--fw-large);
+   }
+   &__dice {
+      width: calc(3vh + 3vw);
+      height: calc(3vh + 3vw);
+   }
+   &__button {
+      align-self: center;
+   }
+}

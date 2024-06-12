@@ -13,4 +13,9 @@
       padding: 20px;
       background-color: rgb(var(--color-light));
    }
+   &__cross {
+      width: 20px;
+      height: 20px;
+      stroke: rgb(var(--color-dark));
+   }
 }

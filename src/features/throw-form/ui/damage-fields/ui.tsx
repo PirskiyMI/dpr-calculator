@@ -1,10 +1,10 @@
-import { ChangeEvent, FC } from 'react';
+import { FC } from 'react';
 
 import { IOption } from 'shared/lib';
 import { MyButton } from 'shared/ui/controls/my-button';
 
 import { IDice } from '../../lib/types/dice-types';
-import { DamageField } from './item';
+import { DamageField, IChangeActions } from './item';
 
 import styles from './styles.module.scss';
 
@@ -15,14 +15,7 @@ interface IProps {
       damageTypeOptions: IOption[];
       damageEfficiencyOptions: IOption[];
    };
-   change: {
-      onFieldChange: (e: ChangeEvent<HTMLInputElement>) => void;
-      onDamageModifierChange: (e: ChangeEvent<HTMLInputElement>) => void;
-      onTypeChange: (e: ChangeEvent<HTMLSelectElement>) => void;
-      onDamageTypeChange: (e: ChangeEvent<HTMLSelectElement>) => void;
-      onDamageEfficiencyChange: (e: ChangeEvent<HTMLSelectElement>) => void;
-      onHasFitChange: (id: string) => void;
-   };
+   change: IChangeActions;
    createField: () => void;
    removeField: (id: string) => void;
 }
@@ -36,13 +29,18 @@ export const DamageFieldsUI: FC<IProps> = ({
 }) => {
    return (
       <div className={styles.fields}>
-         <MyButton onClick={createField} disabled={fieldList.length >= 5} className={styles.button}>
+         <MyButton onClick={createField} disabled={fieldList.length >= 3} className={styles.button}>
             Добавить кость урона
          </MyButton>
          <ul className={styles.list}>
             {fieldList.map((el) => (
                <li key={el.id} className={styles.list__item}>
-                  <DamageField {...el} {...options} {...change} removeField={removeField} />
+                  <DamageField
+                     {...el}
+                     {...options}
+                     changeActions={{ ...change }}
+                     removeField={removeField}
+                  />
                </li>
             ))}
          </ul>

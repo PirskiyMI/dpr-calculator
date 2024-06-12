@@ -1,9 +1,8 @@
 .output {
    display: flex;
    flex-direction: column;
-   width: 25%;
-   min-width: 185px;
    row-gap: 8px;
+   flex: 1 0 100px;
    &__title {
       text-align: center;
       font-weight: var(--fw-large);

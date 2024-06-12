@@ -9,16 +9,20 @@ import { IDice } from '../../lib/types/dice-types';
 
 import styles from './styles.module.scss';
 
-interface IProps extends IDice {
-   typeOptions: IOption[];
-   damageTypeOptions: IOption[];
-   damageEfficiencyOptions: IOption[];
+export interface IChangeActions {
    onFieldChange: (e: ChangeEvent<HTMLInputElement>) => void;
    onDamageModifierChange: (e: ChangeEvent<HTMLInputElement>) => void;
    onTypeChange: (e: ChangeEvent<HTMLSelectElement>) => void;
    onDamageTypeChange: (e: ChangeEvent<HTMLSelectElement>) => void;
    onDamageEfficiencyChange: (e: ChangeEvent<HTMLSelectElement>) => void;
    onHasFitChange: (id: string) => void;
+}
+
+interface IProps extends IDice {
+   typeOptions: IOption[];
+   damageTypeOptions: IOption[];
+   damageEfficiencyOptions: IOption[];
+   changeActions: IChangeActions;
    removeField: (id: string) => void;
 }
 
@@ -34,13 +38,15 @@ export const DamageField: FC<IProps> = memo(
       typeOptions,
       damageTypeOptions,
       damageEfficiencyOptions,
-      onFieldChange,
-      onDamageModifierChange,
-      onTypeChange,
-      onDamageTypeChange,
-      onDamageEfficiencyChange,
-      onHasFitChange,
       removeField,
+      changeActions: {
+         onFieldChange,
+         onDamageModifierChange,
+         onTypeChange,
+         onDamageTypeChange,
+         onDamageEfficiencyChange,
+         onHasFitChange,
+      },
    }) => {
       const handleRemoveField = useCallback(() => removeField(id), []);
       const handleHasFitChange = useCallback(() => onHasFitChange(id), []);
