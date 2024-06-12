@@ -1,5 +1,7 @@
 import { ChangeEvent, FC, memo } from 'react';
-import { IOption } from 'src/shared/lib';
+
+import { IOption } from 'shared/lib';
+
 import styles from './styles.module.scss';
 
 interface IProps {
