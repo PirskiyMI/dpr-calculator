@@ -13,6 +13,10 @@
       padding: 20px;
       background-color: rgb(var(--color-light));
    }
+   &__button {
+      display: block;
+      margin-left: auto;
+   }
    &__cross {
       width: 20px;
       height: 20px;

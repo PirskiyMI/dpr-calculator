@@ -23,7 +23,9 @@ export const Modal: FC<IProps> = ({ children, closeModal }) => {
    return createPortal(
       <div className={styles.modal} onClick={closeModal}>
          <div className={styles.modal__body} onClick={(e) => e.stopPropagation()}>
-            <CrossIcon className={styles.modal__cross} />
+            <button onClick={closeModal} className={styles.modal__button}>
+               <CrossIcon className={styles.modal__cross} />
+            </button>
             {children}
          </div>
       </div>,
