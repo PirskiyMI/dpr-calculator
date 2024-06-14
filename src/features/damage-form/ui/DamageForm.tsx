@@ -1,31 +1,38 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
-import { MyButton } from 'shared/ui/controls/my-button';
+import { IOption } from 'shared/lib';
+import { IDice } from 'entities/damage';
 
-import { DamageFormBody } from './DamageFormBody';
+import { DamageField, IChangeActions } from './DamageField';
+
 import styles from './DamageForm.module.scss';
 
 interface IProps {
-   id: string;
+   fieldList: IDice[];
+   options: {
+      typeOptions: IOption[];
+      damageTypeOptions: IOption[];
+      damageEfficiencyOptions: IOption[];
+   };
+   change: IChangeActions;
+   removeField: (id: string) => void;
 }
 
-export const DamageForm: FC<IProps> = ({ id }) => {
-   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-   const toggleIsOpen = (isOpen: boolean) => () => {
-      return setIsOpen(isOpen);
-   };
-
+export const DamageForm: FC<IProps> = ({ fieldList, options, change, removeField }) => {
    return (
       <div className={styles.damageForm}>
-         <MyButton
-            uiType="secondary"
-            onClick={toggleIsOpen(!isOpen)}
-            onMouseDown={(e) => e.stopPropagation()}
-            className={styles.damageForm__button}>
-            <span className={styles.damageForm__dot}>.</span>
-         </MyButton>
-         {isOpen && <DamageFormBody id={id} closeDropdown={toggleIsOpen(false)} />}
+         <ul className={styles.damageForm__list}>
+            {fieldList.map((el) => (
+               <li key={el.id} className={styles.damageForm__item}>
+                  <DamageField
+                     {...el}
+                     {...options}
+                     changeActions={{ ...change }}
+                     removeField={removeField}
+                  />
+               </li>
+            ))}
+         </ul>
       </div>
    );
 };

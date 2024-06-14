@@ -17,7 +17,6 @@ import {
    getAttackDetails,
    getExtendedAttackDetails,
 } from '../lib/helpers/get-attack-details';
-import { DamageFields } from './damage-fields';
 import { SpecialPropertiesCheckboxes } from './special-properties/SpecialPropertiesCheckboxes';
 import { ThrowFields } from './throw-fields/ThrowFields';
 import { ThrowSelector } from './ThrowSelector';
@@ -25,8 +24,10 @@ import { ThrowSelector } from './ThrowSelector';
 import styles from './ThrowForm.module.scss';
 
 //TODO убрать импорты из этого слоя
-import { DamageForm } from 'features/damage-form';
 import { ChangeCover } from 'features/change-cover';
+import { ActionMenu } from 'features/action-menu';
+import { DamageForm } from 'features/damage-form';
+import { AddDamageDice } from 'features/add-damage-dice';
 
 interface IProps {
    isExtendedForm?: boolean;
@@ -98,11 +99,16 @@ export const ThrowForm: FC<IProps> = memo(({ id, isExtendedForm = false }) => {
             <DetailedThrow fields={extendedCalculationButton} calculations={calculations} />
          ) : (
             <Throw
-               actionMenu={<DamageForm id={id} />}
+               actionMenu={<ActionMenu id={id} />}
                controls={{
                   calculationButton,
                   checkboxes: <SpecialPropertiesCheckboxes id={id} />,
-                  damageFields: <DamageFields id={id} />,
+                  damageFields: (
+                     <>
+                        <AddDamageDice id={id} />
+                        <DamageForm id={id} />
+                     </>
+                  ),
                   throwFields: <ThrowFields id={id} />,
                   throwSelect: <ThrowSelector id={id} />,
                   coverSelect: <ChangeCover id={id} />,

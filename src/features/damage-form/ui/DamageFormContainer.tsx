@@ -1,30 +1,30 @@
-import { ChangeEvent, memo, useCallback, useMemo } from 'react';
+import { ChangeEvent, memo, useCallback } from 'react';
 
-import { IOption, useAppDispatch, useAppSelector } from 'shared/lib';
+import { useAppDispatch, useAppSelector } from 'shared/lib';
 import {
    getDicesSelector,
    damageActions,
    DamageEfficiency,
-   DamageEfficiencyOnRu,
    DamageType,
-   DamageTypeOnRu,
    DiceName,
    TDiceType,
+   DamageTypeOnRu,
+   DamageEfficiencyOnRu,
 } from 'entities/damage';
 
-import { DamageFieldsUI } from './ui';
+import { DamageForm } from './DamageForm';
+import { getOptionList } from '../lib/helpers/getOptionList';
 
 interface IProps {
    id: string;
 }
 
-export const DamageFields = memo(({ id }: IProps) => {
+export const DamageFormContainer = memo(({ id }: IProps) => {
    const dispatch = useAppDispatch();
    const fieldList = useAppSelector((state) => getDicesSelector(state, id));
    const {
       setDices,
       setDiceType,
-      addDice,
       removeDice,
       setDamageModifier,
       setDamageType,
@@ -32,30 +32,9 @@ export const DamageFields = memo(({ id }: IProps) => {
       setDamageFit,
    } = damageActions;
 
-   const typeOptions = useMemo(() => {
-      const list: IOption[] = [];
-      for (const key in DiceName) {
-         const title = DiceName[key as keyof typeof DiceName];
-         list.push({ title, value: key });
-      }
-      return list;
-   }, []);
-   const damageTypeOptions = useMemo(() => {
-      const list: IOption[] = [];
-      for (const key in DamageType) {
-         const title = DamageTypeOnRu[key as keyof typeof DamageTypeOnRu];
-         list.push({ title, value: key });
-      }
-      return list;
-   }, []);
-   const damageEfficiencyOptions = useMemo(() => {
-      const list: IOption[] = [];
-      for (const key in DamageEfficiency) {
-         const title = DamageEfficiencyOnRu[key as keyof typeof DamageEfficiencyOnRu];
-         list.push({ title, value: key });
-      }
-      return list;
-   }, []);
+   const typeOptions = getOptionList(DiceName, DiceName);
+   const damageTypeOptions = getOptionList(DamageType, DamageTypeOnRu);
+   const damageEfficiencyOptions = getOptionList(DamageEfficiency, DamageEfficiencyOnRu);
 
    const onFieldChange = useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +58,7 @@ export const DamageFields = memo(({ id }: IProps) => {
          const name = e.target.value as TDiceType;
          dispatch(setDiceType({ id, dice: { id: diceId, name } }));
       },
-      [id],
+      [dispatch, id, setDiceType],
    );
    const onDamageTypeChange = useCallback(
       (e: ChangeEvent<HTMLSelectElement>) => {
@@ -87,7 +66,7 @@ export const DamageFields = memo(({ id }: IProps) => {
          const damageType = e.target.value as keyof typeof DamageType;
          dispatch(setDamageType({ id, dice: { id: diceId, damageType } }));
       },
-      [id],
+      [dispatch, id, setDamageType],
    );
    const onDamageEfficiencyChange = useCallback(
       (e: ChangeEvent<HTMLSelectElement>) => {
@@ -96,23 +75,22 @@ export const DamageFields = memo(({ id }: IProps) => {
 
          dispatch(setDamageEfficiency({ id, dice: { id: diceId, damageEfficiency } }));
       },
-      [id],
+      [dispatch, id, setDamageEfficiency],
    );
    const onHasFitChange = useCallback(
       (diceId: string) => {
          dispatch(setDamageFit({ id, diceId }));
       },
-      [id],
+      [dispatch, id, setDamageFit],
    );
 
-   const createField = useCallback(() => dispatch(addDice(id)), [dispatch, addDice, id]);
    const removeField = useCallback(
       (diceId: string) => dispatch(removeDice({ id, diceId })),
       [dispatch, id, removeDice],
    );
 
    return (
-      <DamageFieldsUI
+      <DamageForm
          fieldList={fieldList}
          options={{ typeOptions, damageTypeOptions, damageEfficiencyOptions }}
          change={{
@@ -123,7 +101,6 @@ export const DamageFields = memo(({ id }: IProps) => {
             onDamageEfficiencyChange,
             onHasFitChange,
          }}
-         createField={createField}
          removeField={removeField}
       />
    );

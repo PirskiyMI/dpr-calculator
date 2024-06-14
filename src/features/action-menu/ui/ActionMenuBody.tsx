@@ -5,14 +5,14 @@ import { attackParamsActions, attackTypeActions, specialPropertiesActions } from
 import { damageActions } from 'entities/damage';
 import { getThrowListLength, throwListActions } from 'entities/throw';
 
-import styles from './DamageFormBody.module.scss';
+import styles from './ActionMenuBody.module.scss';
 
 interface IProps {
    id: string;
    closeDropdown: () => void;
 }
 
-export const DamageFormBody: FC<IProps> = ({ id, closeDropdown }) => {
+export const ActionMenuBody: FC<IProps> = ({ id, closeDropdown }) => {
    const throwListLength = useAppSelector(getThrowListLength);
 
    const { removeAttackParams, copyAttackParams } = attackParamsActions;

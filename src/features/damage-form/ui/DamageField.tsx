@@ -4,10 +4,9 @@ import { Dropdown } from 'shared/ui/controls/dropdown';
 import { Field } from 'shared/ui/controls/field';
 import { MyButton } from 'shared/ui/controls/my-button';
 import { IOption } from 'shared/lib';
-
-
-import styles from './styles.module.scss';
 import { IDice } from 'entities/damage';
+
+import styles from './DamageField.module.scss';
 
 export interface IChangeActions {
    onFieldChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -48,11 +47,12 @@ export const DamageField: FC<IProps> = memo(
          onHasFitChange,
       },
    }) => {
-      const handleRemoveField = useCallback(() => removeField(id), []);
-      const handleHasFitChange = useCallback(() => onHasFitChange(id), []);
+      const handleRemoveField = useCallback(() => removeField(id), [id, removeField]);
+      const handleHasFitChange = useCallback(() => onHasFitChange(id), [id, onHasFitChange]);
+
       return (
-         <>
-            <div className={styles.inputs}>
+         <form className={styles.damageField}>
+            <div className={styles.damageField__fields}>
                <Field
                   name={id}
                   placeholder={'Кол-во'}
@@ -88,15 +88,17 @@ export const DamageField: FC<IProps> = memo(
             />
             <div
                className={
-                  hasDamageFit ? `${styles.checkbox} ${styles.checkbox_active}` : styles.checkbox
+                  hasDamageFit
+                     ? `${styles.damageField__checkbox} ${styles.damageField__checkbox_active}`
+                     : styles.damageField__checkbox
                }
                onClick={handleHasFitChange}>
                Мастер большого оружия / Меткий стрелок
             </div>
-            <MyButton uiType="secondary" onClick={handleRemoveField}>
+            <MyButton uiType="secondary" type="button" onClick={handleRemoveField}>
                Удалить
             </MyButton>
-         </>
+         </form>
       );
    },
 );
