@@ -1,2 +1,2 @@
-export { DetailedThrow } from './ui/DetailedThrow';
-export type { ICalculation } from './ui/DetailedThrow';
+export * from './lib';
+export * from './ui';

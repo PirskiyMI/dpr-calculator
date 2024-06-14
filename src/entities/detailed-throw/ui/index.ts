@@ -1,0 +1,1 @@
+export { DetailedThrow } from './DetailedThrow';

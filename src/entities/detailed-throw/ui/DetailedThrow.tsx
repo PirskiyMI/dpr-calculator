@@ -2,19 +2,12 @@ import { FC, ReactNode } from 'react';
 
 import { getPercentage } from 'shared/lib/helpers';
 
+import { IDetailedThrowCalculations } from '../lib/types';
 import styles from './DetailedThrow.module.scss';
-
-export interface ICalculation {
-   armorClass: number;
-   probabilityOfMiss: number;
-   probabilityOfHit: number;
-   probabilityOfCriticalHit: number;
-   damagePerRound: number;
-}
 
 interface IProps {
    fields: ReactNode;
-   calculations: ICalculation[];
+   calculations: IDetailedThrowCalculations[];
 }
 
 export const DetailedThrow: FC<IProps> = ({ fields, calculations }) => {

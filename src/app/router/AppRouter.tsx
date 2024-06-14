@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 
-import { CalculatorPage } from 'pages/dpr-page';
+import { CalculatorPage } from 'pages/calculator-page';
 import { TechnicalCalculatorPage } from 'pages/technical-calculator-page';
 
 export const AppRouter = () => {

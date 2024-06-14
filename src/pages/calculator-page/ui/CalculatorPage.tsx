@@ -4,7 +4,7 @@ import DiceIcon from 'shared/assets/icons/dice-icon.svg?react';
 import { AddThrow } from 'features/add-throw';
 import { ThrowList } from 'widgets/throw-list';
 
-import styles from './DprPage.module.scss';
+import styles from './CalculatorPage.module.scss';
 
 export const CalculatorPage: FC = () => {
    return (

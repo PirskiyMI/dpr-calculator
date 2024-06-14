@@ -10,14 +10,13 @@ import {
    specialPropertiesActions,
 } from 'entities/attack';
 import { getDamageSelector, getIsDamageFitActive } from 'entities/damage';
-import { DetailedThrow, ICalculation } from 'entities/detailed-throw';
+import { DetailedThrow, IDetailedThrowCalculations } from 'entities/detailed-throw';
 
 import {
    IAttackIndicators,
    getAttackDetails,
    getExtendedAttackDetails,
 } from '../lib/helpers/get-attack-details';
-import { ThrowActionsMenu } from './action-menu/ActionMenu';
 import { CoverSelector } from './cover-selector/CoverSelect';
 import { DamageFields } from './damage-fields';
 import { SpecialPropertiesCheckboxes } from './special-properties/SpecialPropertiesCheckboxes';
@@ -25,6 +24,9 @@ import { ThrowFields } from './throw-fields/ThrowFields';
 import { ThrowSelector } from './ThrowSelector';
 
 import styles from './ThrowForm.module.scss';
+
+//TODO убрать импорты из этого слоя
+import { DamageForm } from 'features/damage-form';
 
 interface IProps {
    isExtendedForm?: boolean;
@@ -53,7 +55,7 @@ export const ThrowForm: FC<IProps> = memo(({ id, isExtendedForm = false }) => {
       damagePerRound: 0,
    });
 
-   const [calculations, setCalculations] = useState<ICalculation[]>([]);
+   const [calculations, setCalculations] = useState<IDetailedThrowCalculations[]>([]);
 
    const handleCalculation = () => {
       const indicators = getAttackDetails({
@@ -96,7 +98,7 @@ export const ThrowForm: FC<IProps> = memo(({ id, isExtendedForm = false }) => {
             <DetailedThrow fields={extendedCalculationButton} calculations={calculations} />
          ) : (
             <Throw
-               actionMenu={<ThrowActionsMenu id={id} />}
+               actionMenu={<DamageForm id={id} />}
                controls={{
                   calculationButton,
                   checkboxes: <SpecialPropertiesCheckboxes id={id} />,
@@ -105,7 +107,7 @@ export const ThrowForm: FC<IProps> = memo(({ id, isExtendedForm = false }) => {
                   throwSelect: <ThrowSelector id={id} />,
                   coverSelect: <CoverSelector id={id} />,
                }}
-               params={attackIndicators}
+               calculations={attackIndicators}
             />
          )}
          {/*          <Throw

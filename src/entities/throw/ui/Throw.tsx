@@ -6,6 +6,7 @@ import { MyButton } from 'shared/ui/controls/my-button';
 import { Modal } from 'shared/ui/modal';
 import GearIcon from 'shared/assets/icons/gear-icon.svg?react';
 
+import { IThrowCalculations } from '../lib/types';
 import { Output } from './output/Output';
 
 import styles from './Throw.module.scss';
@@ -20,12 +21,7 @@ interface IProps {
       checkboxes: ReactNode;
       calculationButton: ReactNode;
    };
-   params: {
-      probabilityOfMiss: number;
-      probabilityOfHit: number;
-      probabilityOfCriticalHit: number;
-      damagePerRound: number;
-   };
+   calculations: IThrowCalculations;
 }
 
 export const Throw: FC<IProps> = memo(
@@ -39,7 +35,12 @@ export const Throw: FC<IProps> = memo(
          checkboxes,
          calculationButton,
       },
-      params: { probabilityOfMiss, probabilityOfHit, probabilityOfCriticalHit, damagePerRound },
+      calculations: {
+         probabilityOfMiss,
+         probabilityOfHit,
+         probabilityOfCriticalHit,
+         damagePerRound,
+      },
    }) => {
       const { isModalOpen, toggleIsModalOpen } = useModal();
 

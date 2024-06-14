@@ -1,1 +1,1 @@
-export { TechnicalCalculatorPage } from './ui/TechnicalCalculatorPage';
+export * from './ui';

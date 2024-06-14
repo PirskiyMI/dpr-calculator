@@ -1,4 +1,4 @@
-import { AttackBonus } from 'entities/throw';
+import { AttackBonus } from "entities/attack";
 
 const getAverageBonus = (dice: string) => {
    const count = dice[0];
