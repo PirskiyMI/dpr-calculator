@@ -17,7 +17,6 @@ import {
    getAttackDetails,
    getExtendedAttackDetails,
 } from '../lib/helpers/get-attack-details';
-import { CoverSelector } from './cover-selector/CoverSelect';
 import { DamageFields } from './damage-fields';
 import { SpecialPropertiesCheckboxes } from './special-properties/SpecialPropertiesCheckboxes';
 import { ThrowFields } from './throw-fields/ThrowFields';
@@ -27,6 +26,7 @@ import styles from './ThrowForm.module.scss';
 
 //TODO убрать импорты из этого слоя
 import { DamageForm } from 'features/damage-form';
+import { ChangeCover } from 'features/change-cover';
 
 interface IProps {
    isExtendedForm?: boolean;
@@ -105,7 +105,7 @@ export const ThrowForm: FC<IProps> = memo(({ id, isExtendedForm = false }) => {
                   damageFields: <DamageFields id={id} />,
                   throwFields: <ThrowFields id={id} />,
                   throwSelect: <ThrowSelector id={id} />,
-                  coverSelect: <CoverSelector id={id} />,
+                  coverSelect: <ChangeCover id={id} />,
                }}
                calculations={attackIndicators}
             />

@@ -9,13 +9,13 @@ import {
    specialPropertiesActions,
 } from 'entities/attack';
 
-import styles from './CoverSelect.module.scss';
+import styles from './ChangeCover.module.scss';
 
 interface IProps {
    id: string;
 }
 
-export const CoverSelector: FC<IProps> = ({ id }) => {
+export const ChangeCover: FC<IProps> = ({ id }) => {
    const { setCover } = specialPropertiesActions;
    const { cover } = useAppSelector((state) => getSpecialPropertiesSelector(state, id));
    const dispatch = useAppDispatch();
@@ -37,7 +37,7 @@ export const CoverSelector: FC<IProps> = ({ id }) => {
    );
 
    return (
-      <div className={styles.cover}>
+      <div className={styles.changeCover}>
          <span>Укрытие</span>
          <Dropdown
             name={id}

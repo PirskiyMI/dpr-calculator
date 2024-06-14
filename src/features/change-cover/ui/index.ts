@@ -1,0 +1,1 @@
+export { ChangeCover } from './ChangeCover';
