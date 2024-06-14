@@ -5,9 +5,9 @@ import { Field } from 'shared/ui/controls/field';
 import { MyButton } from 'shared/ui/controls/my-button';
 import { IOption } from 'shared/lib';
 
-import { IDice } from '../../lib/types/dice-types';
 
 import styles from './styles.module.scss';
+import { IDice } from 'entities/damage';
 
 export interface IChangeActions {
    onFieldChange: (e: ChangeEvent<HTMLInputElement>) => void;

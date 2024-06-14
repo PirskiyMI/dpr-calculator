@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-const dicesSelector = (state: RootState) => state.damageReducer;
+const dicesSelector = (state: RootState) => state.damage;
 
 export const getDicesSelector = createSelector(
    [dicesSelector, (_dicesSelector, id: string) => id],
@@ -32,4 +32,4 @@ export const getDamageSelector = createSelector(
 );
 
 export const getIsDamageFitActive = (state: RootState, id: string) =>
-   state.damageReducer[id].isDamageFitActive;
+   state.damage[id].isDamageFitActive;

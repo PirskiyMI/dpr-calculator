@@ -2,8 +2,8 @@ import { FC } from 'react';
 
 import { IOption } from 'shared/lib';
 import { MyButton } from 'shared/ui/controls/my-button';
+import { IDice } from 'entities/damage';
 
-import { IDice } from '../../lib/types/dice-types';
 import { DamageField, IChangeActions } from './item';
 
 import styles from './styles.module.scss';

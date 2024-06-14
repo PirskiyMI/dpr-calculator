@@ -1,15 +1,15 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { IDice, TDiceType } from '../../lib/types/dice-types';
-import { DamageEfficiency, DamageType } from '../../constants/damage-consts';
-import { DiceName, DiceValue } from '../../constants/dice-consts';
+import { DamageEfficiency, DamageType } from '../constants/damage-consts';
+import { DiceName, DiceValue } from '../constants/dice-consts';
+import { IDice, TDiceType } from '../lib/types/dice-types';
 
-interface IDamage {
+interface IState {
    isDamageFitActive: boolean;
    dices: IDice[];
 }
 
-const initialState: Record<string, IDamage> = {
+const initialState: Record<string, IState> = {
    'throw-1': {
       isDamageFitActive: false,
       dices: [

@@ -9,9 +9,9 @@ import {
    DamageType,
    DamageTypeOnRu,
    DiceName,
-} from 'entities/throw';
+   TDiceType,
+} from 'entities/damage';
 
-import { TDiceType } from '../../lib/types/dice-types';
 import { DamageFieldsUI } from './ui';
 
 interface IProps {

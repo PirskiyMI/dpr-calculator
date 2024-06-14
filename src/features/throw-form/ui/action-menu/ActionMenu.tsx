@@ -2,10 +2,11 @@ import { FC, useCallback, useEffect, useState } from 'react';
 
 import { MyButton } from 'shared/ui/controls/my-button';
 import { useAppDispatch, useAppSelector } from 'shared/lib';
-import { damageActions, getThrowListLength, throwListActions } from 'entities/throw';
+import { getThrowListLength, throwListActions } from 'entities/throw';
 import { attackParamsActions, attackTypeActions, specialPropertiesActions } from 'entities/attack';
 
 import styles from './ActionMenu.module.scss';
+import { damageActions } from 'entities/damage';
 
 interface IProps {
    id: string;

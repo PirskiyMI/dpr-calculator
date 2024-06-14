@@ -2,7 +2,6 @@ import { FC, memo, useEffect, useState } from 'react';
 
 import { MyButton } from 'shared/ui/controls/my-button';
 import { useAppDispatch, useAppSelector } from 'shared/lib';
-import { getDamageSelector, getIsDamageFitActive } from 'entities/throw';
 import { Throw } from 'entities/throw';
 import {
    getAttackParamsSelector,
@@ -10,6 +9,8 @@ import {
    getThrowTypeSelector,
    specialPropertiesActions,
 } from 'entities/attack';
+import { getDamageSelector, getIsDamageFitActive } from 'entities/damage';
+import { DetailedThrow, ICalculation } from 'entities/detailed-throw';
 
 import {
    IAttackIndicators,
@@ -24,7 +25,6 @@ import { ThrowFields } from './throw-fields/ThrowFields';
 import { ThrowSelector } from './ThrowSelector';
 
 import styles from './ThrowForm.module.scss';
-import { DetailedThrow, ICalculation } from 'entities/detailed-throw';
 
 interface IProps {
    isExtendedForm?: boolean;
