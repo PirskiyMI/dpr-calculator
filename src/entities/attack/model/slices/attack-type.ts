@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-export type throwType = 'disadvantage' | 'default' | 'advantage';
+import { throwType } from 'entities/attack/lib';
 
 const initialState: Record<string, throwType> = {
    'throw-1': 'default',

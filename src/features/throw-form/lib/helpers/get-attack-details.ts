@@ -130,3 +130,44 @@ export const getAttackDetails = ({
 
    return { probabilityOfMiss, probabilityOfHit, probabilityOfCriticalHit, damagePerRound };
 };
+
+interface IExtendedAttackDetails extends Omit<IAttackDetails, 'defendBonus' | 'modifiers'> {
+   hasElvenAccuracy: boolean;
+}
+
+export const getExtendedAttackDetails = ({
+   attackBonus,
+   averageDamage,
+   criticalHitValues,
+   type,
+   hasElvenAccuracy,
+}: IExtendedAttackDetails) => {
+   const minCriticalHitValue = criticalHitValues === '19-20' ? 19 : 20;
+   const res = [];
+
+   for (let armorClass = 8; armorClass <= 30; armorClass++) {
+      let minValueToHit = armorClass - attackBonus;
+      minValueToHit =
+         minValueToHit < minCriticalHitValue ? (minValueToHit > 2 ? minValueToHit : 2) : 20;
+
+      const attackParams: IAttackParams = { minCriticalHitValue, minValueToHit };
+
+      const probabilities =
+         type === 'advantage'
+            ? getAttackProbabilityWithAdvantage({
+                 ...attackParams,
+                 hasElvenAccuracy,
+              })
+            : type === 'disadvantage'
+            ? getAttackProbabilityWithDisadvantage(attackParams)
+            : getDefaultAttackProbability(attackParams);
+
+      const damagePerRound =
+         averageDamage * probabilities.probabilityOfHit +
+         averageDamage * probabilities.probabilityOfCriticalHit * 2;
+
+      res.push({ ...probabilities, damagePerRound, armorClass });
+   }
+
+   return res;
+};

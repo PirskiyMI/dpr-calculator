@@ -2,17 +2,20 @@ import { FC, memo, useEffect, useState } from 'react';
 
 import { MyButton } from 'shared/ui/controls/my-button';
 import { useAppDispatch, useAppSelector } from 'shared/lib';
-import {
-   getThrowTypeSelector,
-   getDamageSelector,
-   getIsDamageFitActive,
-   getSpecialPropertiesSelector,
-   getAttackParamsSelector,
-   specialPropertiesActions,
-} from 'entities/throw';
+import { getDamageSelector, getIsDamageFitActive } from 'entities/throw';
 import { Throw } from 'entities/throw';
+import {
+   getAttackParamsSelector,
+   getSpecialPropertiesSelector,
+   getThrowTypeSelector,
+   specialPropertiesActions,
+} from 'entities/attack';
 
-import { IAttackIndicators, getAttackDetails } from '../lib/helpers/get-attack-details';
+import {
+   IAttackIndicators,
+   getAttackDetails,
+   getExtendedAttackDetails,
+} from '../lib/helpers/get-attack-details';
 import { ThrowActionsMenu } from './action-menu/ActionMenu';
 import { CoverSelector } from './cover-selector/CoverSelect';
 import { DamageFields } from './damage-fields';
@@ -21,25 +24,27 @@ import { ThrowFields } from './throw-fields/ThrowFields';
 import { ThrowSelector } from './ThrowSelector';
 
 import styles from './ThrowForm.module.scss';
+import { DetailedThrow, ICalculation } from 'entities/detailed-throw';
 
 interface IProps {
+   isExtendedForm?: boolean;
    id: string;
 }
 
-export const ThrowForm: FC<IProps> = memo(({ id }) => {
+export const ThrowForm: FC<IProps> = memo(({ id, isExtendedForm = false }) => {
    const damage = useAppSelector((state) => getDamageSelector(state, id));
    const modifiers = useAppSelector((state) => getSpecialPropertiesSelector(state, id));
    const { attackBonus, targetProtection } = useAppSelector((state) =>
       getAttackParamsSelector(state, id),
    );
-   const { setSpecialProperties } = specialPropertiesActions;
+   const { setSpecialProperty } = specialPropertiesActions;
    const attackType = useAppSelector((state) => getThrowTypeSelector(state, id));
    const isDamageFit = useAppSelector((state) => getIsDamageFitActive(state, id));
    const dispatch = useAppDispatch();
 
    useEffect(() => {
-      dispatch(setSpecialProperties({ id, params: { hasWeaponFeats: isDamageFit } }));
-   }, [dispatch, id, isDamageFit, setSpecialProperties]);
+      dispatch(setSpecialProperty({ id, property: 'hasWeaponFeats' }));
+   }, [dispatch, id, isDamageFit, setSpecialProperty]);
 
    const [attackIndicators, setAttackIndicators] = useState<IAttackIndicators>({
       probabilityOfMiss: 0,
@@ -48,16 +53,29 @@ export const ThrowForm: FC<IProps> = memo(({ id }) => {
       damagePerRound: 0,
    });
 
+   const [calculations, setCalculations] = useState<ICalculation[]>([]);
+
    const handleCalculation = () => {
       const indicators = getAttackDetails({
          type: attackType,
          attackBonus: attackBonus,
          defendBonus: targetProtection,
          averageDamage: damage,
-         criticalHitValues: '20',
+         criticalHitValues: modifiers.extendedCritChance ? '19-20' : '20',
          modifiers,
       });
       setAttackIndicators(indicators);
+   };
+
+   const handleExtendedCalculation = () => {
+      const indicators = getExtendedAttackDetails({
+         type: attackType,
+         attackBonus: attackBonus,
+         hasElvenAccuracy: modifiers.hasElvenAccuracy,
+         criticalHitValues: modifiers.extendedCritChance ? '19-20' : '20',
+         averageDamage: damage,
+      });
+      setCalculations(indicators);
    };
 
    const calculationButton = (
@@ -66,9 +84,31 @@ export const ThrowForm: FC<IProps> = memo(({ id }) => {
       </MyButton>
    );
 
+   const extendedCalculationButton = (
+      <MyButton type="submit" onClick={handleExtendedCalculation}>
+         Посчитать расширенные значения
+      </MyButton>
+   );
+
    return (
       <form onSubmit={(e) => e.preventDefault()} className={styles.form}>
-         <Throw
+         {isExtendedForm ? (
+            <DetailedThrow fields={extendedCalculationButton} calculations={calculations} />
+         ) : (
+            <Throw
+               actionMenu={<ThrowActionsMenu id={id} />}
+               controls={{
+                  calculationButton,
+                  checkboxes: <SpecialPropertiesCheckboxes id={id} />,
+                  damageFields: <DamageFields id={id} />,
+                  throwFields: <ThrowFields id={id} />,
+                  throwSelect: <ThrowSelector id={id} />,
+                  coverSelect: <CoverSelector id={id} />,
+               }}
+               params={attackIndicators}
+            />
+         )}
+         {/*          <Throw
             actionMenu={<ThrowActionsMenu id={id} />}
             controls={{
                calculationButton,
@@ -79,7 +119,7 @@ export const ThrowForm: FC<IProps> = memo(({ id }) => {
                coverSelect: <CoverSelector id={id} />,
             }}
             params={attackIndicators}
-         />
+         /> */}
       </form>
    );
 });

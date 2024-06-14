@@ -2,7 +2,9 @@ import { FC, memo } from 'react';
 
 import { MySelect } from 'shared/ui/controls/my-select';
 import { useAppDispatch, useAppSelector } from 'shared/lib';
-import { attackTypeActions, throwType, getThrowTypeSelector } from 'entities/throw';
+
+import { attackTypeActions, getThrowTypeSelector } from 'entities/attack';
+import { throwType } from 'entities/attack/model/slices/attack-type';
 
 interface IProps {
    id: string;

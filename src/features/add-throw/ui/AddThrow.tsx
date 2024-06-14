@@ -2,14 +2,8 @@ import { FC } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'shared/lib';
 import { MyButton } from 'shared/ui/controls/my-button';
-import {
-   throwListActions,
-   attackParamsActions,
-   attackTypeActions,
-   damageActions,
-   specialPropertiesActions,
-   getThrowListLength,
-} from 'entities/throw';
+import { throwListActions, damageActions, getThrowListLength } from 'entities/throw';
+import { attackParamsActions, attackTypeActions, specialPropertiesActions } from 'entities/attack';
 
 import styles from './AddThrow.module.scss';
 

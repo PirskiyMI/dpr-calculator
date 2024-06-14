@@ -1,11 +1,10 @@
-import { CalculatorPage } from 'pages/dpr-page';
-
+import { AppRouter } from './router';
 import { withProviders } from './providers';
 
 import './styles/global.scss';
 
 function App() {
-   return <CalculatorPage />;
+   return <AppRouter />;
 }
 
 const AppWithProviders = withProviders(App);

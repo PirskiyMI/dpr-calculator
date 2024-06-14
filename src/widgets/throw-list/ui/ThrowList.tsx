@@ -12,7 +12,7 @@ export const ThrowList: FC = () => {
       <ul className={styles.list}>
          {throwList.map((el) => (
             <li key={el} className={styles.list__item}>
-               <ThrowForm id={el} />
+               <ThrowForm id={el}/>
             </li>
          ))}
       </ul>

@@ -2,14 +2,8 @@ import { FC, useCallback, useEffect, useState } from 'react';
 
 import { MyButton } from 'shared/ui/controls/my-button';
 import { useAppDispatch, useAppSelector } from 'shared/lib';
-import {
-   attackParamsActions,
-   attackTypeActions,
-   damageActions,
-   getThrowListLength,
-   specialPropertiesActions,
-   throwListActions,
-} from 'entities/throw';
+import { damageActions, getThrowListLength, throwListActions } from 'entities/throw';
+import { attackParamsActions, attackTypeActions, specialPropertiesActions } from 'entities/attack';
 
 import styles from './ActionMenu.module.scss';
 

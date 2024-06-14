@@ -1,11 +1,11 @@
 import { FC, ReactNode, memo } from 'react';
 
 import { useModal } from 'shared/lib';
+import { getPercentage } from 'shared/lib/helpers';
 import { MyButton } from 'shared/ui/controls/my-button';
 import { Modal } from 'shared/ui/modal';
 import GearIcon from 'shared/assets/icons/gear-icon.svg?react';
 
-import { getPercentage } from '../lib/helpers/get-percentage';
 import { Output } from './output/Output';
 
 import styles from './Throw.module.scss';
