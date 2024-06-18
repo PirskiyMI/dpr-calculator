@@ -12,14 +12,7 @@ import {
 import { getDamageSelector, getIsDamageFitActive } from 'entities/damage';
 import { DetailedThrow, IDetailedThrowCalculations } from 'entities/detailed-throw';
 
-import {
-   IAttackIndicators,
-   getAttackDetails,
-   getExtendedAttackDetails,
-} from '../lib/helpers/get-attack-details';
-import { SpecialPropertiesCheckboxes } from './special-properties/SpecialPropertiesCheckboxes';
-import { ThrowFields } from './throw-fields/ThrowFields';
-import { ThrowSelector } from './ThrowSelector';
+import { getAttackDetails, getExtendedAttackDetails } from '../lib/helpers/get-attack-details';
 
 import styles from './ThrowForm.module.scss';
 
@@ -28,6 +21,10 @@ import { ChangeCover } from 'features/change-cover';
 import { ActionMenu } from 'features/action-menu';
 import { DamageForm } from 'features/damage-form';
 import { AddDamageDice } from 'features/add-damage-dice';
+import { AttackModifiers } from 'features/attack-modifiers';
+import { ThrowFields } from 'features/throw-fields';
+import { ThrowTypeSelector } from 'features/throw-type-selector';
+import { IAttackIndicators } from '../lib/types';
 
 interface IProps {
    isExtendedForm?: boolean;
@@ -102,7 +99,7 @@ export const ThrowForm: FC<IProps> = memo(({ id, isExtendedForm = false }) => {
                actionMenu={<ActionMenu id={id} />}
                controls={{
                   calculationButton,
-                  checkboxes: <SpecialPropertiesCheckboxes id={id} />,
+                  checkboxes: <AttackModifiers id={id} />,
                   damageFields: (
                      <>
                         <AddDamageDice id={id} />
@@ -110,7 +107,7 @@ export const ThrowForm: FC<IProps> = memo(({ id, isExtendedForm = false }) => {
                      </>
                   ),
                   throwFields: <ThrowFields id={id} />,
-                  throwSelect: <ThrowSelector id={id} />,
+                  throwSelect: <ThrowTypeSelector id={id} />,
                   coverSelect: <ChangeCover id={id} />,
                }}
                calculations={attackIndicators}

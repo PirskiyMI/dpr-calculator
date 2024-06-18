@@ -15,7 +15,7 @@ const selectList = [
    { title: 'Преимущество', value: 'advantage' },
 ];
 
-export const ThrowSelector: FC<IProps> = memo(({ id }) => {
+export const ThrowTypeSelector: FC<IProps> = memo(({ id }) => {
    const attackType = useAppSelector((state) => getThrowTypeSelector(state, id));
    const { setThrowType } = attackTypeActions;
    const dispatch = useAppDispatch();

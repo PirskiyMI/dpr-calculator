@@ -51,17 +51,17 @@ export const ActionMenuBody: FC<IProps> = ({ id, closeDropdown }) => {
    }, [id]);
 
    return (
-      <div onMouseDown={(e) => e.stopPropagation()} className={styles.damageFormBody}>
+      <div onMouseDown={(e) => e.stopPropagation()} className={styles.actionMenuBody}>
          <button
             onClick={handleCopy}
             disabled={throwListLength >= 6}
-            className={styles.damageFormBody__button}>
+            className={styles.actionMenuBody__button}>
             Копировать
          </button>
          <button
             onClick={handleDelete}
             disabled={throwListLength <= 1}
-            className={styles.damageFormBody__button}>
+            className={styles.actionMenuBody__button}>
             Удалить
          </button>
       </div>

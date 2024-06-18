@@ -5,9 +5,9 @@ import { Field } from 'shared/ui/controls/field';
 import { useInputNumber } from 'shared/lib/hooks/use-input-number';
 import { getAttackParamsSelector, attackParamsActions } from 'entities/attack';
 
-import { useAttackModifierInput } from '../../lib/hooks';
-import { getAttackBonusSum } from '../../lib/helpers/get-attack-bonus-sum';
-import { getAttackModifierSum } from '../../lib/helpers/get-attack-modifier-sum';
+import { useAttackModifierInput } from '../lib/hooks/useAttackModifierInput';
+import { getAttackBonusSum } from '../lib/helpers/get-attack-bonus-sum';
+import { getAttackModifierSum } from '../lib/helpers/get-attack-modifier-sum';
 
 import styles from './ThrowFields.module.scss';
 
