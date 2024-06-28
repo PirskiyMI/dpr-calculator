@@ -1,5 +1,6 @@
 import { FC, ButtonHTMLAttributes, ReactNode, memo } from 'react';
-import styles from './styles.module.scss';
+
+import styles from './MyButton.module.scss';
 
 type ButtonType = 'primary' | 'secondary';
 

@@ -1,5 +1,6 @@
 import { FC, memo } from 'react';
-import styles from './styles.module.scss';
+
+import styles from './MySelect.module.scss';
 
 interface ISelect {
    title: string;

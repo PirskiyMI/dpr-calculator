@@ -1,5 +1,6 @@
 import { FC, KeyboardEvent, memo } from 'react';
-import styles from './styles.module.scss';
+
+import styles from './MyCheckbox.module.scss';
 
 interface IProps {
    checked: boolean;

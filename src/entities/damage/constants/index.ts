@@ -1,8 +1,3 @@
-export {
-   DamageEfficiency,
-   DamageEfficiencyOnRu,
-   DamageType,
-   DamageTypeOnRu,
-} from './damage-consts';
+export { DamageEfficiency, DamageEfficiencyOnRu, DamageType, DamageTypeOnRu } from './damage';
 
-export { DiceName, DiceValue } from './dice-consts';
+export { DiceName, DiceValue } from './dice';

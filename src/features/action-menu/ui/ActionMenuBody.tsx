@@ -1,14 +1,13 @@
 import { FC, useCallback, useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector } from 'shared/lib';
+import { IPropsId, useAppDispatch, useAppSelector } from 'shared/lib';
 import { attackParamsActions, attackTypeActions, specialPropertiesActions } from 'entities/attack';
 import { damageActions } from 'entities/damage';
 import { getThrowListLength, throwListActions } from 'entities/throw';
 
 import styles from './ActionMenuBody.module.scss';
 
-interface IProps {
-   id: string;
+interface IProps extends IPropsId {
    closeDropdown: () => void;
 }
 

@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { DamageEfficiency, DamageType } from '../constants/damage-consts';
-import { DiceName, DiceValue } from '../constants/dice-consts';
-import { IDice, TDiceType } from '../lib/types/dice-types';
+import { DamageEfficiency, DamageType } from '../constants/damage';
+import { DiceName, DiceValue } from '../constants/dice';
+import { IDice, TDiceType } from '../lib/types/dice';
 
 interface IState {
    isDamageFitActive: boolean;

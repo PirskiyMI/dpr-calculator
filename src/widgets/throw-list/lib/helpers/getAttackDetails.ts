@@ -1,10 +1,11 @@
-import { IAttackDetails } from '../types/attack-details';
-import { IAttackParams } from '../types/attack-params';
+import { IAttackDetails } from '../types/attackDetails';
+import { IAttackParams } from '../types/attackParams';
+
 import {
    getAttackProbabilityWithAdvantage,
    getAttackProbabilityWithDisadvantage,
    getDefaultAttackProbability,
-} from './get-attack-probability';
+} from './getAttackProbability';
 
 export const getAttackDetails = ({
    type,

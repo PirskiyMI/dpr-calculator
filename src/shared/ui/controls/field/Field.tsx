@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, memo } from 'react';
-import styles from './styles.module.scss';
+
+import styles from './Field.module.scss';
 
 interface IProps {
    id?: string;

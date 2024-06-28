@@ -1,6 +1,6 @@
 import { FC, memo, useCallback } from 'react';
 
-import { useAppDispatch, useAppSelector } from 'shared/lib';
+import { IPropsId, useAppDispatch, useAppSelector } from 'shared/lib';
 import { MyCheckbox } from 'shared/ui/controls/my-checkbox';
 import {
    TSpecialProperty,
@@ -10,11 +10,7 @@ import {
 
 import styles from './AttackModifiers.module.scss';
 
-interface IProps {
-   id: string;
-}
-
-export const AttackModifiers: FC<IProps> = memo(({ id }) => {
+export const AttackModifiers: FC<IPropsId> = memo(({ id }) => {
    const { setSpecialProperty } = specialPropertiesActions;
    const { hasElvenAccuracy, hasShield, hasWeaponFeats, extendedCritChance } = useAppSelector(
       (state) => getSpecialPropertiesSelector(state, id),

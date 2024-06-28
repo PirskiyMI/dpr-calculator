@@ -1,5 +1,5 @@
-import { IAttackParams } from "../types/attack-params";
-import { IAttackProbability } from "../types/attack-probability";
+import { IAttackParams } from '../types/attackParams';
+import { IAttackProbability } from '../types/attackProbability';
 
 export const getDefaultAttackProbability = ({
    minValueToHit,
@@ -47,8 +47,6 @@ export const getAttackProbabilityWithDisadvantage = ({
    minCriticalHitValue,
 }: IAttackParams): IAttackProbability => {
    const probabilityOfCriticalHit = minCriticalHitValue === 20 ? 1 / 400 : (1 / 400) * 2;
-
-   console.log(1 - Math.pow(21 - minValueToHit, 2) / 400);
 
    const probabilityOfMiss =
       minValueToHit === 2

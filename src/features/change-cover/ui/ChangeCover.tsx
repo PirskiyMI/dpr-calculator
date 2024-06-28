@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useCallback, useMemo } from 'react';
 
-import { IOption, useAppDispatch, useAppSelector } from 'shared/lib';
+import { IOption, IPropsId, useAppDispatch, useAppSelector } from 'shared/lib';
 import { Dropdown } from 'shared/ui/controls/dropdown';
 import {
    Cover,
@@ -11,11 +11,7 @@ import {
 
 import styles from './ChangeCover.module.scss';
 
-interface IProps {
-   id: string;
-}
-
-export const ChangeCover: FC<IProps> = ({ id }) => {
+export const ChangeCover: FC<IPropsId> = ({ id }) => {
    const { setCover } = specialPropertiesActions;
    const { cover } = useAppSelector((state) => getSpecialPropertiesSelector(state, id));
    const dispatch = useAppDispatch();
@@ -25,6 +21,7 @@ export const ChangeCover: FC<IProps> = ({ id }) => {
       for (const key in Cover) {
          options.push({ title: CoverOnRu[key as keyof typeof CoverOnRu], value: key });
       }
+      console.log(options);
       return options;
    }, []);
 

@@ -1,3 +1,3 @@
-export { getAttackParamsSelector } from './attack-fields-selector';
-export { getThrowTypeSelector } from './attack-type-selector';
-export { getSpecialPropertiesSelector } from './special-properties-selector';
+export { getAttackParamsSelector } from './attackFieldsSelector';
+export { getThrowTypeSelector } from './attackTypeSelector';
+export { getSpecialPropertiesSelector } from './specialPropertiesSelector';

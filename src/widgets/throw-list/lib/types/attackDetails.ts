@@ -1,9 +1,7 @@
-import { throwType } from "entities/attack";
-
-import { ISpecialProperties } from "./special-properties";
+import { TThrow, ISpecialProperties } from 'entities/attack';
 
 export interface IAttackDetails {
-   type: throwType;
+   type: TThrow;
    criticalHitValues: '20' | '19-20';
    attackBonus: number;
    defendBonus: number;

@@ -1,4 +1,4 @@
-import { ISpecialProperties } from "./special-properties";
+import { ISpecialProperties } from 'entities/attack';
 
 export interface IAttackParams {
    minValueToHit: number;

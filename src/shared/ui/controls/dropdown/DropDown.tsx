@@ -2,7 +2,7 @@ import { ChangeEvent, FC, memo } from 'react';
 
 import { IOption } from 'shared/lib';
 
-import styles from './styles.module.scss';
+import styles from './DropDown.module.scss';
 
 interface IProps {
    defaultValue: string;

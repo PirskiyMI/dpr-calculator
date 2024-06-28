@@ -1,21 +1,17 @@
 import { ChangeEvent, FC, memo, useCallback, useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector } from 'shared/lib';
+import { IPropsId, useAppDispatch, useAppSelector } from 'shared/lib';
 import { Field } from 'shared/ui/controls/field';
 import { useInputNumber } from 'shared/lib/hooks/use-input-number';
 import { getAttackParamsSelector, attackParamsActions } from 'entities/attack';
 
 import { useAttackModifierInput } from '../lib/hooks/useAttackModifierInput';
-import { getAttackBonusSum } from '../lib/helpers/get-attack-bonus-sum';
-import { getAttackModifierSum } from '../lib/helpers/get-attack-modifier-sum';
+import { getAttackBonusSum } from '../lib/helpers/getAttackBonusSum';
+import { getAttackModifierSum } from '../lib/helpers/getAttackModifierSum';
 
 import styles from './ThrowFields.module.scss';
 
-interface IProps {
-   id: string;
-}
-
-export const ThrowFields: FC<IProps> = memo(({ id }) => {
+export const ThrowFields: FC<IPropsId> = memo(({ id }) => {
    const { attackBonus, targetProtection } = useAppSelector((state) =>
       getAttackParamsSelector(state, id),
    );

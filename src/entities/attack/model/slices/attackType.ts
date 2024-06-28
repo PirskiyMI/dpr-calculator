@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { throwType } from 'entities/attack/lib';
+import { TThrow } from 'entities/attack/lib';
 
-const initialState: Record<string, throwType> = {
+const initialState: Record<string, TThrow> = {
    'throw-1': 'default',
 };
 
@@ -15,9 +15,9 @@ const attackTypeSlice = createSlice({
       },
       setThrowType: (
          state,
-         { payload: { id, throwType } }: PayloadAction<{ id: string; throwType: throwType }>,
+         { payload: { id, TThrow } }: PayloadAction<{ id: string; TThrow: TThrow }>,
       ) => {
-         state[id] = throwType;
+         state[id] = TThrow;
       },
       removeThrowType: (state, { payload }: PayloadAction<string>) => {
          delete state[payload];

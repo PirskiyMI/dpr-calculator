@@ -1,4 +1,4 @@
-import { TDamageEfficiency, TDamageType } from './damage-types';
+import { TDamageEfficiency, TDamageType } from './damage';
 
 export type TDiceType = 'D4' | 'D6' | 'D8' | 'D10' | 'D12';
 export type TDiceName = 'd4' | 'd6' | 'd8' | 'd10' | 'd12';

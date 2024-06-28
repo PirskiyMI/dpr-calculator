@@ -1,1 +1,1 @@
-export { getPercentage } from './get-percentage';
+export { getPercentage } from './getPercentage';

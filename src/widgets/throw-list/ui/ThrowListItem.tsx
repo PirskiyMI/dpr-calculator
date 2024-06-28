@@ -1,7 +1,7 @@
-import { FC, memo, useEffect, useState } from 'react';
+import { FC, FormEvent, memo, useEffect, useState } from 'react';
 
 import { MyButton } from 'shared/ui/controls/my-button';
-import { useAppDispatch, useAppSelector } from 'shared/lib';
+import { IPropsId, useAppDispatch, useAppSelector } from 'shared/lib';
 import { Throw } from 'entities/throw';
 import {
    getAttackParamsSelector,
@@ -17,15 +17,12 @@ import { AddDamageDice } from 'features/add-damage-dice';
 import { AttackModifiers } from 'features/attack-modifiers';
 import { ThrowFields } from 'features/throw-fields';
 import { ThrowTypeSelector } from 'features/throw-type-selector';
-import { IAttackIndicators, getAttackDetails } from 'features/throw-form';
 
+import { IAttackIndicators } from '../lib/types/attackIndicators';
+import { getAttackDetails } from '../lib/helpers/getAttackDetails';
 import styles from './ThrowListItem.module.scss';
 
-interface IProps {
-   id: string;
-}
-
-export const ThrowListItem: FC<IProps> = memo(({ id }) => {
+export const ThrowListItem: FC<IPropsId> = memo(({ id }) => {
    const damage = useAppSelector((state) => getDamageSelector(state, id));
    const modifiers = useAppSelector((state) => getSpecialPropertiesSelector(state, id));
    const { attackBonus, targetProtection } = useAppSelector((state) =>
@@ -65,8 +62,10 @@ export const ThrowListItem: FC<IProps> = memo(({ id }) => {
       </MyButton>
    );
 
+   const handleSubmit = (e: FormEvent<HTMLFormElement>) => e.preventDefault();
+
    return (
-      <form onSubmit={(e) => e.preventDefault()} className={styles.item}>
+      <form onSubmit={handleSubmit} className={styles.item}>
          <Throw
             actionMenu={<ActionMenu id={id} />}
             controls={{

@@ -1,16 +1,12 @@
 import { FC, useCallback } from 'react';
 
-import { useAppDispatch, useAppSelector } from 'shared/lib';
+import { IPropsId, useAppDispatch, useAppSelector } from 'shared/lib';
 import { MyButton } from 'shared/ui/controls/my-button';
 import { damageActions, getDicesSelector } from 'entities/damage';
 
 import styles from './AddDamageDice.module.scss';
 
-interface IProps {
-   id: string;
-}
-
-export const AddDamageDice: FC<IProps> = ({ id }) => {
+export const AddDamageDice: FC<IPropsId> = ({ id }) => {
    const fieldList = useAppSelector((state) => getDicesSelector(state, id));
    const { addDice } = damageActions;
    const dispatch = useAppDispatch();

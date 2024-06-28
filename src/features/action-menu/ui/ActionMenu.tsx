@@ -1,15 +1,12 @@
 import { FC, useState } from 'react';
 
+import { IPropsId } from 'shared/lib';
 import { MyButton } from 'shared/ui/controls/my-button';
 
 import { ActionMenuBody } from './ActionMenuBody';
 import styles from './ActionMenu.module.scss';
 
-interface IProps {
-   id: string;
-}
-
-export const ActionMenu: FC<IProps> = ({ id }) => {
+export const ActionMenu: FC<IPropsId> = ({ id }) => {
    const [isOpen, setIsOpen] = useState<boolean>(false);
 
    const toggleIsOpen = (isOpen: boolean) => () => {

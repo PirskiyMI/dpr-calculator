@@ -1,28 +1,19 @@
 import { FC, memo } from 'react';
 
 import { MySelect } from 'shared/ui/controls/my-select';
-import { useAppDispatch, useAppSelector } from 'shared/lib';
+import { IPropsId, useAppDispatch, useAppSelector } from 'shared/lib';
+import { attackTypeActions, getThrowTypeSelector, TThrow } from 'entities/attack';
 
-import { attackTypeActions, getThrowTypeSelector, throwType } from 'entities/attack';
+import { selectorList } from '../constants/selectorList';
 
-interface IProps {
-   id: string;
-}
-
-const selectList = [
-   { title: 'Помеха', value: 'disadvantage' },
-   { title: 'Обычный', value: 'default' },
-   { title: 'Преимущество', value: 'advantage' },
-];
-
-export const ThrowTypeSelector: FC<IProps> = memo(({ id }) => {
+export const ThrowTypeSelector: FC<IPropsId> = memo(({ id }) => {
    const attackType = useAppSelector((state) => getThrowTypeSelector(state, id));
    const { setThrowType } = attackTypeActions;
    const dispatch = useAppDispatch();
 
    const setAttackType = (value: string) => {
-      dispatch(setThrowType({ id, throwType: value as throwType }));
+      dispatch(setThrowType({ id, TThrow: value as TThrow }));
    };
 
-   return <MySelect items={selectList} currentValue={attackType} onChange={setAttackType} />;
+   return <MySelect items={selectorList} currentValue={attackType} onChange={setAttackType} />;
 });

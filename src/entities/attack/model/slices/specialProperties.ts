@@ -1,16 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { Cover } from '../../constants/cover-enums';
-import { TSpecialProperty } from '../../constants/special-property';
+import { Cover } from '../../constants/cover';
+import { TSpecialProperty } from '../../lib/types/specialProperty';
+import { ISpecialProperties } from '../../lib/types/specialProperties';
 
-interface IState {
-   hasElvenAccuracy: boolean;
-   hasShield: boolean;
-   hasWeaponFeats: boolean;
-   extendedCritChance: boolean;
-   cover: Cover;
-}
-const initialState: Record<string, IState> = {
+const initialState: Record<string, ISpecialProperties> = {
    'throw-1': {
       hasElvenAccuracy: false,
       hasShield: false,
@@ -19,6 +13,7 @@ const initialState: Record<string, IState> = {
       cover: Cover.ABSENT,
    },
 };
+
 const specialPropertiesSlice = createSlice({
    name: 'special-properties',
    initialState,

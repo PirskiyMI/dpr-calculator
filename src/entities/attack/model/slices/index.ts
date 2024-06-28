@@ -1,3 +1,3 @@
-export { attackParamsActions, attackParamsReducer } from './attack-fields';
-export { attackTypeActions, attackTypeReducer } from './attack-type';
-export { specialPropertiesActions, specialPropertiesReducer } from './special-properties';
+export { attackParamsActions, attackParamsReducer } from './attackFields';
+export { attackTypeActions, attackTypeReducer } from './attackType';
+export { specialPropertiesActions, specialPropertiesReducer } from './specialProperties';

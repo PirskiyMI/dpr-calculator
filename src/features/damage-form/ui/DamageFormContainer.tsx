@@ -1,6 +1,6 @@
 import { ChangeEvent, memo, useCallback } from 'react';
 
-import { useAppDispatch, useAppSelector } from 'shared/lib';
+import { IPropsId, useAppDispatch, useAppSelector } from 'shared/lib';
 import {
    getDicesSelector,
    damageActions,
@@ -12,14 +12,10 @@ import {
    DamageEfficiencyOnRu,
 } from 'entities/damage';
 
-import { DamageForm } from './DamageForm';
 import { getOptionList } from '../lib/helpers/getOptionList';
+import { DamageForm } from './DamageForm';
 
-interface IProps {
-   id: string;
-}
-
-export const DamageFormContainer = memo(({ id }: IProps) => {
+export const DamageFormContainer = memo(({ id }: IPropsId) => {
    const dispatch = useAppDispatch();
    const fieldList = useAppSelector((state) => getDicesSelector(state, id));
    const {
