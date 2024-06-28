@@ -28,7 +28,7 @@ export const ThrowFields: FC<IPropsId> = memo(({ id }) => {
             : getAttackBonusSum(attackModifierInput.value);
          const result = getAttackModifierSum(attackInput.value) + modifierSum;
          dispatch(setAttackParams({ id, params: { attackBonus: result } }));
-      }, 700);
+      }, 500);
       return () => clearTimeout(timerId);
    }, [attackInput.value, attackModifierInput.value, dispatch, id, setAttackParams]);
 
@@ -37,7 +37,7 @@ export const ThrowFields: FC<IPropsId> = memo(({ id }) => {
          const value = Number(e.target.value);
          dispatch(setAttackParams({ id, params: { targetProtection: value } }));
       },
-      [id],
+      [dispatch, id, setAttackParams],
    );
 
    return (

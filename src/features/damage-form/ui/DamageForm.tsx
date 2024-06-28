@@ -4,11 +4,12 @@ import { Dropdown } from 'shared/ui/controls/dropdown';
 import { Field } from 'shared/ui/controls/field';
 import { MyButton } from 'shared/ui/controls/my-button';
 import { IOption, useAppDispatch } from 'shared/lib';
-import { DamageEfficiency, DamageType, IDice, TDiceType, damageActions } from 'entities/damage';
+import { IDice, damageActions } from 'entities/damage';
 
 import styles from './DamageForm.module.scss';
 
-interface IProps extends IDice {
+interface IProps {
+   dice: IDice;
    parentId: string;
    typeOptions: IOption[];
    damageTypeOptions: IOption[];
@@ -16,75 +17,52 @@ interface IProps extends IDice {
 }
 
 export const DamageForm: FC<IProps> = memo(
-   ({
-      parentId,
-      name,
-      count,
-      id,
-      hasDamageFit,
-      damageModifier,
-      damageType,
-      damageEfficiency,
-      typeOptions,
-      damageTypeOptions,
-      damageEfficiencyOptions,
-   }) => {
+   ({ dice, parentId, typeOptions, damageTypeOptions, damageEfficiencyOptions }) => {
       const dispatch = useAppDispatch();
 
-      const {
-         setDices,
-         setDiceType,
-         removeDice,
-         setDamageModifier,
-         setDamageType,
-         setDamageEfficiency,
-         setDamageFit,
-      } = damageActions;
+      const { id, name, count, damageEfficiency, damageModifier, damageType, hasDamageFit } = dice;
+
+      const { changeDice, removeDice, setDamageFit } = damageActions;
 
       const removeField = useCallback(
          () => dispatch(removeDice({ id: parentId, diceId: id })),
          [dispatch, id, parentId, removeDice],
       );
-      const onHasFitChange = useCallback(() => {
-         dispatch(setDamageFit({ id: parentId, diceId: id }));
-      }, [dispatch, id, parentId, setDamageFit]);
 
-      const onFieldChange = useCallback(
-         (e: ChangeEvent<HTMLInputElement>) => {
-            const count = +e.target.value;
-            dispatch(setDices({ id: parentId, dice: { id, count } }));
-         },
-         [dispatch, id, parentId, setDices],
-      );
-      const onDamageModifierChange = useCallback(
-         (e: ChangeEvent<HTMLInputElement>) => {
-            const damageModifier = +e.target.value;
-            dispatch(setDamageModifier({ id: parentId, dice: { id, damageModifier } }));
-         },
-         [dispatch, id, parentId, setDamageModifier],
-      );
+      const handleDiceChange = (dice: IDice) => {
+         dispatch(
+            changeDice({
+               id: parentId,
+               dice,
+            }),
+         );
+      };
 
-      const onTypeChange = useCallback(
+      const handleSelectorChange =
+         (changedValue: keyof IDice, isNumber: boolean = false) =>
          (e: ChangeEvent<HTMLSelectElement>) => {
-            const name = e.target.value as TDiceType;
-            dispatch(setDiceType({ id: parentId, dice: { id, name } }));
-         },
-         [dispatch, id, parentId, setDiceType],
-      );
-      const onDamageTypeChange = useCallback(
-         (e: ChangeEvent<HTMLSelectElement>) => {
-            const damageType = e.target.value as keyof typeof DamageType;
-            dispatch(setDamageType({ id: parentId, dice: { id, damageType } }));
-         },
-         [dispatch, id, parentId, setDamageType],
-      );
-      const onDamageEfficiencyChange = useCallback(
-         (e: ChangeEvent<HTMLSelectElement>) => {
-            const damageEfficiency = e.target.value as keyof typeof DamageEfficiency;
-            dispatch(setDamageEfficiency({ id: parentId, dice: { id, damageEfficiency } }));
-         },
-         [dispatch, id, parentId, setDamageEfficiency],
-      );
+            const newDice = {
+               ...dice,
+               [changedValue]: isNumber ? +e.target.value : e.target.value,
+            };
+
+            handleDiceChange(newDice);
+         };
+
+      const handleFieldChange =
+         (changedValue: keyof IDice, isNumber: boolean = false) =>
+         (e: ChangeEvent<HTMLInputElement>) => {
+            const newDice = {
+               ...dice,
+               [changedValue]: isNumber ? +e.target.value : e.target.value,
+            };
+
+            handleDiceChange(newDice);
+         };
+
+      const toggleDamageFit = () => {
+         dispatch(setDamageFit({ id: parentId, diceId: dice.id }));
+      };
 
       return (
          <form className={styles.damageForm}>
@@ -94,33 +72,33 @@ export const DamageForm: FC<IProps> = memo(
                   placeholder={'Кол-во'}
                   value={count ? String(count) : ''}
                   maxLength={2}
-                  onChange={onFieldChange}
+                  onChange={handleFieldChange('count', true)}
                />
                <Field
                   name={id}
                   placeholder={'Мод-ор'}
                   value={damageModifier ? String(damageModifier) : ''}
                   maxLength={2}
-                  onChange={onDamageModifierChange}
+                  onChange={handleFieldChange('damageModifier', true)}
                />
             </div>
             <Dropdown
                name={id}
                defaultValue={name.toUpperCase()}
                options={typeOptions}
-               onChange={onTypeChange}
+               onChange={handleSelectorChange('name')}
             />
             <Dropdown
                name={id}
                defaultValue={damageType.toUpperCase()}
                options={damageTypeOptions}
-               onChange={onDamageTypeChange}
+               onChange={handleSelectorChange('damageType')}
             />
             <Dropdown
                name={id}
                defaultValue={damageEfficiency.toUpperCase()}
                options={damageEfficiencyOptions}
-               onChange={onDamageEfficiencyChange}
+               onChange={handleSelectorChange('damageEfficiency')}
             />
             <div
                className={
@@ -128,7 +106,7 @@ export const DamageForm: FC<IProps> = memo(
                      ? `${styles.damageForm__checkbox} ${styles.damageForm__checkbox_active}`
                      : styles.damageForm__checkbox
                }
-               onClick={onHasFitChange}>
+               onClick={toggleDamageFit}>
                Мастер большого оружия / Меткий стрелок
             </div>
             <MyButton uiType="secondary" type="button" onClick={removeField}>

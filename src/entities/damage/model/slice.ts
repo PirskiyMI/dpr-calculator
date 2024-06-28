@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { DamageEfficiency, DamageType } from '../constants/damage';
 import { DiceName, DiceValue } from '../constants/dice';
-import { IDice, TDiceType } from '../lib/types/dice';
+import { IDice } from '../lib/types/dice';
 
 interface IState {
    isDamageFitActive: boolean;
@@ -51,6 +51,12 @@ const damageSlice = createSlice({
       removeThrow: (state, { payload }: PayloadAction<string>) => {
          delete state[payload];
       },
+      copyThrow: (
+         state,
+         { payload: { id, paramId } }: PayloadAction<{ id: string; paramId: string }>,
+      ) => {
+         state[id] = { ...state[paramId] };
+      },
       setDices: (
          state,
          {
@@ -58,6 +64,30 @@ const damageSlice = createSlice({
          }: PayloadAction<{ id: string; dice: { id: string; count: number } }>,
       ) => {
          state[id].dices.forEach((el) => (el.id === dice.id ? (el.count = dice.count) : null));
+      },
+      changeDice: (
+         state,
+         { payload: { id, dice } }: PayloadAction<{ id: string; dice: IDice }>,
+      ) => {
+         state[id].dices = state[id].dices.map((el) => (el.id === dice.id ? dice : el));
+      },
+      setDamageFit: (
+         state,
+         { payload: { id, diceId } }: PayloadAction<{ id: string; diceId: string }>,
+      ) => {
+         state[id].dices.forEach((el) => {
+            if (el.id === diceId) {
+               if (el.hasDamageFit) {
+                  el.hasDamageFit = false;
+                  state[id].isDamageFitActive = false;
+               } else {
+                  el.hasDamageFit = true;
+                  state[id].isDamageFitActive = true;
+               }
+            } else {
+               el.hasDamageFit = false;
+            }
+         });
       },
       addDice: (state, { payload: id }: PayloadAction<string>) => {
          if (state[id].dices.length === 5) return;
@@ -87,81 +117,6 @@ const damageSlice = createSlice({
             }
             return true;
          });
-      },
-      setDamageModifier: (
-         state,
-         {
-            payload: { id, dice },
-         }: PayloadAction<{ id: string; dice: { id: string; damageModifier: number } }>,
-      ) => {
-         state[id].dices.forEach((el) =>
-            el.id === dice.id ? (el.damageModifier = dice.damageModifier) : null,
-         );
-      },
-      setDiceType: (
-         state,
-         {
-            payload: { id, dice },
-         }: PayloadAction<{ id: string; dice: { id: string; name: TDiceType } }>,
-      ) => {
-         state[id].dices.forEach((el) => {
-            if (el.id === dice.id) {
-               el.name = DiceName[`${dice.name}`];
-               el.value = DiceValue[`${dice.name}`];
-            }
-         });
-      },
-      setDamageType: (
-         state,
-         {
-            payload: { id, dice },
-         }: PayloadAction<{
-            id: string;
-            dice: { id: string; damageType: keyof typeof DamageType };
-         }>,
-      ) => {
-         state[id].dices.forEach((el) =>
-            el.id === dice.id ? (el.damageType = DamageType[`${dice.damageType}`]) : null,
-         );
-      },
-      setDamageEfficiency: (
-         state,
-         {
-            payload: { id, dice },
-         }: PayloadAction<{
-            id: string;
-            dice: { id: string; damageEfficiency: keyof typeof DamageEfficiency };
-         }>,
-      ) => {
-         state[id].dices.forEach((el) =>
-            el.id === dice.id
-               ? (el.damageEfficiency = DamageEfficiency[`${dice.damageEfficiency}`])
-               : null,
-         );
-      },
-      setDamageFit: (
-         state,
-         { payload: { id, diceId } }: PayloadAction<{ id: string; diceId: string }>,
-      ) => {
-         state[id].dices.forEach((el) => {
-            if (el.id === diceId) {
-               if (el.hasDamageFit) {
-                  el.hasDamageFit = false;
-                  state[id].isDamageFitActive = false;
-               } else {
-                  el.hasDamageFit = true;
-                  state[id].isDamageFitActive = true;
-               }
-            } else {
-               el.hasDamageFit = false;
-            }
-         });
-      },
-      copyThrow: (
-         state,
-         { payload: { id, paramId } }: PayloadAction<{ id: string; paramId: string }>,
-      ) => {
-         state[id] = { ...state[paramId] };
       },
    },
 });

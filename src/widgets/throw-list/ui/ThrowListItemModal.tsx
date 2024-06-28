@@ -28,7 +28,7 @@ export const ThrowListItemModal: FC<IPropsId> = ({ id }) => {
          <ul className={styles.damageForm__list}>
             {fieldList.map((el) => (
                <li key={el.id} className={styles.damageForm__item}>
-                  <DamageForm parentId={id} {...el} {...options} />
+                  <DamageForm dice={el} parentId={id} {...options} />
                </li>
             ))}
          </ul>
