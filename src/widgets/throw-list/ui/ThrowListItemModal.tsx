@@ -10,8 +10,8 @@ import {
    getDicesSelector,
 } from 'entities/damage';
 import { DamageForm } from 'features/damage-form';
-import { getOptionList } from 'features/damage-form/lib/helpers/getOptionList';
 
+import { getOptionList } from '../lib/helpers/getOptionList';
 import styles from './ThrowListItemModal.module.scss';
 
 export const ThrowListItemModal: FC<IPropsId> = ({ id }) => {
