@@ -21,7 +21,6 @@ export const ChangeCover: FC<IPropsId> = ({ id }) => {
       for (const key in Cover) {
          options.push({ title: CoverOnRu[key as keyof typeof CoverOnRu], value: key });
       }
-      console.log(options);
       return options;
    }, []);
 

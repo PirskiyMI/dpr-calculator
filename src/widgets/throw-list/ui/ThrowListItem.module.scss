@@ -1,19 +1,15 @@
 .item {
-   &__controls {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-   }
-   &__header {
-      display: flex;
-      gap: 14px;
-   }
    &__button {
       color: rgb(var(--color-light));
       border-color: rgb(var(--color-light));
       @media (min-width: 728px) {
          margin-bottom: 20px;
       }
+   }
+   &__modal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 20px;
    }
 }

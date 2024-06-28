@@ -1,1 +1,1 @@
-export { DamageFormContainer as DamageForm } from './DamageFormContainer';
+export { DamageForm } from './DamageForm';

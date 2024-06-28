@@ -12,7 +12,6 @@ import {
 import { getDamageSelector, getIsDamageFitActive } from 'entities/damage';
 import { ChangeCover } from 'features/change-cover';
 import { ActionMenu } from 'features/action-menu';
-import { DamageForm } from 'features/damage-form';
 import { AddDamageDice } from 'features/add-damage-dice';
 import { AttackModifiers } from 'features/attack-modifiers';
 import { ThrowFields } from 'features/throw-fields';
@@ -20,6 +19,7 @@ import { ThrowTypeSelector } from 'features/throw-type-selector';
 
 import { IAttackIndicators } from '../lib/types/attackIndicators';
 import { getAttackDetails } from '../lib/helpers/getAttackDetails';
+import { ThrowListItemModal } from './ThrowListItemModal';
 import styles from './ThrowListItem.module.scss';
 
 export const ThrowListItem: FC<IPropsId> = memo(({ id }) => {
@@ -56,13 +56,13 @@ export const ThrowListItem: FC<IPropsId> = memo(({ id }) => {
       setAttackIndicators(indicators);
    };
 
+   const handleSubmit = (e: FormEvent<HTMLFormElement>) => e.preventDefault();
+
    const calculationButton = (
       <MyButton type="submit" onClick={handleCalculation} className={styles.item__button}>
          Посчитать
       </MyButton>
    );
-
-   const handleSubmit = (e: FormEvent<HTMLFormElement>) => e.preventDefault();
 
    return (
       <form onSubmit={handleSubmit} className={styles.item}>
@@ -72,10 +72,10 @@ export const ThrowListItem: FC<IPropsId> = memo(({ id }) => {
                calculationButton,
                checkboxes: <AttackModifiers id={id} />,
                damageFields: (
-                  <>
+                  <div className={styles.item__modal}>
+                     <ThrowListItemModal id={id} />
                      <AddDamageDice id={id} />
-                     <DamageForm id={id} />
-                  </>
+                  </div>
                ),
                throwFields: <ThrowFields id={id} />,
                throwSelect: <ThrowTypeSelector id={id} />,
